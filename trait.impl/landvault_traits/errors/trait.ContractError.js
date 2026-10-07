@@ -1,0 +1,9 @@
+(function() {
+    const implementors = Object.fromEntries([["compliance_registry",[["impl <a class=\"trait\" href=\"landvault_traits/errors/trait.ContractError.html\" title=\"trait landvault_traits::errors::ContractError\">ContractError</a> for <a class=\"enum\" href=\"compliance_registry/compliance_registry/enum.Error.html\" title=\"enum compliance_registry::compliance_registry::Error\">Error</a>",0]]],["governance",[["impl <a class=\"trait\" href=\"landvault_traits/errors/trait.ContractError.html\" title=\"trait landvault_traits::errors::ContractError\">ContractError</a> for <a class=\"enum\" href=\"governance/governance/enum.Error.html\" title=\"enum governance::governance::Error\">Error</a>",0]]],["landvault_contracts",[]],["landvault_dex",[["impl <a class=\"trait\" href=\"landvault_traits/errors/trait.ContractError.html\" title=\"trait landvault_traits::errors::ContractError\">ContractError</a> for <a class=\"enum\" href=\"landvault_dex/dex/enum.Error.html\" title=\"enum landvault_dex::dex::Error\">Error</a>",0]]],["landvault_fees",[["impl <a class=\"trait\" href=\"landvault_traits/errors/trait.ContractError.html\" title=\"trait landvault_traits::errors::ContractError\">ContractError</a> for <a class=\"enum\" href=\"landvault_fees/landvault_fees/enum.FeeError.html\" title=\"enum landvault_fees::landvault_fees::FeeError\">FeeError</a>",0]]],["landvault_traits",[]],["version_registry",[["impl <a class=\"trait\" href=\"landvault_traits/errors/trait.ContractError.html\" title=\"trait landvault_traits::errors::ContractError\">ContractError</a> for <a class=\"enum\" href=\"version_registry/version_registry/enum.Error.html\" title=\"enum version_registry::version_registry::Error\">Error</a>",0]]]]);
+    if (window.register_implementors) {
+        window.register_implementors(implementors);
+    } else {
+        window.pending_implementors = implementors;
+    }
+})()
+//{"start":59,"fragment_lengths":[347,303,27,298,332,24,333]}

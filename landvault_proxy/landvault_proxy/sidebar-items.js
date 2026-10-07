@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["DEFAULT_UPGRADE_DELAY_BLOCKS","MAX_UPGRADE_DELAY_BLOCKS","MIN_UPGRADE_DELAY_BLOCKS"],"enum":["ProxyError"],"struct":["TransparentProxy","TransparentProxyRef","UpgradeCancelled","UpgradeConfirmed","UpgradeDelayChanged","UpgradeStaged"]};

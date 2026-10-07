@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["MIN_VALIDATOR_STAKE","SLASH_PERCENT","STAKED_QUORUM_BPS"],"enum":["StakeError"],"struct":["ValidatorStaking"]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["BASE_RATE_BPS","FULL_UTILISATION_BPS","REWARD_POINTS_DENOM","SLOPE_BPS"],"fn":["compute_borrow_rate","fee_dust","pending_rewards","reward_points","round_fee_down","round_fee_up"]};

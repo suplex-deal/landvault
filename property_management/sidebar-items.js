@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["collateral_events","permit_module","property_management"]};
