@@ -152,7 +152,7 @@ jobs:
         # Evidence is published, not pushed: run on failure too so a red night
         # still leaves a report behind for triage.
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: security-audit-report
           path: AUDIT_LOG.md
