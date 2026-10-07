@@ -1,6 +1,6 @@
-# Contributing to PropChain Smart Contracts
+# Contributing to LandVault Smart Contracts
 
-Thank you for helping make PropChain better!  This guide covers the process
+Thank you for helping make LandVault better!  This guide covers the process
 for reporting issues, proposing changes, and submitting pull requests.
 
 ## Table of Contents
@@ -24,7 +24,7 @@ Harassment or discriminatory behaviour will not be tolerated.
 
 ## Reporting Issues
 
-1. Search [existing issues](https://github.com/MettaChain/PropChain-contract/issues)
+1. Search [existing issues](https://github.com/MettaChain/LandVault-contract/issues)
    before opening a new one.
 2. Use the appropriate issue template (bug report, feature request, etc.).
 3. Include a minimal reproduction case for bugs.
@@ -36,8 +36,8 @@ Harassment or discriminatory behaviour will not be tolerated.
 
 ```bash
 # 1. Fork the repository and clone your fork
-git clone https://github.com/<your-username>/PropChain-contract.git
-cd PropChain-contract
+git clone https://github.com/<your-username>/LandVault-contract.git
+cd LandVault-contract
 
 # 2. Create a feature branch
 git checkout -b feat/my-feature
@@ -151,7 +151,7 @@ python3 scripts/verify_doc_sync.sh  # or the inline CI check
 
 ## Getting Help
 
-- Open a [GitHub Discussion](https://github.com/MettaChain/PropChain-contract/discussions)
+- Open a [GitHub Discussion](https://github.com/MettaChain/LandVault-contract/discussions)
   for questions.
-- Join the PropChain [Discord](https://discord.gg/propchain) for real-time help.
-- Email the maintainers: contracts@propchain.io
+- Join the LandVault [Discord](https://discord.gg/landvault) for real-time help.
+- Email the maintainers: contracts@landvault.io

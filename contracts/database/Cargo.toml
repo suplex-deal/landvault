@@ -1,24 +1,24 @@
 [package]
-name = "propchain-database"
+name = "landvault-database"
 version.workspace = true
 authors.workspace = true
 edition.workspace = true
 homepage.workspace = true
 license.workspace = true
 repository.workspace = true
-description = "Off-chain database integration with synchronization and analytics capabilities for PropChain"
+description = "Off-chain database integration with synchronization and analytics capabilities for LandVault"
 
 [dependencies]
 ink = { workspace = true }
 scale = { workspace = true }
 scale-info = { workspace = true }
-propchain-traits = { path = "../traits" }
+landvault-traits = { path = "../traits" }
 
 [dev-dependencies]
 ink_e2e = "5.0.0"
 
 [lib]
-name = "propchain_database"
+name = "landvault_database"
 path = "src/lib.rs"
 
 [features]

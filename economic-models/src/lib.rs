@@ -1,6 +1,6 @@
 #![allow(unexpected_cfgs)] // `kani` is set by the Kani compiler, not by Cargo
 
-//! Models of PropChain's value-movement arithmetic, and the Kani proofs that
+//! Models of LandVault's value-movement arithmetic, and the Kani proofs that
 //! pin it (issue #1209).
 //!
 //! # Why this crate exists
@@ -16,7 +16,7 @@
 //! is a `pub fn` inside a **private** module (`contracts/lending/src/lib.rs:12`)
 //! exposed only through `borrow_rate(pool_id)`, which needs a pool and returns a
 //! `Result`; `round_fee_up` / `round_fee_down` / `fee_dust` are `include!`d into
-//! the `#[ink::contract] mod propchain_fees`, so they are items of a generated
+//! the `#[ink::contract] mod landvault_fees`, so they are items of a generated
 //! contract module rather than crate exports; `points_for` and
 //! `RewardSnapshot::pending` sit behind a private `mod reward_snapshots`
 //! (`contracts/staking/src/lib.rs:10`).

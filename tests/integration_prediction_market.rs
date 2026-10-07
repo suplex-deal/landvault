@@ -1,6 +1,6 @@
 //! # Integration Tests: Prediction market lifecycle and settlement (Issue #927)
 //!
-//! Drives the full value flow of `propchain-prediction-market` at suite
+//! Drives the full value flow of `landvault-prediction-market` at suite
 //! level: market creation → staking (real balance movement via
 //! `transfer_in`) → settlement against a price source → payout claims with
 //! exact math assertions. Covers both the admin-resolved plain markets and
@@ -17,7 +17,7 @@
 #[cfg(test)]
 mod integration_prediction_market {
     use ink::env::{test, DefaultEnvironment};
-    use propchain_prediction_market::propchain_prediction_market::{
+    use landvault_prediction_market::landvault_prediction_market::{
         Error, MarketStatus, PredictionDirection, PredictionMarket, DISPUTE_WINDOW,
     };
 

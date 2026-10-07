@@ -1,14 +1,14 @@
 [package]
-name = "propchain-gdpr"
+name = "landvault-gdpr"
 version = "0.1.0"
 edition = "2021"
-description = "GDPR consent management and data retention for PropChain"
+description = "GDPR consent management and data retention for LandVault"
 
 [dependencies]
 ink = { workspace = true }
 scale = { workspace = true }
 scale-info = { workspace = true }
-propchain-traits = { path = "../traits", default-features = false }
+landvault-traits = { path = "../traits", default-features = false }
 
 [lib]
 path = "lib.rs"
@@ -19,6 +19,6 @@ std = [
     "ink/std",
     "scale/std",
     "scale-info/std",
-    "propchain-traits/std",
+    "landvault-traits/std",
 ]
 ink-as-dependency = []

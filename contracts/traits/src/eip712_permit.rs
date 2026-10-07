@@ -25,7 +25,7 @@ impl Eip712Permit {
     /// chain because each is part of the signed message.
     pub fn message_hash(&self) -> Hash {
         crypto::hash_encoded(&(
-            b"PropChain:Eip712Permit:v1",
+            b"LandVault:Eip712Permit:v1",
             self.chain_id,
             self.nonce,
             self.owner,

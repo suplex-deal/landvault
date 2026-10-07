@@ -23,7 +23,7 @@
 //!   * the `EventSubscriberError` surface stays stable.
 
 use ink::primitives::AccountId;
-use propchain_traits::event_bus::{EventPayload, EventSubscriber, EventSubscriberError, Topic};
+use landvault_traits::event_bus::{EventPayload, EventSubscriber, EventSubscriberError, Topic};
 use scale::{Decode, Encode};
 
 /// An `EventSubscriber` that records what it was handed.

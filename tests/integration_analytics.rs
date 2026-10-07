@@ -15,10 +15,10 @@
 #[cfg(test)]
 mod integration_analytics {
     use ink::env::{test, DefaultEnvironment};
-    use propchain_analytics::propchain_analytics::{
+    use landvault_analytics::landvault_analytics::{
         AnalyticsDashboard, MarketTrend, MetricUpdate, PortfolioPosition,
     };
-    use propchain_traits::PropertyType;
+    use landvault_traits::PropertyType;
 
     fn trend(start: u64, price_change: i32) -> MarketTrend {
         MarketTrend {
@@ -81,7 +81,7 @@ mod integration_analytics {
             .collect();
         assert_eq!(
             dash.batch_update_metrics(oversized),
-            Err(propchain_analytics::propchain_analytics::AnalyticsError::BatchSizeExceeded)
+            Err(landvault_analytics::landvault_analytics::AnalyticsError::BatchSizeExceeded)
         );
         assert_eq!(
             dash.get_market_metrics().average_price,
@@ -115,7 +115,7 @@ mod integration_analytics {
         let oversized: Vec<MarketTrend> = (0..21).map(|i| trend(i as u64 * 30, i)).collect();
         assert_eq!(
             dash.batch_add_trends(oversized),
-            Err(propchain_analytics::propchain_analytics::AnalyticsError::BatchSizeExceeded)
+            Err(landvault_analytics::landvault_analytics::AnalyticsError::BatchSizeExceeded)
         );
         dash.batch_add_trends(vec![trend(90, 1), trend(120, 2)])
             .expect("small batch accepted");
@@ -206,7 +206,7 @@ mod integration_analytics {
         test::set_caller::<DefaultEnvironment>(accounts.bob);
         assert_eq!(
             dash.request_admin_rotation(accounts.bob),
-            Err(propchain_analytics::propchain_analytics::AnalyticsError::Unauthorized)
+            Err(landvault_analytics::landvault_analytics::AnalyticsError::Unauthorized)
         );
 
         test::set_caller::<DefaultEnvironment>(accounts.alice);
@@ -217,20 +217,20 @@ mod integration_analytics {
         // A pending rotation blocks further requests.
         assert_eq!(
             dash.request_admin_rotation(accounts.charlie),
-            Err(propchain_analytics::propchain_analytics::AnalyticsError::KeyRotationCooldown)
+            Err(landvault_analytics::landvault_analytics::AnalyticsError::KeyRotationCooldown)
         );
 
         // Confirming before the cooldown elapses is rejected...
         test::set_caller::<DefaultEnvironment>(accounts.bob);
         assert_eq!(
             dash.confirm_admin_rotation(),
-            Err(propchain_analytics::propchain_analytics::AnalyticsError::KeyRotationCooldown)
+            Err(landvault_analytics::landvault_analytics::AnalyticsError::KeyRotationCooldown)
         );
         // ...as is confirmation by anyone but the nominee.
         test::set_caller::<DefaultEnvironment>(accounts.charlie);
         assert_eq!(
             dash.confirm_admin_rotation(),
-            Err(propchain_analytics::propchain_analytics::AnalyticsError::RotationUnauthorized)
+            Err(landvault_analytics::landvault_analytics::AnalyticsError::RotationUnauthorized)
         );
 
         // After the cooldown the nominee takes over.

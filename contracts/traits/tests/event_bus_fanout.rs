@@ -7,13 +7,13 @@
 //! deleted in `61c32dc` for three reasons: it did not parse, it was never a
 //! declared `[[test]]` target (the `tests/` package root *is* the tests
 //! directory, so cargo cannot auto-discover files there), and it targeted
-//! `propchain_traits::observer`, which no longer exists. The traits crate ships
+//! `landvault_traits::observer`, which no longer exists. The traits crate ships
 //! `event_bus` instead, and that replacement had no tests of its own — this
 //! suite, plus `event_subscriber_callback.rs`, is them.
 //!
-//! Why here and not in the `tests/` package: `propchain-tests` cannot be built
-//! at all on the current base commit (`propchain-insurance` and
-//! `propchain-bridge` do not compile — see the PR description), so a suite added
+//! Why here and not in the `tests/` package: `landvault-tests` cannot be built
+//! at all on the current base commit (`landvault-insurance` and
+//! `landvault-bridge` do not compile — see the PR description), so a suite added
 //! there could be neither compiled nor executed. Integration tests in this crate
 //! do build and run, and sit next to the interface they exercise.
 //!
@@ -40,8 +40,8 @@
 //!   * the `EventBusError` taxonomy stays stable for off-chain consumers.
 
 use ink::primitives::AccountId;
-use propchain_traits::event_bus::{EventBus, EventBusError, EventPayload, Topic};
-use propchain_traits::{ContractError, ErrorCategory};
+use landvault_traits::event_bus::{EventBus, EventBusError, EventPayload, Topic};
+use landvault_traits::{ContractError, ErrorCategory};
 
 /// Subscriber ceiling the reference bus enforces per topic. Any finite cap
 /// exercises the same `MaxSubscribersReached` path; two keeps the test cheap.

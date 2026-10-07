@@ -1,7 +1,7 @@
 use ink::prelude::vec::Vec;
 use ink::primitives::AccountId;
 use ink::storage::Mapping;
-use propchain_traits::{SecurityEventType, SecuritySeverity};
+use landvault_traits::{SecurityEventType, SecuritySeverity};
 
 /// A single tamper-evident audit record in the hash chain.
 /// Compact design (~98 bytes) avoids String fields for gas efficiency.

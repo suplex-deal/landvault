@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.test-node
-    container_name: propchain-test-node
+    container_name: landvault-test-node
     ports:
       - "9944:9944"
       - "9933:9933"
@@ -15,28 +15,28 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - propchain-test-network
+      - landvault-test-network
 
   ipfs:
     image: ipfs/kubo:latest
-    container_name: propchain-test-ipfs
+    container_name: landvault-test-ipfs
     ports:
       - "5001:5001"
       - "8080:8080"
     networks:
-      - propchain-test-network
+      - landvault-test-network
 
   indexer:
     image: subsquid/substrate-ingest:latest
-    container_name: propchain-test-indexer
+    container_name: landvault-test-indexer
     environment:
       - CHAIN_ENDPOINT=ws://substrate-node:9944
     depends_on:
       substrate-node:
         condition: service_healthy
     networks:
-      - propchain-test-network
+      - landvault-test-network
 
 networks:
-  propchain-test-network:
+  landvault-test-network:
     driver: bridge

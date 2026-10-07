@@ -1,4 +1,4 @@
-# PropChain Crowdfunding Platform
+# LandVault Crowdfunding Platform
 
 Decentralized real estate crowdfunding platform enabling multiple investors to pool resources for property acquisitions.
 

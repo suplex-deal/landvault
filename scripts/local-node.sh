@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# PropChain Local Development Setup
+# LandVault Local Development Setup
 # Sets up local Substrate node for contract testing
 
 set -euo pipefail
@@ -8,7 +8,7 @@ set -euo pipefail
 NODE_PORT=${NODE_PORT:-9944}
 NODE_WS_PORT=${NODE_WS_PORT:-9945}
 RPC_PORT=${RPC_PORT:-9933}
-DATA_DIR=${DATA_DIR:-"/tmp/propchain-dev"}
+DATA_DIR=${DATA_DIR:-"/tmp/landvault-dev"}
 
 # Colors
 GREEN='\033[0;32m'

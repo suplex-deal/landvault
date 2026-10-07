@@ -13,13 +13,13 @@
 
 use ink::prelude::string::String;
 use ink::storage::Mapping;
-use propchain_traits::*;
+use landvault_traits::*;
 #[cfg(not(feature = "std"))]
 use scale_info::prelude::vec::Vec;
 
 #[ink::contract]
 mod bridge {
-    use propchain_traits::{non_reentrant, ReentrancyError, ReentrancyGuard};
+    use landvault_traits::{non_reentrant, ReentrancyError, ReentrancyGuard};
 
     use super::*;
 
@@ -426,7 +426,7 @@ mod bridge {
         operator_public_keys: Mapping<AccountId, [u8; 33]>,
 
         /// Pending admin key rotation request
-        pending_admin_rotation: Option<propchain_traits::KeyRotationRequest>,
+        pending_admin_rotation: Option<landvault_traits::KeyRotationRequest>,
 
         /// Account daily bridge request count for rate limiting
         account_daily_requests: Mapping<AccountId, u64>,
@@ -932,8 +932,8 @@ mod bridge {
                     chain_name: format!("Chain-{}", chain_id),
                     bridge_contract_address: None,
                     is_active: true,
-                    gas_multiplier: propchain_traits::constants::DEFAULT_GAS_MULTIPLIER,
-                    confirmation_blocks: propchain_traits::constants::DEFAULT_CONFIRMATION_BLOCKS,
+                    gas_multiplier: landvault_traits::constants::DEFAULT_GAS_MULTIPLIER,
+                    confirmation_blocks: landvault_traits::constants::DEFAULT_CONFIRMATION_BLOCKS,
                     supported_tokens: Vec::new(),
                     chain_daily_limit: 10_000_000_000_000_000_000, // Example large default
                 };
@@ -1244,7 +1244,7 @@ mod bridge {
             source_chain: ChainId,
             destination_chain: ChainId,
         ) -> Hash {
-            propchain_traits::crypto::hash_encoded(&(
+            landvault_traits::crypto::hash_encoded(&(
                 request_id,
                 approve,
                 caller,
@@ -1261,7 +1261,7 @@ mod bridge {
             &mut self,
             request_id: u64,
             approve: bool,
-            signed_approval: Option<propchain_traits::SignedApproval>,
+            signed_approval: Option<landvault_traits::SignedApproval>,
         ) -> Result<(), Error> {
             let caller = self.env().caller();
 
@@ -1293,7 +1293,7 @@ mod bridge {
                     return Err(Error::Unauthorized);
                 }
 
-                propchain_traits::crypto::verify_signed_approval(approval, &expected_key)
+                landvault_traits::crypto::verify_signed_approval(approval, &expected_key)
                     .map_err(|_| Error::Unauthorized)?;
             }
 
@@ -1707,7 +1707,7 @@ mod bridge {
                 return Err(Error::InvalidChain);
             }
 
-            let base_gas = propchain_traits::constants::BRIDGE_BASE_GAS;
+            let base_gas = landvault_traits::constants::BRIDGE_BASE_GAS;
             let multiplier = u64::from(chain_info.gas_multiplier);
             let confirmation_blocks = u64::from(chain_info.confirmation_blocks);
             let adjusted_base = base_gas.saturating_mul(multiplier) / 100;
@@ -1804,10 +1804,12 @@ mod bridge {
             page_size: u64,
         ) -> Vec<BridgeTransaction> {
             let full = self.bridge_history.get(account).unwrap_or_default();
-            bridge_history_pagination::PaginatedBridgeHistory::new(
-                MAX_BRIDGE_HISTORY_PER_ACCOUNT,
-            )
-            .paginate(&full, page as usize, page_size as usize)
+            let start = (page as usize).saturating_mul(page_size as usize);
+            if start >= full.len() || page_size == 0 {
+                return Vec::new();
+            }
+            let end = start.saturating_add(page_size as usize).min(full.len());
+            full[start..end].to_vec()
         }
 
         /// Quotes bridge fees for a DEX settlement.
@@ -2215,9 +2217,9 @@ mod bridge {
 
             let block = self.env().block_number();
             let effective_at =
-                block.saturating_add(propchain_traits::constants::KEY_ROTATION_COOLDOWN_BLOCKS);
+                block.saturating_add(landvault_traits::constants::KEY_ROTATION_COOLDOWN_BLOCKS);
 
-            self.pending_admin_rotation = Some(propchain_traits::KeyRotationRequest {
+            self.pending_admin_rotation = Some(landvault_traits::KeyRotationRequest {
                 old_account: caller,
                 new_account: new_admin,
                 requested_at: block,
@@ -2247,7 +2249,7 @@ mod bridge {
             }
             let expiry = request
                 .effective_at
-                .saturating_add(propchain_traits::constants::KEY_ROTATION_EXPIRY_BLOCKS);
+                .saturating_add(landvault_traits::constants::KEY_ROTATION_EXPIRY_BLOCKS);
             if block > expiry {
                 self.pending_admin_rotation = None;
                 return Err(Error::RequestExpired);
@@ -3458,7 +3460,7 @@ mod bridge {
                 request.recipient,
                 self.env().block_timestamp(),
             );
-            propchain_traits::crypto::hash_encoded(&data)
+            landvault_traits::crypto::hash_encoded(&data)
         }
 
         fn estimate_gas_usage(&self, request: &StoredBridgeRequest) -> u64 {
@@ -3619,7 +3621,7 @@ mod bridge {
                 destination_chain,
                 source_status: source.clone(),
                 destination_status: destination,
-                overall_status: propchain_traits::bridge::BridgeOperationStatus::Pending,
+                overall_status: landvault_traits::bridge::BridgeOperationStatus::Pending,
                 history,
                 last_updated: timestamp,
             };
@@ -3680,7 +3682,7 @@ mod bridge {
             tracker.history.push(source_update);
             tracker.history.push(destination_update);
             tracker.last_updated = timestamp;
-            tracker.overall_status = propchain_traits::bridge::BridgeOperationStatus::InTransit;
+            tracker.overall_status = landvault_traits::bridge::BridgeOperationStatus::InTransit;
 
             // Record the source-chain tx hash in the reverse index.
             self.tx_hash_index.insert(tx_hash, &request_id);
@@ -3743,7 +3745,7 @@ mod bridge {
                 tracker.history.push(upd);
             }
             tracker.last_updated = timestamp;
-            tracker.overall_status = propchain_traits::bridge::BridgeOperationStatus::Failed;
+            tracker.overall_status = landvault_traits::bridge::BridgeOperationStatus::Failed;
             self.cross_chain_tx_status.insert(request_id, &tracker);
 
             self.env().emit_event(CrossChainTxStatusUpdated {
@@ -4013,29 +4015,29 @@ mod bridge {
     }
 
     fn to_public_bridge_status(
-        status: propchain_traits::bridge::BridgeOperationStatus,
+        status: landvault_traits::bridge::BridgeOperationStatus,
     ) -> BridgeOperationStatus {
         match status {
-            propchain_traits::bridge::BridgeOperationStatus::None => BridgeOperationStatus::None,
-            propchain_traits::bridge::BridgeOperationStatus::Pending => {
+            landvault_traits::bridge::BridgeOperationStatus::None => BridgeOperationStatus::None,
+            landvault_traits::bridge::BridgeOperationStatus::Pending => {
                 BridgeOperationStatus::Pending
             }
-            propchain_traits::bridge::BridgeOperationStatus::Locked => {
+            landvault_traits::bridge::BridgeOperationStatus::Locked => {
                 BridgeOperationStatus::Locked
             }
-            propchain_traits::bridge::BridgeOperationStatus::InTransit => {
+            landvault_traits::bridge::BridgeOperationStatus::InTransit => {
                 BridgeOperationStatus::InTransit
             }
-            propchain_traits::bridge::BridgeOperationStatus::Completed => {
+            landvault_traits::bridge::BridgeOperationStatus::Completed => {
                 BridgeOperationStatus::Completed
             }
-            propchain_traits::bridge::BridgeOperationStatus::Failed => {
+            landvault_traits::bridge::BridgeOperationStatus::Failed => {
                 BridgeOperationStatus::Failed
             }
-            propchain_traits::bridge::BridgeOperationStatus::Recovering => {
+            landvault_traits::bridge::BridgeOperationStatus::Recovering => {
                 BridgeOperationStatus::Recovering
             }
-            propchain_traits::bridge::BridgeOperationStatus::Expired => {
+            landvault_traits::bridge::BridgeOperationStatus::Expired => {
                 BridgeOperationStatus::Expired
             }
         }
@@ -4072,16 +4074,16 @@ mod bridge {
     fn compute_overall_status(
         source: ChainTxStatus,
         destination: ChainTxStatus,
-    ) -> propchain_traits::bridge::BridgeOperationStatus {
+    ) -> landvault_traits::bridge::BridgeOperationStatus {
         use ChainTxStatus::*;
         match (source, destination) {
-            (Failed, _) | (_, Failed) => propchain_traits::bridge::BridgeOperationStatus::Failed,
-            (Confirmed, Confirmed) => propchain_traits::bridge::BridgeOperationStatus::Completed,
-            (Confirmed, _) => propchain_traits::bridge::BridgeOperationStatus::InTransit,
+            (Failed, _) | (_, Failed) => landvault_traits::bridge::BridgeOperationStatus::Failed,
+            (Confirmed, Confirmed) => landvault_traits::bridge::BridgeOperationStatus::Completed,
+            (Confirmed, _) => landvault_traits::bridge::BridgeOperationStatus::InTransit,
             (Submitted, NotStarted) | (Confirming, NotStarted) => {
-                propchain_traits::bridge::BridgeOperationStatus::Pending
+                landvault_traits::bridge::BridgeOperationStatus::Pending
             }
-            _ => propchain_traits::bridge::BridgeOperationStatus::InTransit,
+            _ => landvault_traits::bridge::BridgeOperationStatus::InTransit,
         }
     }
 

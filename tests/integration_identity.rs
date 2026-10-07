@@ -17,7 +17,7 @@
 #[cfg(test)]
 mod integration_identity {
     use ink::env::{test, DefaultEnvironment};
-    use propchain_identity::propchain_identity::{
+    use landvault_identity::landvault_identity::{
         IdentityError, IdentityRegistry, PrivacySettings, VerificationLevel,
     };
 

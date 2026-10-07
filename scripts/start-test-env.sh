@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "Starting PropChain test environment..."
+echo "Starting LandVault test environment..."
 docker compose -f docker-compose.test.yml up -d
 
 echo "Waiting for node to be ready..."

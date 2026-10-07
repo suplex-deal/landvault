@@ -7,7 +7,7 @@ if ! command -v gh &> /dev/null; then
     exit 1
 fi
 
-echo "🚀 Starting GitHub Issue Import for PropChain..."
+echo "🚀 Starting GitHub Issue Import for LandVault..."
 
 # Load Testing Enhancement Issues
 gh issue create --title "Load Testing: Implement E2E tests with real testnet latency" --body "Expand the current load testing framework to support high-latency network simulations mirroring Westend/Polkadot environments." --label "performance,testing"

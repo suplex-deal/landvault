@@ -1,4 +1,4 @@
-//! Shared error handling framework for PropChain contracts
+//! Shared error handling framework for LandVault contracts
 //!
 //! This module provides a unified error handling system with:
 //! - Base error trait that all contract errors implement
@@ -26,7 +26,7 @@ use scale_info::TypeInfo;
 /// `&'static str` does not implement `Decode`; use it purely in-memory.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct ErrorMessage {
-    /// Numeric error code, globally unique across all PropChain contracts.
+    /// Numeric error code, globally unique across all LandVault contracts.
     pub code: u32,
     /// Top-level domain that produced this error.
     pub category: ErrorCategory,
@@ -43,7 +43,7 @@ pub struct ErrorMessage {
 // Base Error Trait
 // =============================================================================
 
-/// Base trait for all PropChain contract errors.
+/// Base trait for all LandVault contract errors.
 /// All contract-specific error enums must implement this trait.
 pub trait ContractError: fmt::Debug + fmt::Display + Encode + Decode {
     /// Returns the numeric error code for this error variant.
@@ -588,8 +588,8 @@ pub mod insurance_codes {
 /// # Usage
 ///
 /// ```ignore
-/// use propchain_traits::errors::{error_ext, ContractError, ErrorCategory};
-/// use propchain_traits::errors::lending_codes;
+/// use landvault_traits::errors::{error_ext, ContractError, ErrorCategory};
+/// use landvault_traits::errors::lending_codes;
 ///
 /// #[derive(Debug, Clone, PartialEq, Eq, scale::Encode, scale::Decode)]
 /// pub enum MyError {

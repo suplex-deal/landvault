@@ -58,7 +58,7 @@ mod tests {
 
         // Propose pause bridge as bob
         test::set_caller::<DefaultEnvironment>(accounts.bob);
-        let pause_flags = propchain_traits::PauseFlags {
+        let pause_flags = landvault_traits::PauseFlags {
             all_operations: true,
             new_requests: true,
             signing: false,
@@ -68,7 +68,7 @@ mod tests {
         let request_id = bridge
             .propose_pause_bridge(
                 pause_flags,
-                propchain_traits::PauseReason::ManualAdmin,
+                landvault_traits::PauseReason::ManualAdmin,
                 Some(String::from("Test pause")),
                 Some(100),
             )
@@ -946,7 +946,7 @@ mod tests {
         assert_eq!(tracker.destination_status.status, ChainTxStatus::NotStarted);
         assert_eq!(
             tracker.overall_status,
-            propchain_traits::bridge::BridgeOperationStatus::Pending
+            landvault_traits::bridge::BridgeOperationStatus::Pending
         );
         assert_eq!(tracker.history.len(), 1);
     }
@@ -1020,7 +1020,7 @@ mod tests {
         assert_eq!(mid.destination_status.status, ChainTxStatus::Submitted);
         assert_eq!(
             mid.overall_status,
-            propchain_traits::bridge::BridgeOperationStatus::InTransit
+            landvault_traits::bridge::BridgeOperationStatus::InTransit
         );
 
         // Relayer confirms destination delivery.
@@ -1038,7 +1038,7 @@ mod tests {
         );
         assert_eq!(
             final_status.overall_status,
-            propchain_traits::bridge::BridgeOperationStatus::Completed
+            landvault_traits::bridge::BridgeOperationStatus::Completed
         );
         // Tx hash reverse lookup should now resolve.
         let by_hash = bridge
@@ -1135,7 +1135,7 @@ mod tests {
         assert_eq!(tracker.destination_status.status, ChainTxStatus::Failed);
         assert_eq!(
             tracker.overall_status,
-            propchain_traits::bridge::BridgeOperationStatus::Failed
+            landvault_traits::bridge::BridgeOperationStatus::Failed
         );
     }
 
@@ -1697,7 +1697,7 @@ mod tests {
         bridge.set_emergency_threshold(2).expect("threshold");
 
         test::set_caller::<DefaultEnvironment>(accounts.bob);
-        let pause_flags = propchain_traits::PauseFlags {
+        let pause_flags = landvault_traits::PauseFlags {
             all_operations: false,
             new_requests: true,
             signing: false,
@@ -1707,7 +1707,7 @@ mod tests {
         let request_id = bridge
             .propose_pause_bridge(
                 pause_flags,
-                propchain_traits::PauseReason::ManualAdmin,
+                landvault_traits::PauseReason::ManualAdmin,
                 Some(String::from("max timeout")),
                 Some(u64::MAX),
             )
@@ -2079,8 +2079,8 @@ mod tests {
         }
     }
 
-    fn flags_with(cross_chain_trades: bool) -> propchain_traits::PauseFlags {
-        propchain_traits::PauseFlags {
+    fn flags_with(cross_chain_trades: bool) -> landvault_traits::PauseFlags {
+        landvault_traits::PauseFlags {
             all_operations: false,
             new_requests: false,
             signing: false,
@@ -2097,17 +2097,17 @@ mod tests {
 
         bridge
             .emergency_pause(
-                propchain_traits::PauseFlags {
+                landvault_traits::PauseFlags {
                     new_requests: true,
                     ..flags_with(false)
                 },
-                propchain_traits::PauseReason::ManualAdmin,
+                landvault_traits::PauseReason::ManualAdmin,
                 Some(String::from("granular pause test")),
             )
             .expect("admin can pause NewRequest");
 
-        assert!(bridge.is_operation_paused(propchain_traits::BridgeOperation::NewRequest));
-        assert!(!bridge.is_operation_paused(propchain_traits::BridgeOperation::CrossChainTrade));
+        assert!(bridge.is_operation_paused(landvault_traits::BridgeOperation::NewRequest));
+        assert!(!bridge.is_operation_paused(landvault_traits::BridgeOperation::CrossChainTrade));
 
         // NewRequest is gated...
         let blocked = bridge.initiate_bridge_multisig(1, 2, accounts.bob, 2, Some(50), metadata());
@@ -2121,12 +2121,12 @@ mod tests {
 
         // Resume restores service.
         bridge
-            .emergency_unpause(propchain_traits::PauseFlags {
+            .emergency_unpause(landvault_traits::PauseFlags {
                 new_requests: true,
                 ..flags_with(false)
             })
             .expect("admin can resume NewRequest");
-        assert!(!bridge.is_operation_paused(propchain_traits::BridgeOperation::NewRequest));
+        assert!(!bridge.is_operation_paused(landvault_traits::BridgeOperation::NewRequest));
         let resumed = bridge.initiate_bridge_multisig(1, 2, accounts.bob, 2, Some(50), metadata());
         assert!(resumed.is_ok());
     }
@@ -2146,18 +2146,18 @@ mod tests {
 
         bridge
             .emergency_pause(
-                propchain_traits::PauseFlags {
+                landvault_traits::PauseFlags {
                     signing: true,
                     ..flags_with(false)
                 },
-                propchain_traits::PauseReason::ManualAdmin,
+                landvault_traits::PauseReason::ManualAdmin,
                 Some(String::from("granular pause test")),
             )
             .expect("admin can pause Signing");
 
-        assert!(bridge.is_operation_paused(propchain_traits::BridgeOperation::Signing));
-        assert!(!bridge.is_operation_paused(propchain_traits::BridgeOperation::NewRequest));
-        assert!(!bridge.is_operation_paused(propchain_traits::BridgeOperation::Execution));
+        assert!(bridge.is_operation_paused(landvault_traits::BridgeOperation::Signing));
+        assert!(!bridge.is_operation_paused(landvault_traits::BridgeOperation::NewRequest));
+        assert!(!bridge.is_operation_paused(landvault_traits::BridgeOperation::Execution));
 
         // Signing is gated...
         let blocked = bridge.sign_bridge_request(request_id, true);
@@ -2169,12 +2169,12 @@ mod tests {
 
         // Resume restores service.
         bridge
-            .emergency_unpause(propchain_traits::PauseFlags {
+            .emergency_unpause(landvault_traits::PauseFlags {
                 signing: true,
                 ..flags_with(false)
             })
             .expect("admin can resume Signing");
-        assert!(!bridge.is_operation_paused(propchain_traits::BridgeOperation::Signing));
+        assert!(!bridge.is_operation_paused(landvault_traits::BridgeOperation::Signing));
         let signed = bridge.sign_bridge_request(request_id, true);
         assert!(signed.is_ok());
     }
@@ -2210,17 +2210,17 @@ mod tests {
         test::set_caller::<DefaultEnvironment>(accounts.alice);
         bridge
             .emergency_pause(
-                propchain_traits::PauseFlags {
+                landvault_traits::PauseFlags {
                     execution: true,
                     ..flags_with(false)
                 },
-                propchain_traits::PauseReason::ManualAdmin,
+                landvault_traits::PauseReason::ManualAdmin,
                 Some(String::from("granular pause test")),
             )
             .expect("admin can pause Execution");
 
-        assert!(bridge.is_operation_paused(propchain_traits::BridgeOperation::Execution));
-        assert!(!bridge.is_operation_paused(propchain_traits::BridgeOperation::Signing));
+        assert!(bridge.is_operation_paused(landvault_traits::BridgeOperation::Execution));
+        assert!(!bridge.is_operation_paused(landvault_traits::BridgeOperation::Signing));
 
         // Fully-signed request is still gated at execution...
         let blocked = bridge.execute_bridge(request_id);
@@ -2234,12 +2234,12 @@ mod tests {
 
         // Resume restores service.
         bridge
-            .emergency_unpause(propchain_traits::PauseFlags {
+            .emergency_unpause(landvault_traits::PauseFlags {
                 execution: true,
                 ..flags_with(false)
             })
             .expect("admin can resume Execution");
-        assert!(!bridge.is_operation_paused(propchain_traits::BridgeOperation::Execution));
+        assert!(!bridge.is_operation_paused(landvault_traits::BridgeOperation::Execution));
         let executed = bridge.execute_bridge(request_id);
         assert!(executed.is_ok());
     }
@@ -2253,13 +2253,13 @@ mod tests {
         bridge
             .emergency_pause(
                 flags_with(true),
-                propchain_traits::PauseReason::ManualAdmin,
+                landvault_traits::PauseReason::ManualAdmin,
                 Some(String::from("granular pause test")),
             )
             .expect("admin can pause CrossChainTrade");
 
-        assert!(bridge.is_operation_paused(propchain_traits::BridgeOperation::CrossChainTrade));
-        assert!(!bridge.is_operation_paused(propchain_traits::BridgeOperation::NewRequest));
+        assert!(bridge.is_operation_paused(landvault_traits::BridgeOperation::CrossChainTrade));
+        assert!(!bridge.is_operation_paused(landvault_traits::BridgeOperation::NewRequest));
 
         let blocked = bridge.register_cross_chain_trade(9, Some(7), 2, accounts.charlie, 50_000, 49_000);
         assert_eq!(blocked, Err(Error::OperationPaused));
@@ -2270,7 +2270,7 @@ mod tests {
         bridge
             .emergency_unpause(flags_with(true))
             .expect("admin can resume CrossChainTrade");
-        assert!(!bridge.is_operation_paused(propchain_traits::BridgeOperation::CrossChainTrade));
+        assert!(!bridge.is_operation_paused(landvault_traits::BridgeOperation::CrossChainTrade));
         let trade_id = bridge
             .register_cross_chain_trade(9, Some(7), 2, accounts.charlie, 50_000, 49_000)
             .expect("cross-chain trade resumes after unpause");
@@ -2289,7 +2289,7 @@ mod tests {
         // Binding only (request_id, approve, caller, block) as before is no
         // longer sufficient: an approval signing that tuple must be rejected
         // once the transfer payload exists.
-        let old_shape = propchain_traits::crypto::hash_encoded(&(42u64, true, caller, 7u32));
+        let old_shape = landvault_traits::crypto::hash_encoded(&(42u64, true, caller, 7u32));
         assert_ne!(full, old_shape, "payload must bind more than the original tuple");
 
         // Altering amount, source or destination must change the binding hash.
@@ -2332,13 +2332,13 @@ mod tests {
         // even before any signature math, because the stored request's amount
         // and chains are not covered.
         let old_shape_hash =
-            <[u8; 32]>::from(propchain_traits::crypto::hash_encoded(&(
+            <[u8; 32]>::from(landvault_traits::crypto::hash_encoded(&(
                 request_id,
                 true,
                 accounts.alice,
                 42u32,
             )));
-        let approval = propchain_traits::SignedApproval {
+        let approval = landvault_traits::SignedApproval {
             signature: [0u8; 65],
             message_hash: old_shape_hash,
         };
@@ -2356,7 +2356,7 @@ mod tests {
             1,
             2,
         ));
-        let approval = propchain_traits::SignedApproval {
+        let approval = landvault_traits::SignedApproval {
             signature: [0u8; 65],
             message_hash: bound_hash,
         };

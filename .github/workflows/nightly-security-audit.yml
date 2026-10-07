@@ -99,21 +99,21 @@ jobs:
             echo "audit_exit=0" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Mutants Gate — propchain-lending
+      - name: Mutants Gate — landvault-lending
         run: |
           set -o pipefail
           echo "## 🧬 Mutation Gate: lending" >> AUDIT_LOG.md
           echo "\`\`\`text" >> AUDIT_LOG.md
-          cargo mutants -p propchain-lending --timeout 120 2>&1 | tee -a AUDIT_LOG.md
+          cargo mutants -p landvault-lending --timeout 120 2>&1 | tee -a AUDIT_LOG.md
           echo "\`\`\`" >> AUDIT_LOG.md
           echo "---" >> AUDIT_LOG.md
 
-      - name: Mutants Gate — propchain-bridge
+      - name: Mutants Gate — landvault-bridge
         run: |
           set -o pipefail
           echo "## 🧬 Mutation Gate: bridge" >> AUDIT_LOG.md
           echo "\`\`\`text" >> AUDIT_LOG.md
-          cargo mutants -p propchain-bridge --timeout 180 2>&1 | tee -a AUDIT_LOG.md
+          cargo mutants -p landvault-bridge --timeout 180 2>&1 | tee -a AUDIT_LOG.md
           echo "\`\`\`" >> AUDIT_LOG.md
           echo "---" >> AUDIT_LOG.md
 
@@ -131,10 +131,10 @@ jobs:
           set -o pipefail
           echo "## 🧪 Test Gate: bridge granular pause / sig payload / dex invariants" >> AUDIT_LOG.md
           echo "\`\`\`text" >> AUDIT_LOG.md
-          cargo test -p propchain-bridge granular_ 2>&1 | tee -a AUDIT_LOG.md
-          cargo test -p propchain-bridge signed_payload 2>&1 | tee -a AUDIT_LOG.md
-          cargo test -p propchain-bridge old_shape_approval 2>&1 | tee -a AUDIT_LOG.md
-          cargo test -p propchain-dex swap_invariant 2>&1 | tee -a AUDIT_LOG.md
+          cargo test -p landvault-bridge granular_ 2>&1 | tee -a AUDIT_LOG.md
+          cargo test -p landvault-bridge signed_payload 2>&1 | tee -a AUDIT_LOG.md
+          cargo test -p landvault-bridge old_shape_approval 2>&1 | tee -a AUDIT_LOG.md
+          cargo test -p landvault-dex swap_invariant 2>&1 | tee -a AUDIT_LOG.md
           echo "\`\`\`" >> AUDIT_LOG.md
           echo "---" >> AUDIT_LOG.md
 

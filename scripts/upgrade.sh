@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Simple upgrade script for PropChain contracts
+# Simple upgrade script for LandVault contracts
 # Usage: ./upgrade.sh <proxy_address> <new_logic_wasm_path>
 
 PROXY_ADDRESS=$1

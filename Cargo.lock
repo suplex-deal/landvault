@@ -979,8 +979,8 @@ name = "compliance_registry"
 version = "0.1.0"
 dependencies = [
  "ink 5.1.1",
+ "landvault-traits",
  "parity-scale-codec",
- "propchain-traits",
  "scale-info",
 ]
 
@@ -1871,8 +1871,8 @@ name = "fractional"
 version = "0.1.0"
 dependencies = [
  "ink 5.1.1",
+ "landvault-traits",
  "parity-scale-codec",
- "propchain-traits",
  "scale-info",
 ]
 
@@ -2262,8 +2262,8 @@ name = "governance"
 version = "0.1.0"
 dependencies = [
  "ink 5.1.1",
+ "landvault-traits",
  "parity-scale-codec",
- "propchain-traits",
  "scale-info",
 ]
 
@@ -3359,8 +3359,8 @@ name = "ipfs-metadata"
 version = "1.0.0"
 dependencies = [
  "ink 5.1.1",
+ "landvault-traits",
  "parity-scale-codec",
- "propchain-traits",
  "scale-info",
 ]
 
@@ -3565,6 +3565,274 @@ name = "konst_macro_rules"
 version = "0.2.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a4933f3f57a8e9d9da04db23fb153356ecaf00cbd14aee46279c33dc80925c37"
+
+[[package]]
+name = "landvault-analytics"
+version = "1.0.0"
+dependencies = [
+ "ink 5.1.1",
+ "landvault-traits",
+ "parity-scale-codec",
+ "scale-info",
+]
+
+[[package]]
+name = "landvault-bridge"
+version = "1.0.0"
+dependencies = [
+ "ink 5.1.1",
+ "landvault-traits",
+ "parity-scale-codec",
+ "scale-info",
+]
+
+[[package]]
+name = "landvault-common"
+version = "1.0.0"
+dependencies = [
+ "ink 5.1.1",
+ "parity-scale-codec",
+]
+
+[[package]]
+name = "landvault-contracts"
+version = "1.0.0"
+dependencies = [
+ "ink 5.1.1",
+ "ink_e2e",
+ "landvault-identity",
+ "landvault-traits",
+ "openbrush",
+ "parity-scale-codec",
+ "scale-info",
+]
+
+[[package]]
+name = "landvault-crowdfunding"
+version = "1.0.0"
+dependencies = [
+ "ink 5.1.1",
+ "ink_e2e",
+ "landvault-traits",
+ "parity-scale-codec",
+ "scale-info",
+]
+
+[[package]]
+name = "landvault-database"
+version = "1.0.0"
+dependencies = [
+ "ink 5.1.1",
+ "ink_e2e",
+ "landvault-traits",
+ "parity-scale-codec",
+ "scale-info",
+]
+
+[[package]]
+name = "landvault-dex"
+version = "1.0.0"
+dependencies = [
+ "ink 5.1.1",
+ "landvault-traits",
+ "parity-scale-codec",
+ "proptest",
+ "scale-info",
+]
+
+[[package]]
+name = "landvault-economic-models"
+version = "1.0.0"
+
+[[package]]
+name = "landvault-factory"
+version = "1.0.0"
+dependencies = [
+ "ink 5.1.1",
+ "parity-scale-codec",
+ "scale-info",
+]
+
+[[package]]
+name = "landvault-fees"
+version = "1.0.0"
+dependencies = [
+ "ink 5.1.1",
+ "landvault-traits",
+ "parity-scale-codec",
+ "scale-info",
+]
+
+[[package]]
+name = "landvault-gdpr"
+version = "0.1.0"
+dependencies = [
+ "ink 5.1.1",
+ "landvault-traits",
+ "parity-scale-codec",
+ "scale-info",
+]
+
+[[package]]
+name = "landvault-identity"
+version = "0.1.0"
+dependencies = [
+ "blake2 0.10.6",
+ "ed25519-dalek",
+ "ink 5.1.1",
+ "landvault-traits",
+ "parity-scale-codec",
+ "rand_core 0.6.4",
+ "scale-info",
+ "sha2 0.10.9",
+]
+
+[[package]]
+name = "landvault-insurance"
+version = "1.0.0"
+dependencies = [
+ "ink 5.1.1",
+ "ink_e2e",
+ "landvault-traits",
+ "parity-scale-codec",
+ "scale-info",
+]
+
+[[package]]
+name = "landvault-lending"
+version = "1.0.0"
+dependencies = [
+ "ink 5.1.1",
+ "ink_e2e",
+ "landvault-traits",
+ "parity-scale-codec",
+ "scale-info",
+]
+
+[[package]]
+name = "landvault-metadata"
+version = "1.0.0"
+dependencies = [
+ "ink 5.1.1",
+ "ink_e2e",
+ "landvault-traits",
+ "parity-scale-codec",
+ "scale-info",
+]
+
+[[package]]
+name = "landvault-monitoring"
+version = "1.0.0"
+dependencies = [
+ "ink 5.1.1",
+ "landvault-traits",
+ "parity-scale-codec",
+ "scale-info",
+]
+
+[[package]]
+name = "landvault-multicall"
+version = "1.0.0"
+dependencies = [
+ "ink 5.1.1",
+ "landvault-traits",
+ "parity-scale-codec",
+ "scale-info",
+]
+
+[[package]]
+name = "landvault-prediction-market"
+version = "1.0.0"
+dependencies = [
+ "ink 5.1.1",
+ "landvault-contracts",
+ "landvault-traits",
+ "parity-scale-codec",
+ "scale-info",
+]
+
+[[package]]
+name = "landvault-proxy"
+version = "1.0.0"
+dependencies = [
+ "ink 5.1.1",
+ "parity-scale-codec",
+ "scale-info",
+]
+
+[[package]]
+name = "landvault-sanctions"
+version = "0.1.0"
+dependencies = [
+ "ink 5.1.1",
+ "landvault-traits",
+ "parity-scale-codec",
+ "scale-info",
+]
+
+[[package]]
+name = "landvault-tests"
+version = "1.0.0"
+dependencies = [
+ "compliance_registry",
+ "fractional",
+ "governance",
+ "ink 5.1.1",
+ "ink_e2e",
+ "ink_env 5.1.1",
+ "ipfs-metadata",
+ "landvault-analytics",
+ "landvault-bridge",
+ "landvault-contracts",
+ "landvault-crowdfunding",
+ "landvault-database",
+ "landvault-dex",
+ "landvault-factory",
+ "landvault-fees",
+ "landvault-gdpr",
+ "landvault-identity",
+ "landvault-insurance",
+ "landvault-lending",
+ "landvault-monitoring",
+ "landvault-multicall",
+ "landvault-prediction-market",
+ "landvault-sanctions",
+ "landvault-third-party",
+ "landvault-traits",
+ "mock-oracle",
+ "oracle",
+ "parity-scale-codec",
+ "property-management",
+ "proptest",
+ "rand 0.8.6",
+ "scale-info",
+ "serde",
+ "serde_json",
+ "staking",
+ "tokio",
+ "version-registry",
+]
+
+[[package]]
+name = "landvault-third-party"
+version = "1.0.0"
+dependencies = [
+ "ink 5.1.1",
+ "ink_e2e",
+ "landvault-traits",
+ "parity-scale-codec",
+ "scale-info",
+]
+
+[[package]]
+name = "landvault-traits"
+version = "1.0.0"
+dependencies = [
+ "ink 5.1.1",
+ "parity-scale-codec",
+ "scale-info",
+ "secp256k1 0.33.1",
+]
 
 [[package]]
 name = "lazy_static"
@@ -3850,8 +4118,8 @@ name = "mock-oracle"
 version = "1.0.0"
 dependencies = [
  "ink 5.1.1",
+ "landvault-traits",
  "parity-scale-codec",
- "propchain-traits",
  "scale-info",
 ]
 
@@ -4120,8 +4388,8 @@ version = "1.0.0"
 dependencies = [
  "ink 5.1.1",
  "ink_e2e",
+ "landvault-traits",
  "parity-scale-codec",
- "propchain-traits",
  "scale-info",
 ]
 
@@ -5006,280 +5274,12 @@ dependencies = [
 ]
 
 [[package]]
-name = "propchain-analytics"
-version = "1.0.0"
-dependencies = [
- "ink 5.1.1",
- "parity-scale-codec",
- "propchain-traits",
- "scale-info",
-]
-
-[[package]]
-name = "propchain-bridge"
-version = "1.0.0"
-dependencies = [
- "ink 5.1.1",
- "parity-scale-codec",
- "propchain-traits",
- "scale-info",
-]
-
-[[package]]
-name = "propchain-common"
-version = "1.0.0"
-dependencies = [
- "ink 5.1.1",
- "parity-scale-codec",
-]
-
-[[package]]
-name = "propchain-contracts"
-version = "1.0.0"
-dependencies = [
- "ink 5.1.1",
- "ink_e2e",
- "openbrush",
- "parity-scale-codec",
- "propchain-identity",
- "propchain-traits",
- "scale-info",
-]
-
-[[package]]
-name = "propchain-crowdfunding"
-version = "1.0.0"
-dependencies = [
- "ink 5.1.1",
- "ink_e2e",
- "parity-scale-codec",
- "propchain-traits",
- "scale-info",
-]
-
-[[package]]
-name = "propchain-database"
-version = "1.0.0"
-dependencies = [
- "ink 5.1.1",
- "ink_e2e",
- "parity-scale-codec",
- "propchain-traits",
- "scale-info",
-]
-
-[[package]]
-name = "propchain-dex"
-version = "1.0.0"
-dependencies = [
- "ink 5.1.1",
- "parity-scale-codec",
- "propchain-traits",
- "proptest",
- "scale-info",
-]
-
-[[package]]
-name = "propchain-economic-models"
-version = "1.0.0"
-
-[[package]]
-name = "propchain-factory"
-version = "1.0.0"
-dependencies = [
- "ink 5.1.1",
- "parity-scale-codec",
- "scale-info",
-]
-
-[[package]]
-name = "propchain-fees"
-version = "1.0.0"
-dependencies = [
- "ink 5.1.1",
- "parity-scale-codec",
- "propchain-traits",
- "scale-info",
-]
-
-[[package]]
-name = "propchain-gdpr"
-version = "0.1.0"
-dependencies = [
- "ink 5.1.1",
- "parity-scale-codec",
- "propchain-traits",
- "scale-info",
-]
-
-[[package]]
-name = "propchain-identity"
-version = "0.1.0"
-dependencies = [
- "blake2 0.10.6",
- "ed25519-dalek",
- "ink 5.1.1",
- "parity-scale-codec",
- "propchain-traits",
- "rand_core 0.6.4",
- "scale-info",
- "sha2 0.10.9",
-]
-
-[[package]]
-name = "propchain-insurance"
-version = "1.0.0"
-dependencies = [
- "ink 5.1.1",
- "ink_e2e",
- "parity-scale-codec",
- "propchain-traits",
- "scale-info",
-]
-
-[[package]]
-name = "propchain-lending"
-version = "1.0.0"
-dependencies = [
- "ink 5.1.1",
- "ink_e2e",
- "parity-scale-codec",
- "propchain-traits",
- "scale-info",
-]
-
-[[package]]
-name = "propchain-metadata"
-version = "1.0.0"
-dependencies = [
- "ink 5.1.1",
- "ink_e2e",
- "parity-scale-codec",
- "propchain-traits",
- "scale-info",
-]
-
-[[package]]
-name = "propchain-monitoring"
-version = "1.0.0"
-dependencies = [
- "ink 5.1.1",
- "parity-scale-codec",
- "propchain-traits",
- "scale-info",
-]
-
-[[package]]
-name = "propchain-multicall"
-version = "1.0.0"
-dependencies = [
- "ink 5.1.1",
- "parity-scale-codec",
- "propchain-traits",
- "scale-info",
-]
-
-[[package]]
-name = "propchain-prediction-market"
-version = "1.0.0"
-dependencies = [
- "ink 5.1.1",
- "parity-scale-codec",
- "propchain-contracts",
- "propchain-traits",
- "scale-info",
-]
-
-[[package]]
-name = "propchain-proxy"
-version = "1.0.0"
-dependencies = [
- "ink 5.1.1",
- "parity-scale-codec",
- "scale-info",
-]
-
-[[package]]
-name = "propchain-sanctions"
-version = "0.1.0"
-dependencies = [
- "ink 5.1.1",
- "parity-scale-codec",
- "propchain-traits",
- "scale-info",
-]
-
-[[package]]
-name = "propchain-tests"
-version = "1.0.0"
-dependencies = [
- "compliance_registry",
- "fractional",
- "governance",
- "ink 5.1.1",
- "ink_e2e",
- "ink_env 5.1.1",
- "ipfs-metadata",
- "mock-oracle",
- "oracle",
- "parity-scale-codec",
- "propchain-analytics",
- "propchain-bridge",
- "propchain-contracts",
- "propchain-crowdfunding",
- "propchain-database",
- "propchain-dex",
- "propchain-factory",
- "propchain-fees",
- "propchain-gdpr",
- "propchain-identity",
- "propchain-insurance",
- "propchain-lending",
- "propchain-monitoring",
- "propchain-multicall",
- "propchain-prediction-market",
- "propchain-sanctions",
- "propchain-third-party",
- "propchain-traits",
- "property-management",
- "proptest",
- "rand 0.8.6",
- "scale-info",
- "serde",
- "serde_json",
- "staking",
- "tokio",
- "version-registry",
-]
-
-[[package]]
-name = "propchain-third-party"
-version = "1.0.0"
-dependencies = [
- "ink 5.1.1",
- "ink_e2e",
- "parity-scale-codec",
- "propchain-traits",
- "scale-info",
-]
-
-[[package]]
-name = "propchain-traits"
-version = "1.0.0"
-dependencies = [
- "ink 5.1.1",
- "parity-scale-codec",
- "scale-info",
- "secp256k1 0.33.1",
-]
-
-[[package]]
 name = "property-management"
 version = "1.0.0"
 dependencies = [
  "ink 5.1.1",
+ "landvault-traits",
  "parity-scale-codec",
- "propchain-traits",
  "scale-info",
  "secp256k1 0.33.1",
 ]
@@ -7281,8 +7281,8 @@ name = "staking"
 version = "0.1.0"
 dependencies = [
  "ink 5.1.1",
+ "landvault-traits",
  "parity-scale-codec",
- "propchain-traits",
  "scale-info",
 ]
 
@@ -8131,8 +8131,8 @@ name = "version-registry"
 version = "1.0.0"
 dependencies = [
  "ink 5.1.1",
+ "landvault-traits",
  "parity-scale-codec",
- "propchain-traits",
  "scale-info",
 ]
 

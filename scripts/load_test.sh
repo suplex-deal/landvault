@@ -1,8 +1,8 @@
 #!/bin/bash
-# Load Test Runner Script for PropChain
+# Load Test Runner Script for LandVault
 # 
 # This script provides convenient commands for running various load tests
-# against the PropChain smart contracts.
+# against the LandVault smart contracts.
 #
 # Usage:
 #   ./scripts/load_test.sh [command] [options]
@@ -26,7 +26,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Configuration
-PACKAGE="propchain-tests"
+PACKAGE="landvault-tests"
 RELEASE_FLAG="--release"
 OUTPUT_FLAG="--nocapture"
 
@@ -77,7 +77,7 @@ run_load_test() {
 
 show_help() {
     cat << EOF
-PropChain Load Test Runner
+LandVault Load Test Runner
 ==========================
 
 Usage: ./scripts/load_test.sh [command] [options]

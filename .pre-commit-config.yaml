@@ -1,4 +1,4 @@
-# PropChain Pre-commit Configuration
+# LandVault Pre-commit Configuration
 # This file configures pre-commit hooks for code quality and consistency
 
 repos:

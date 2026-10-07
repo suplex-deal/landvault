@@ -1,5 +1,5 @@
 //! Closes #803: public `compute_borrow_rate` view so off-chain tools can
-//! quote without simulating contract state. Wired into `propchain_lending`
+//! quote without simulating contract state. Wired into `landvault_lending`
 //! (#1091): the `borrow_rate` message and the pool-level interest accrual in
 //! `deposit`/`borrow` both use this linear model, documented in the message
 //! docs as `rate_bps = 200 + 1000 × utilisation_bps / 10 000`.

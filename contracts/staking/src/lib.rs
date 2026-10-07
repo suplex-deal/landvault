@@ -14,8 +14,8 @@ mod unbonding_tiers;
 mod staking {
     use ink::prelude::vec::Vec;
     use ink::storage::Mapping;
-    use propchain_traits::constants;
-    use propchain_traits::errors::*;
+    use landvault_traits::constants;
+    use landvault_traits::errors::*;
 
     include!("errors.rs");
     include!("types.rs");
@@ -28,8 +28,8 @@ mod staking {
         UnbondingTierConfig, MAX_TIER_UNBONDING_BLOCKS,
     };
 
-    impl From<propchain_traits::ReentrancyError> for Error {
-        fn from(_: propchain_traits::ReentrancyError) -> Self {
+    impl From<landvault_traits::ReentrancyError> for Error {
+        fn from(_: landvault_traits::ReentrancyError) -> Self {
             Error::ReentrantCall
         }
     }
@@ -321,7 +321,7 @@ mod staking {
         reward_history: Mapping<AccountId, Vec<RewardCheckpoint>>,
         governance_power: Mapping<AccountId, u128>,
         staker_list: Vec<AccountId>,
-        reentrancy_guard: propchain_traits::ReentrancyGuard,
+        reentrancy_guard: landvault_traits::ReentrancyGuard,
         slashing_coordinator: Option<AccountId>,
         // ----- Parameter governance -----
         proposal_counter: u64,
@@ -380,7 +380,7 @@ mod staking {
                 reward_history: Mapping::default(),
                 governance_power: Mapping::default(),
                 staker_list: Vec::new(),
-                reentrancy_guard: propchain_traits::ReentrancyGuard::new(),
+                reentrancy_guard: landvault_traits::ReentrancyGuard::new(),
                 slashing_coordinator: None,
                 proposal_counter: 0,
                 active_proposal_count: 0,
@@ -803,7 +803,7 @@ mod staking {
         /// schedule exists, unvested rewards are returned to the reward pool.
         #[ink(message)]
         pub fn unstake(&mut self) -> Result<(), Error> {
-            propchain_traits::non_reentrant!(self, {
+            landvault_traits::non_reentrant!(self, {
                 let caller = self.env().caller();
                 let stake = self.stakes.get(caller).ok_or(Error::StakeNotFound)?;
 
@@ -987,7 +987,7 @@ mod staking {
         /// Claim accumulated rewards.
         #[ink(message)]
         pub fn claim_rewards(&mut self) -> Result<u128, Error> {
-            propchain_traits::non_reentrant!(self, {
+            landvault_traits::non_reentrant!(self, {
                 let caller = self.env().caller();
                 let mut stake = self.stakes.get(caller).ok_or(Error::StakeNotFound)?;
 
@@ -1755,7 +1755,7 @@ mod staking {
         /// Admin-only: slash a validator and propagate to all delegators.
         #[ink(message)]
         pub fn slash_validator(&mut self, validator: AccountId) -> Result<(), Error> {
-            propchain_traits::non_reentrant!(self, {
+            landvault_traits::non_reentrant!(self, {
                 let coordinator = self
                     .slashing_coordinator
                     .ok_or(Error::NoSlashingCoordinator)?;
@@ -1824,7 +1824,7 @@ mod staking {
         /// Delegate `amount` tokens to `validator`.
         #[ink(message)]
         pub fn delegate(&mut self, validator: AccountId, amount: u128) -> Result<(), Error> {
-            propchain_traits::non_reentrant!(self, {
+            landvault_traits::non_reentrant!(self, {
                 let caller = self.env().caller();
                 let info = self
                     .validators
@@ -1879,7 +1879,7 @@ mod staking {
         /// Initiate unbonding for the caller's delegation.
         #[ink(message)]
         pub fn undelegate(&mut self, validator: AccountId) -> Result<(), Error> {
-            propchain_traits::non_reentrant!(self, {
+            landvault_traits::non_reentrant!(self, {
                 let caller = self.env().caller();
                 let mut record = self
                     .delegations
@@ -1915,7 +1915,7 @@ mod staking {
         /// Claim tokens after the unbonding period has elapsed.
         #[ink(message)]
         pub fn claim_undelegated(&mut self, validator: AccountId) -> Result<u128, Error> {
-            propchain_traits::non_reentrant!(self, {
+            landvault_traits::non_reentrant!(self, {
                 let caller = self.env().caller();
                 let record = self
                     .delegations
@@ -1950,7 +1950,7 @@ mod staking {
         /// Claim pending delegation rewards (net of validator commission).
         #[ink(message)]
         pub fn claim_delegation_rewards(&mut self, validator: AccountId) -> Result<u128, Error> {
-            propchain_traits::non_reentrant!(self, {
+            landvault_traits::non_reentrant!(self, {
                 let caller = self.env().caller();
                 let record = self
                     .delegations
@@ -1987,7 +1987,7 @@ mod staking {
         /// Validator claims their accumulated commission.
         #[ink(message)]
         pub fn claim_validator_commission(&mut self) -> Result<u128, Error> {
-            propchain_traits::non_reentrant!(self, {
+            landvault_traits::non_reentrant!(self, {
                 let caller = self.env().caller();
                 if !self.validators.contains(caller) {
                     return Err(Error::Unauthorized);

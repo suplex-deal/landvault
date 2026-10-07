@@ -94,6 +94,12 @@ pub enum Error {
     /// An outgoing native-value transfer (e.g. a gas refund during
     /// [`RecoveryAction::RefundGas`]) could not be executed.
     TransferFailed,
+    /// Conflicting vote submitted by validator.
+    VoteConflict,
+    /// Total staked weight of approving validators is below required quorum.
+    InsufficientStakeWeight,
+    /// Rate limit configuration parameters are invalid.
+    InvalidRateLimit,
 }
 
 impl Error {
@@ -206,6 +212,9 @@ impl ContractError for Error {
             Error::AssetNotFrozen => bridge_codes::BRIDGE_INVALID_REQUEST,
             Error::InsufficientEmergencySignatures => bridge_codes::BRIDGE_INSUFFICIENT_SIGNATURES,
             Error::TransferFailed => bridge_codes::BRIDGE_TRANSFER_FAILED,
+            Error::VoteConflict => bridge_codes::BRIDGE_INVALID_REQUEST,
+            Error::InsufficientStakeWeight => bridge_codes::BRIDGE_INSUFFICIENT_SIGNATURES,
+            Error::InvalidRateLimit => bridge_codes::BRIDGE_RATE_LIMIT_EXCEEDED,
         }
     }
 
@@ -267,6 +276,15 @@ impl ContractError for Error {
             }
             Error::TransferFailed => {
                 "The native-value transfer for this bridge recovery could not be executed"
+            }
+            Error::VoteConflict => {
+                "Conflicting vote submitted by validator"
+            }
+            Error::InsufficientStakeWeight => {
+                "Total staked weight of approving validators is below required quorum"
+            }
+            Error::InvalidRateLimit => {
+                "Rate limit configuration parameters are invalid"
             }
         }
     }

@@ -3,22 +3,22 @@
 #![allow(unexpected_cfgs)]
 #![allow(clippy::new_without_default)]
 
-//! # PropChain Third-Party Service Integration
+//! # LandVault Third-Party Service Integration
 //!
-//! Orchestrates interactions between PropChain contracts and external services:
+//! Orchestrates interactions between LandVault contracts and external services:
 //! - KYC/AML Providers (Identity verification, status checking)
 //! - Fiat Payment Gateways (Bridging fiat payments to on-chain operations)
 //! - Off-chain Monitoring and Alerting systems
 //! - Service API endpoints and credential management
 //!
-//! Resolves: https://github.com/MettaChain/PropChain-contract/issues/113
+//! Resolves: https://github.com/MettaChain/LandVault-contract/issues/113
 
 use ink::prelude::string::String;
 use ink::prelude::vec::Vec;
 use ink::storage::Mapping;
 
 #[ink::contract]
-pub mod propchain_third_party {
+pub mod landvault_third_party {
     use super::*;
 
     // Data types extracted to types.rs (Issue #101)

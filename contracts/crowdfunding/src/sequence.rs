@@ -3,16 +3,16 @@
 #![allow(clippy::too_many_arguments)]
 
 use ink::storage::Mapping;
-use propchain_traits::*;
+use landvault_traits::*;
 #[cfg(not(feature = "std"))]
 use scale_info::prelude::{string::String, vec::Vec};
 
 pub mod tests;
 
 #[ink::contract]
-mod propchain_escrow {
+mod landvault_escrow {
     use super::*;
-    use propchain_traits::{non_reentrant, ReentrancyError, ReentrancyGuard};
+    use landvault_traits::{non_reentrant, ReentrancyError, ReentrancyGuard};
 
     include!("errors.rs");
     include!("types.rs");
@@ -57,7 +57,7 @@ mod propchain_escrow {
         /// Registered ECDSA public keys for optional cryptographic signature verification
         signer_public_keys: Mapping<AccountId, [u8; 33]>,
         /// Pending admin key rotation request
-        pending_admin_rotation: Option<propchain_traits::KeyRotationRequest>,
+        pending_admin_rotation: Option<landvault_traits::KeyRotationRequest>,
         /// Reentrancy protection guard
         reentrancy_guard: ReentrancyGuard,
         /// Pending large-transfer approval requests: request_id -> LargeTransferRequest
@@ -323,7 +323,7 @@ mod propchain_escrow {
                 large_transfer_requests: Mapping::default(),
                 large_transfer_request_count: 0,
                 escrow_active_large_transfer: Mapping::default(),
-                // 0 means "use global constant from propchain_traits::constants"
+                // 0 means "use global constant from landvault_traits::constants"
                 large_transfer_threshold: 0,
                 very_large_transfer_threshold: 0,
                 tax_compliance_contract,

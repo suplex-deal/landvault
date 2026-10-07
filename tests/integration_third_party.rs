@@ -22,7 +22,7 @@
 mod integration_third_party {
     // Third-party contract
     use ink::env::{test, DefaultEnvironment};
-    use propchain_third_party::propchain_third_party::{
+    use landvault_third_party::landvault_third_party::{
         Error as ThirdPartyError, KycRecord, PaymentRequest, RequestStatus, ServiceConfig,
         ServiceStatus, ServiceType, ThirdPartyIntegration,
     };
@@ -40,9 +40,9 @@ mod integration_third_party {
         contract
             .register_service(
                 ServiceType::KycProvider,
-                String::from("PropChain KYC"),
+                String::from("LandVault KYC"),
                 accounts.bob,
-                String::from("https://kyc.propchain.io"),
+                String::from("https://kyc.landvault.io"),
                 String::from("v1"),
                 100,
             )
@@ -58,7 +58,7 @@ mod integration_third_party {
                 ServiceType::PaymentGateway,
                 String::from("Fiat Gateway"),
                 accounts.bob,
-                String::from("https://pay.propchain.io"),
+                String::from("https://pay.landvault.io"),
                 String::from("v2"),
                 250,
             )
@@ -119,7 +119,7 @@ mod integration_third_party {
         assert_eq!(config.status, ServiceStatus::Active);
         assert_eq!(config.fee_percentage, 100);
         assert_eq!(config.fees_collected, 0);
-        assert_eq!(config.endpoint_url, "https://kyc.propchain.io");
+        assert_eq!(config.endpoint_url, "https://kyc.landvault.io");
     }
 
     /// Scenario 2 - Unregistered / wrong-type services are rejected

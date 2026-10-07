@@ -1,7 +1,7 @@
 [package]
-name = "propchain-traits"
+name = "landvault-traits"
 version = "1.0.0"
-authors = ["PropChain Team <dev@propchain.io>"]
+authors = ["LandVault Team <dev@landvault.io>"]
 edition = "2021"
 publish = false
 
@@ -11,7 +11,7 @@ scale = { workspace = true, default-features = false, features = ["derive"] }
 scale-info = { workspace = true, default-features = false, features = ["derive"] }
 
 [lib]
-name = "propchain_traits"
+name = "landvault_traits"
 path = "src/lib.rs"
 
 [features]

@@ -289,7 +289,7 @@ pub struct OracleSourceProposal {
 // ── Oracle Slashing Events (Issue #319 / #497) ────────────────────────────────
 
 // (These are referenced in oracle lib.rs via self.env().emit_event — they are
-//  defined as #[ink(event)] structs inside the mod propchain_oracle block.
+//  defined as #[ink(event)] structs inside the mod landvault_oracle block.
 //  We define helper types here for the UpdateThrottled event.)
 
 #[derive(Debug, Clone, PartialEq, scale::Encode, scale::Decode)]

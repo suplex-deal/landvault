@@ -1,7 +1,7 @@
 #![allow(clippy::clone_on_copy)] // fires inside ink! generated storage code
-//! PropChain Test Suite
+//! LandVault Test Suite
 //!
-//! This module provides the test library for PropChain contracts,
+//! This module provides the test library for LandVault contracts,
 //! including shared utilities, fixtures, and test helpers.
 
 #![cfg_attr(not(feature = "std"), no_std)]

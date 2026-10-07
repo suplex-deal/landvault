@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# PropChain Deployment Script
+# LandVault Deployment Script
 # This script handles deployment of contracts to various networks
 
 set -euo pipefail
@@ -435,7 +435,7 @@ main() {
         esac
     done
 
-    log_info "Starting PropChain deployment..."
+    log_info "Starting LandVault deployment..."
 
     # Load environment variables
     load_env

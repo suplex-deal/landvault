@@ -1,4 +1,4 @@
-# cargo-deny configuration for PropChain contract security audit
+# cargo-deny configuration for LandVault contract security audit
 # For more information about cargo-deny, see: https://github.com/EmbarkStudios/cargo-deny
 
 [advisories]

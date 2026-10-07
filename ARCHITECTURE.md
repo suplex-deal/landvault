@@ -1,4 +1,4 @@
-# PropChain Smart Contract Architecture
+# LandVault Smart Contract Architecture
 
 > One-stop overview of the contract system.  
 > For deep-dives see the per-contract READMEs under `contracts/` and the
@@ -24,7 +24,7 @@
 
 ## 1. System Overview
 
-PropChain is a modular set of ink! (Substrate/Polkadot) smart contracts that
+LandVault is a modular set of ink! (Substrate/Polkadot) smart contracts that
 together implement decentralised real-estate infrastructure: tokenisation,
 lending, insurance, governance, compliance, and cross-chain bridging.
 
@@ -44,13 +44,13 @@ graph TD
 
     subgraph Finance["Finance Layer"]
         Lending["Lending\n(PropertyLending)"]
-        Insurance["Insurance\n(PropchainInsurance)"]
+        Insurance["Insurance\n(LandVaultInsurance)"]
         Staking["Staking"]
         DEX["DEX"]
     end
 
     subgraph Infra["Infrastructure Layer"]
-        Traits["Shared Traits\n(propchain-traits)"]
+        Traits["Shared Traits\n(landvault-traits)"]
         Oracle2["Oracle / Mock-Oracle"]
         Bridge["Cross-Chain Bridge"]
         Governance["Governance"]
@@ -81,34 +81,34 @@ graph TD
 
 | Contract | Crate | Primary Responsibility |
 |----------|-------|----------------------|
-| `identity` | `propchain-identity` | On-chain KYC / DID registry |
-| `metadata` | `propchain-metadata` | Property metadata & IPFS pinning |
-| `fractional` | `propchain-fractional` | Fractional ownership tokens |
-| `ipfs-metadata` | `propchain-ipfs-metadata` | IPFS CID storage helpers |
-| `lending` | `propchain-lending` | Collateral, pools, loans, liquidations, yield |
-| `insurance` | `propchain-insurance` | Dynamic premiums, risk pools, claims |
-| `staking` | `propchain-staking` | Token staking & rewards |
-| `dex` | `propchain-dex` | On-chain swap / AMM |
-| `oracle` | `propchain-oracle` | Price feed aggregation |
-| `mock-oracle` | `propchain-mock-oracle` | Deterministic test oracle |
-| `bridge` | `propchain-bridge` | Cross-chain asset bridge |
-| `governance` | `propchain-governance` | Proposals & voting |
-| `compliance_registry` | `propchain-compliance-registry` | AML/KYC compliance records |
-| `gdpr` | `propchain-gdpr` | GDPR data erasure requests |
-| `sanctions` | `propchain-sanctions` | OFAC/sanctions screening |
-| `factory` | `propchain-factory` | Contract deployment factory |
-| `proxy` | `propchain-proxy` | Upgradeable proxy pattern |
-| `analytics` | `propchain-analytics` | On-chain metrics accumulation |
-| `monitoring` | `propchain-monitoring` | Health-check aggregation |
-| `version-registry` | `propchain-version-registry` | Contract version tracking |
-| `database` | `propchain-database` | Generic key-value store |
-| `multicall` | `propchain-multicall` | Batch message dispatcher |
-| `prediction-market` | `propchain-prediction-market` | Property price prediction markets |
-| `crowdfunding` | `propchain-crowdfunding` | Property crowdfunding campaigns |
-| `fees` | `propchain-fees` | Platform fee configuration |
-| `property-management` | `propchain-property-management` | Ongoing property management |
-| `traits` | `propchain-traits` | Shared types, errors, macros |
-| `lib` | `propchain-lib` | Shared utilities & Kani proofs |
+| `identity` | `landvault-identity` | On-chain KYC / DID registry |
+| `metadata` | `landvault-metadata` | Property metadata & IPFS pinning |
+| `fractional` | `landvault-fractional` | Fractional ownership tokens |
+| `ipfs-metadata` | `landvault-ipfs-metadata` | IPFS CID storage helpers |
+| `lending` | `landvault-lending` | Collateral, pools, loans, liquidations, yield |
+| `insurance` | `landvault-insurance` | Dynamic premiums, risk pools, claims |
+| `staking` | `landvault-staking` | Token staking & rewards |
+| `dex` | `landvault-dex` | On-chain swap / AMM |
+| `oracle` | `landvault-oracle` | Price feed aggregation |
+| `mock-oracle` | `landvault-mock-oracle` | Deterministic test oracle |
+| `bridge` | `landvault-bridge` | Cross-chain asset bridge |
+| `governance` | `landvault-governance` | Proposals & voting |
+| `compliance_registry` | `landvault-compliance-registry` | AML/KYC compliance records |
+| `gdpr` | `landvault-gdpr` | GDPR data erasure requests |
+| `sanctions` | `landvault-sanctions` | OFAC/sanctions screening |
+| `factory` | `landvault-factory` | Contract deployment factory |
+| `proxy` | `landvault-proxy` | Upgradeable proxy pattern |
+| `analytics` | `landvault-analytics` | On-chain metrics accumulation |
+| `monitoring` | `landvault-monitoring` | Health-check aggregation |
+| `version-registry` | `landvault-version-registry` | Contract version tracking |
+| `database` | `landvault-database` | Generic key-value store |
+| `multicall` | `landvault-multicall` | Batch message dispatcher |
+| `prediction-market` | `landvault-prediction-market` | Property price prediction markets |
+| `crowdfunding` | `landvault-crowdfunding` | Property crowdfunding campaigns |
+| `fees` | `landvault-fees` | Platform fee configuration |
+| `property-management` | `landvault-property-management` | Ongoing property management |
+| `traits` | `landvault-traits` | Shared types, errors, macros |
+| `lib` | `landvault-lib` | Shared utilities & Kani proofs |
 
 > **DEX scope note (Issue #1116):** the dormant `concentrated_liquidity.rs`
 > module (range-liquidity type sketches) was dead code that was never compiled
@@ -204,7 +204,7 @@ sequenceDiagram
 
 ```mermaid
 graph LR
-    subgraph "propchain-traits"
+    subgraph "landvault-traits"
         T1["ReentrancyGuard"]
         T2["non_reentrant! macro"]
         T3["KeyRotationRequest"]
@@ -219,7 +219,7 @@ graph LR
     Insurance -->|uses| T2
     Insurance -->|uses| T3
 
-    subgraph "propchain-lib"
+    subgraph "landvault-lib"
         L1["balance_proofs (Kani)"]
         L2["access_control_proofs (Kani)"]
         L3["oracle_proofs (Kani)"]
@@ -278,8 +278,8 @@ graph TB
     end
 
     subgraph "Shared Foundation"
-        F1["propchain-traits\n(types, macros, errors)"]
-        F2["propchain-lib\n(utils, Kani proofs)"]
+        F1["landvault-traits\n(types, macros, errors)"]
+        F2["landvault-lib\n(utils, Kani proofs)"]
     end
 
     UI --> A1
@@ -308,7 +308,7 @@ graph TB
 ## 5. Key Design Principles
 
 **Reentrancy protection** — every state-mutating message that calls back
-into unknown code is wrapped with the `propchain_traits::non_reentrant!`
+into unknown code is wrapped with the `landvault_traits::non_reentrant!`
 macro, which checks and sets a `ReentrancyGuard` flag stored in contract
 storage.
 
@@ -381,7 +381,6 @@ declared-but-unused module remains in `contracts/bridge/src/lib.rs`:
 | Lending contract | [`contracts/lending/README.md`](./contracts/lending/README.md) |
 | Insurance premium calculation | [`contracts/insurance/DYNAMIC_PREMIUM_CALCULATION.md`](./contracts/insurance/DYNAMIC_PREMIUM_CALCULATION.md) |
 | Insurance implementation summary | [`contracts/insurance/IMPLEMENTATION_SUMMARY.md`](./contracts/insurance/IMPLEMENTATION_SUMMARY.md) |
-| Insurance penalty drift resolution | [`docs/penalty_drift.md`](./docs/penalty_drift.md) |
 | Bridge liquidity pools | [`contracts/bridge/LIQUIDITY_POOLS.md`](./contracts/bridge/LIQUIDITY_POOLS.md) |
 | Factory deployment guide | [`contracts/factory/DEPLOYMENT_GUIDE.md`](./contracts/factory/DEPLOYMENT_GUIDE.md) |
 | Oracle encryption | [`contracts/oracle/ENCRYPTION.md`](./contracts/oracle/ENCRYPTION.md) |

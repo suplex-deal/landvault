@@ -1,6 +1,6 @@
 #!/bin/bash
 # =============================================================================
-# PropChain Automated Backup Script
+# LandVault Automated Backup Script
 # =============================================================================
 # Creates timestamped backups of contract state, configuration, and metadata.
 # Designed for cron scheduling: 0 */6 * * * /path/to/backup.sh
@@ -12,11 +12,11 @@ set -euo pipefail
 
 BACKUP_DIR="${1:-./backups}"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-BACKUP_NAME="propchain_backup_${TIMESTAMP}"
+BACKUP_NAME="landvault_backup_${TIMESTAMP}"
 BACKUP_PATH="${BACKUP_DIR}/${BACKUP_NAME}"
 MAX_BACKUPS=30  # Keep last 30 backups
 
-echo "=== PropChain Backup: ${TIMESTAMP} ==="
+echo "=== LandVault Backup: ${TIMESTAMP} ==="
 
 # Create backup directory
 mkdir -p "${BACKUP_PATH}"
@@ -68,10 +68,10 @@ rm -rf "${BACKUP_PATH}"
 echo "Backup created: ${BACKUP_DIR}/${BACKUP_NAME}.tar.gz"
 
 # Rotate old backups
-BACKUP_COUNT=$(ls -1 "${BACKUP_DIR}"/propchain_backup_*.tar.gz 2>/dev/null | wc -l)
+BACKUP_COUNT=$(ls -1 "${BACKUP_DIR}"/landvault_backup_*.tar.gz 2>/dev/null | wc -l)
 if [ "${BACKUP_COUNT}" -gt "${MAX_BACKUPS}" ]; then
   REMOVE_COUNT=$((BACKUP_COUNT - MAX_BACKUPS))
-  ls -1t "${BACKUP_DIR}"/propchain_backup_*.tar.gz | tail -n "${REMOVE_COUNT}" | xargs rm -f
+  ls -1t "${BACKUP_DIR}"/landvault_backup_*.tar.gz | tail -n "${REMOVE_COUNT}" | xargs rm -f
   echo "Rotated ${REMOVE_COUNT} old backup(s)"
 fi
 

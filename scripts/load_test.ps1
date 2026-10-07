@@ -1,7 +1,7 @@
-# Load Test Runner Script for PropChain (PowerShell)
+# Load Test Runner Script for LandVault (PowerShell)
 # 
 # This script provides convenient commands for running various load tests
-# against the PropChain smart contracts.
+# against the LandVault smart contracts.
 #
 # Usage:
 #   .\scripts\load_test.ps1 [command] [options]
@@ -28,7 +28,7 @@ param(
 )
 
 # Configuration
-$Package = "propchain-tests"
+$Package = "landvault-tests"
 $ReleaseFlag = if ($Debug) { "" } else { "--release" }
 $OutputFlag = if ($Quiet) { "" } else { "--nocapture" }
 
@@ -95,7 +95,7 @@ function Run-LoadTest {
 
 function Show-Help {
     Write-Host @"
-PropChain Load Test Runner (PowerShell)
+LandVault Load Test Runner (PowerShell)
 ========================================
 
 Usage: .\scripts\load_test.ps1 [command] [options]

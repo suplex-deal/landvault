@@ -153,7 +153,7 @@ pub fn hash_keccak256(data: &[u8]) -> Hash {
 
 /// SCALE-encode a value and compute its Blake2b-256 hash.
 ///
-/// This is the recommended way to hash structured data in PropChain contracts.
+/// This is the recommended way to hash structured data in LandVault contracts.
 /// It replaces the previous pattern of truncating SCALE-encoded bytes to 32 bytes,
 /// which was not a cryptographic hash and could produce collisions.
 pub fn hash_encoded<T: scale::Encode>(value: &T) -> Hash {

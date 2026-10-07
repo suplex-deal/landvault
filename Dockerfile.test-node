@@ -1,7 +1,7 @@
 FROM paritytech/substrate-contracts-node:latest
 
-LABEL maintainer="PropChain Team"
-LABEL description="Pre-configured Substrate node for PropChain contract testing"
+LABEL maintainer="LandVault Team"
+LABEL description="Pre-configured Substrate node for LandVault contract testing"
 
 # Pre-fund test accounts and configure the node
 COPY scripts/deploy-contracts.sh /usr/local/bin/deploy-contracts.sh

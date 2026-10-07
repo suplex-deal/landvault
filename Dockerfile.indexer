@@ -6,12 +6,12 @@ RUN mkdir -p contracts && mkdir -p security-audit && mkdir -p contracts/lib && m
 # Create empty Cargo.toml for workspace members to allow cargo to resolve workspace (avoid building them)
 RUN bash -lc 'for d in contracts/* security-audit; do echo -e "[package]\nname=\"dummy-${d//\//-}\"\nversion=\"0.0.0\"\nedition=\"2021\"\n[lib]\npath=\"lib.rs\"\n" > $d/Cargo.toml && echo "" > $d/lib.rs; done'
 COPY indexer /app/indexer
-RUN cargo build -p propchain-indexer --release --features ingest
+RUN cargo build -p landvault-indexer --release --features ingest
 
 FROM gcr.io/distroless/cc-debian12
 WORKDIR /app
-COPY --from=builder /app/target/release/propchain-indexer /usr/local/bin/propchain-indexer
+COPY --from=builder /app/target/release/landvault-indexer /usr/local/bin/landvault-indexer
 ENV RUST_LOG=info
 EXPOSE 8088
-ENTRYPOINT ["/usr/local/bin/propchain-indexer"]
+ENTRYPOINT ["/usr/local/bin/landvault-indexer"]
 

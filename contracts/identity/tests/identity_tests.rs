@@ -3,8 +3,8 @@
 
 use ink::env::test::{default_accounts, DefaultAccounts};
 use ink::primitives::AccountId;
-use propchain_identity::propchain_identity::dashboard::IdentityDashboard;
-use propchain_identity::propchain_identity::{
+use landvault_identity::landvault_identity::dashboard::IdentityDashboard;
+use landvault_identity::landvault_identity::{
     IdentityError, IdentityRegistry, PrivacySettings, RiskLevel, VerificationLevel,
 };
 

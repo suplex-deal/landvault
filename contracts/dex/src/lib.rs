@@ -10,12 +10,12 @@
 use ink::prelude::string::String;
 use ink::prelude::vec::Vec;
 use ink::storage::Mapping;
-use propchain_traits::*;
+use landvault_traits::*;
 
 #[ink::contract]
 pub mod dex {
-    use propchain_traits::constants;
-    use propchain_traits::{non_reentrant, ReentrancyError, ReentrancyGuard};
+    use landvault_traits::constants;
+    use landvault_traits::{non_reentrant, ReentrancyError, ReentrancyGuard};
 
     use super::*;
 

@@ -2,7 +2,7 @@
 header = """
 # Changelog
 
-All notable changes to PropChain contracts are documented here.
+All notable changes to LandVault contracts are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Commits follow [Conventional Commits](https://www.conventionalcommits.org/).
 
@@ -29,7 +29,7 @@ conventional_commits = true
 filter_unconventional = true
 split_commits = false
 commit_preprocessors = [
-    { pattern = "\\(#(\\d+)\\)", replace = "([#$1](https://github.com/MettaChain/PropChain-contract/issues/$1))" },
+    { pattern = "\\(#(\\d+)\\)", replace = "([#$1](https://github.com/MettaChain/LandVault-contract/issues/$1))" },
 ]
 commit_parsers = [
     { message = "^feat", group = "Features" },

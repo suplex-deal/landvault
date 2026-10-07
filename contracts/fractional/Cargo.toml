@@ -2,7 +2,7 @@
 name = "fractional"
 version = "0.1.0"
 edition = "2021"
-authors = ["PropChain Team <dev@propchain.io>"]
+authors = ["LandVault Team <dev@landvault.io>"]
 license = "MIT"
 publish = false
 
@@ -15,7 +15,7 @@ crate-type = ["cdylib", "rlib"]
 ink = { version = "5.0.0", default-features = false }
 scale = { package = "parity-scale-codec", version = "3.6.9", default-features = false, features = ["derive"] }
 scale-info = { version = "2.10.0", default-features = false, features = ["derive"] }
-propchain_traits = { package = "propchain-traits", path = "../traits", default-features = false }
+landvault_traits = { package = "landvault-traits", path = "../traits", default-features = false }
 
 [features]
 default = ["std"]
@@ -23,6 +23,6 @@ std = [
     "ink/std",
     "scale/std",
     "scale-info/std",
-    "propchain_traits/std",
+    "landvault_traits/std",
 ]
 ink-as-dependency = []

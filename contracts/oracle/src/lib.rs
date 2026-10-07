@@ -14,8 +14,8 @@
 
 use ink::prelude::*;
 use ink::storage::Mapping;
-use propchain_traits::access_control::{AccessControl, Action, Permission, Resource, Role};
-use propchain_traits::*;
+use landvault_traits::access_control::{AccessControl, Action, Permission, Resource, Role};
+use landvault_traits::*;
 
 // Aggregation helpers (simple_median, weighted_median, trimmed_mean) live in
 // `oracle/src/aggregation.rs` and are called from `aggregate_prices`.
@@ -30,7 +30,7 @@ mod median_cache;
 
 /// Property Valuation Oracle Contract
 #[ink::contract]
-mod propchain_oracle {
+mod landvault_oracle {
     use super::*;
     include!("types.rs");
     use ink::prelude::string::{String, ToString};
@@ -558,10 +558,10 @@ mod propchain_oracle {
                 property_trends: Mapping::default(),
                 ema_alpha_bps: 1000, // Default alpha = 0.10
                 comparable_cache: Mapping::default(),
-                max_price_staleness: propchain_traits::constants::DEFAULT_MAX_PRICE_STALENESS,
-                min_sources_required: propchain_traits::constants::DEFAULT_MIN_SOURCES_REQUIRED,
-                min_source_quorum: propchain_traits::constants::DEFAULT_MIN_SOURCES_REQUIRED,
-                outlier_threshold: propchain_traits::constants::DEFAULT_OUTLIER_THRESHOLD,
+                max_price_staleness: landvault_traits::constants::DEFAULT_MAX_PRICE_STALENESS,
+                min_sources_required: landvault_traits::constants::DEFAULT_MIN_SOURCES_REQUIRED,
+                min_source_quorum: landvault_traits::constants::DEFAULT_MIN_SOURCES_REQUIRED,
+                outlier_threshold: landvault_traits::constants::DEFAULT_OUTLIER_THRESHOLD,
                 source_reputations: Mapping::default(),
                 source_stakes: Mapping::default(),
                 pending_requests: Mapping::default(),
@@ -599,7 +599,7 @@ mod propchain_oracle {
                 // Auto-slash configuration (Issue #497)
                 auto_slash_on_staleness: false,
                 auto_slash_staleness_threshold:
-                    propchain_traits::constants::DEFAULT_MAX_PRICE_STALENESS,
+                    landvault_traits::constants::DEFAULT_MAX_PRICE_STALENESS,
                 auto_slash_on_deviation: false,
                 auto_slash_deviation_threshold_bps: 2000, // 20% default
                 auto_slash_on_missed_updates: false,
@@ -2467,7 +2467,7 @@ mod propchain_oracle {
                 };
                 let new_rep = current_rep.saturating_sub(penalty);
                 self.source_reputations.insert(&source_id, &new_rep);
-                if new_rep < propchain_traits::constants::ORACLE_MIN_REPUTATION_THRESHOLD {
+                if new_rep < landvault_traits::constants::ORACLE_MIN_REPUTATION_THRESHOLD {
                     if let Some(mut src) = self.oracle_sources.get(&source_id) {
                         src.is_active = false;
                         self.oracle_sources.insert(&source_id, &src);
@@ -2543,7 +2543,7 @@ mod propchain_oracle {
             }
 
             // Auto-deactivate if reputation too low
-            if new_rep < propchain_traits::constants::ORACLE_MIN_REPUTATION_THRESHOLD {
+            if new_rep < landvault_traits::constants::ORACLE_MIN_REPUTATION_THRESHOLD {
                 if let Some(mut src) = self.oracle_sources.get(&source_id) {
                     src.is_active = false;
                     self.oracle_sources.insert(&source_id, &src);
@@ -3717,8 +3717,8 @@ mod propchain_oracle {
         }
     }
 
-    /// Implementation of the Oracle trait from propchain-traits
-    impl propchain_traits::Oracle for PropertyValuationOracle {
+    /// Implementation of the Oracle trait from landvault-traits
+    impl landvault_traits::Oracle for PropertyValuationOracle {
         /// Returns the stored valuation for `property_id`.
         ///
         /// Thin wrapper over `get_property_valuation`; open to any caller.
@@ -3835,8 +3835,8 @@ mod propchain_oracle {
         }
     }
 
-    /// Implementation of the OracleRegistry trait from propchain-traits
-    impl propchain_traits::OracleRegistry for PropertyValuationOracle {
+    /// Implementation of the OracleRegistry trait from landvault-traits
+    impl landvault_traits::OracleRegistry for PropertyValuationOracle {
         /// Registers or updates an oracle source.
         ///
         /// Admin only (`ensure_admin`). Rejects sources with weight above 100
@@ -3918,6 +3918,6 @@ mod propchain_oracle {
 }
 
 // Re-export the contract and error type
-pub use propchain_traits::OracleError;
+pub use landvault_traits::OracleError;
 
 pub mod reputation_slashing;

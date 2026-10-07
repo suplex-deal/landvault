@@ -13,7 +13,7 @@
 //    adding a new variant produces a compiler error in every match
 //  - Full unit-test suite covering every variant and every method
 
-use propchain_traits::errors::{fee_codes, ContractError, ErrorCategory};
+use landvault_traits::errors::{fee_codes, ContractError, ErrorCategory};
 
 // ── Supporting types ──────────────────────────────────────────────────────────
 

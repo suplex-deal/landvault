@@ -3,7 +3,7 @@
 #[cfg(test)]
 mod oracle_tests {
     use super::*;
-    use crate::propchain_oracle::PropertyValuationOracle;
+    use crate::landvault_oracle::PropertyValuationOracle;
     use ink::env::{test, DefaultEnvironment};
 
     fn setup_oracle() -> PropertyValuationOracle {
@@ -992,7 +992,7 @@ mod oracle_tests {
 #[cfg(test)]
 mod auto_slash_tests {
     use super::*;
-    use crate::propchain_oracle::PropertyValuationOracle;
+    use crate::landvault_oracle::PropertyValuationOracle;
     use ink::env::{test, DefaultEnvironment};
 
     fn setup() -> PropertyValuationOracle {
@@ -1273,7 +1273,7 @@ mod auto_slash_tests {
 
         assert!(frozen, "repeated outliers must freeze (deactivate) the source");
         assert!(
-            rep < propchain_traits::constants::ORACLE_MIN_REPUTATION_THRESHOLD,
+            rep < landvault_traits::constants::ORACLE_MIN_REPUTATION_THRESHOLD,
             "reputation keeps decreasing below the threshold, got {rep}"
         );
     }
@@ -1371,7 +1371,7 @@ mod auto_slash_tests {
 #[cfg(test)]
 mod oracle_source_multisig_tests {
     use super::*;
-    use crate::propchain_oracle::PropertyValuationOracle;
+    use crate::landvault_oracle::PropertyValuationOracle;
     use ink::env::{test, DefaultEnvironment};
 
     fn setup_oracle() -> PropertyValuationOracle {
@@ -1887,7 +1887,7 @@ mod oracle_source_multisig_tests {
 #[cfg(test)]
 mod oracle_benchmarks {
     use super::*;
-    use crate::propchain_oracle::PropertyValuationOracle;
+    use crate::landvault_oracle::PropertyValuationOracle;
     use ink::env::{test, DefaultEnvironment};
 
     fn setup_oracle() -> PropertyValuationOracle {

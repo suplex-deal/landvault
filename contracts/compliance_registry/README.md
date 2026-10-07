@@ -1,6 +1,6 @@
-# PropChain Compliance Registry (Issue #45)
+# LandVault Compliance Registry (Issue #45)
 
-Multi-jurisdictional compliance and regulatory framework for PropChain: KYC/AML, sanctions screening, audit trails, workflow management, and regulatory reporting.
+Multi-jurisdictional compliance and regulatory framework for LandVault: KYC/AML, sanctions screening, audit trails, workflow management, and regulatory reporting.
 
 ## Features
 

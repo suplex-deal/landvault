@@ -12,7 +12,7 @@
 #[cfg(test)]
 mod integration_lending {
     use ink::env::{test, DefaultEnvironment};
-    use propchain_lending::propchain_lending::{LoanStatus, PropertyLending};
+    use landvault_lending::landvault_lending::{LoanStatus, PropertyLending};
 
     /// Admin = alice; bob gets a 620 credit profile (500 base + 6 * 20).
     fn funded_lending() -> (PropertyLending, u64) {
@@ -36,7 +36,7 @@ mod integration_lending {
         test::set_caller::<DefaultEnvironment>(accounts.bob);
         assert_eq!(
             lending.create_pool(200),
-            Err(propchain_lending::propchain_lending::LendingError::Unauthorized)
+            Err(landvault_lending::landvault_lending::LendingError::Unauthorized)
         );
 
         test::set_caller::<DefaultEnvironment>(accounts.alice);
@@ -49,7 +49,7 @@ mod integration_lending {
         lending.deposit(pool_id, 10_000).expect("deposit accepted");
         assert_eq!(
             lending.borrow(pool_id, 20_000),
-            Err(propchain_lending::propchain_lending::LendingError::InsufficientLiquidity),
+            Err(landvault_lending::landvault_lending::LendingError::InsufficientLiquidity),
             "cannot borrow beyond deposits"
         );
         lending.borrow(pool_id, 5_000).expect("half utilized");
@@ -59,7 +59,7 @@ mod integration_lending {
         // Unknown pools fail cleanly.
         assert_eq!(
             lending.borrow_rate(999),
-            Err(propchain_lending::propchain_lending::LendingError::PoolNotFound)
+            Err(landvault_lending::landvault_lending::LendingError::PoolNotFound)
         );
     }
 
@@ -135,7 +135,7 @@ mod integration_lending {
         );
         assert_eq!(
             lending.liquidate_loan(loan_id, vec![(10, 2_000_000)]),
-            Err(propchain_lending::propchain_lending::LendingError::LiquidationThresholdNotMet)
+            Err(landvault_lending::landvault_lending::LendingError::LiquidationThresholdNotMet)
         );
 
         // Collateral halves twice: debt/value crosses the 8000 bps threshold.
@@ -154,7 +154,7 @@ mod integration_lending {
         );
         assert_eq!(
             lending.liquidate_loan(loan_id, vec![(10, 550_000)]),
-            Err(propchain_lending::propchain_lending::LendingError::LoanNotActive)
+            Err(landvault_lending::landvault_lending::LendingError::LoanNotActive)
         );
         assert_eq!(
             lending.should_liquidate_loan(loan_id, vec![(10, 100_000)]),

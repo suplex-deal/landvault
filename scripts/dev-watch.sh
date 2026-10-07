@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # scripts/dev-watch.sh
 #
-# Hot-reload development watcher for PropChain contracts.
+# Hot-reload development watcher for LandVault contracts.
 # Watches contracts/ and tests/ for changes, then rebuilds and reruns tests.
 #
 # Prerequisites: cargo-watch (cargo install cargo-watch)

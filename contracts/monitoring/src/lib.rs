@@ -13,8 +13,8 @@ pub mod quorum_guard;
 pub mod monitoring {
     use ink::prelude::vec::Vec;
     use ink::storage::Mapping;
-    use propchain_traits::constants;
-    use propchain_traits::monitoring::*;
+    use landvault_traits::constants;
+    use landvault_traits::monitoring::*;
 
     // =========================================================================
     // Internal storage type (not part of cross-contract interface)

@@ -1,12 +1,12 @@
 # SBOM Release Artefact
 
-Each tagged release publishes a `propchain-sbom.json` asset generated from the
+Each tagged release publishes a `landvault-sbom.json` asset generated from the
 workspace with `cargo sbom`.
 
 ## What ships
 
 - **Format**: SPDX JSON 2.3
-- **Asset name**: `propchain-sbom.json`
+- **Asset name**: `landvault-sbom.json`
 - **Source**: the Cargo workspace rooted at this repository
 - **Release hook**: `.github/workflows/release.yml`
 
@@ -31,13 +31,13 @@ You can reproduce the same flow locally:
 
 ```bash
 cargo install cargo-sbom --locked
-cargo sbom --output-format spdxjson23 > propchain-sbom.json
+cargo sbom --output-format spdxjson23 > landvault-sbom.json
 jq -e '
   .SPDXID == "SPDXRef-DOCUMENT" and
   (.creationInfo.creators | length > 0) and
   (.packages | length > 0) and
   (.relationships | length > 0)
-' propchain-sbom.json > /dev/null
+' landvault-sbom.json > /dev/null
 ```
 
 ## How to use it

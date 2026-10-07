@@ -20,7 +20,7 @@
 mod reinsurance_stats_derives {
     use ink::env::{test, DefaultEnvironment};
 
-    use crate::propchain_insurance::{
+    use crate::landvault_insurance::{
         CoverageType, PropertyInsurance, ReinsuranceStats, ReinsuranceTreatyType,
     };
 
@@ -77,11 +77,11 @@ mod reinsurance_stats_derives {
 mod insurance_tests {
     use ink::env::{test, DefaultEnvironment};
 
-    use crate::propchain_insurance::{
+    use crate::landvault_insurance::{
         ClaimStatus, CoverageType, InsuranceError, PayoutMode, PolicyStatus, PropertyInsurance,
         TriggerComparator, TriggerMetric,
     };
-    use propchain_traits::AccountId;
+    use landvault_traits::AccountId;
 
     fn setup() -> PropertyInsurance {
         let accounts = test::default_accounts::<DefaultEnvironment>();
@@ -1263,7 +1263,7 @@ mod insurance_tests {
         assert!(model.overall_risk_score < 400); // Should be low risk
         assert_eq!(
             model.final_risk_level,
-            crate::propchain_insurance::RiskLevel::VeryLow
+            crate::landvault_insurance::RiskLevel::VeryLow
         );
     }
 
@@ -1290,7 +1290,7 @@ mod insurance_tests {
         assert!(model.overall_risk_score > 400); // Should be high risk
         assert_eq!(
             model.final_risk_level,
-            crate::propchain_insurance::RiskLevel::Medium
+            crate::landvault_insurance::RiskLevel::Medium
         );
     }
 
@@ -1555,7 +1555,7 @@ mod insurance_tests {
     // PARAMETRIC INSURANCE TESTS (Issue #249)
     // =========================================================================
 
-    use crate::propchain_insurance::{ParametricPolicyStatus, TriggerComparison};
+    use crate::landvault_insurance::{ParametricPolicyStatus, TriggerComparison};
 
     fn setup_parametric(contract: &mut PropertyInsurance) -> (u64, u64) {
         let accounts = test::default_accounts::<DefaultEnvironment>();
@@ -2365,7 +2365,7 @@ mod insurance_tests {
 mod circuit_breaker_tests {
     use ink::env::{test, DefaultEnvironment};
 
-    use crate::propchain_insurance::{
+    use crate::landvault_insurance::{
         ClaimStatus, CoverageType, InsuranceError, PropertyInsurance,
     };
 
@@ -2596,7 +2596,7 @@ mod circuit_breaker_tests {
 mod insurance_admin_rotation_tests {
     use ink::env::{test, DefaultEnvironment};
 
-    use crate::propchain_insurance::{InsuranceError, PropertyInsurance};
+    use crate::landvault_insurance::{InsuranceError, PropertyInsurance};
 
     fn setup() -> PropertyInsurance {
         let accounts = test::default_accounts::<DefaultEnvironment>();
@@ -2727,7 +2727,7 @@ mod insurance_admin_rotation_tests {
 // Direct premium-engine tests (Issue #1018)
 //
 // `calculate_dynamic_premium` in premium_engine.rs is private to module
-// `propchain_insurance`, so these tests drive the engine through the public
+// `landvault_insurance`, so these tests drive the engine through the public
 // messages `calculate_premium` / `calculate_premium_with_modifiers`.
 //
 // Every expected value below is computed BY HAND from the engine formula:
@@ -2751,7 +2751,7 @@ mod insurance_admin_rotation_tests {
 mod premium_engine_tests {
     use ink::env::{test, DefaultEnvironment};
 
-    use crate::propchain_insurance::{
+    use crate::landvault_insurance::{
         CoverageType, InsuranceError, PremiumModifiers, PropertyInsurance,
     };
 

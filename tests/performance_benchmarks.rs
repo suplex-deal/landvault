@@ -4,8 +4,8 @@
 //! and ensure contract operations meet performance requirements.
 
 use ink::env::test::DefaultEnvironment;
-use propchain_contracts::PropertyRegistry;
-use propchain_traits::*;
+use landvault_contracts::PropertyRegistry;
+use landvault_traits::*;
 
 #[cfg(test)]
 mod benchmarks {

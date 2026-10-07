@@ -14,8 +14,8 @@
 #[cfg(test)]
 mod integration_fees {
     use ink::env::{test, DefaultEnvironment};
-    use propchain_fees::propchain_fees::{FeeCalculationMethod, FeeConfig, FeeManager};
-    use propchain_traits::{BasisPoints, FeeOperation};
+    use landvault_fees::landvault_fees::{FeeCalculationMethod, FeeConfig, FeeManager};
+    use landvault_traits::{BasisPoints, FeeOperation};
 
     fn fixed_config(base: u128, min: u128, max: u128) -> FeeConfig {
         FeeConfig {
@@ -62,21 +62,21 @@ mod integration_fees {
                 FeeOperation::TransferProperty,
                 fixed_config(500, 900, 1_000), // min > max
             ),
-            Err(propchain_fees::propchain_fees::FeeError::InvalidConfig)
+            Err(landvault_fees::landvault_fees::FeeError::InvalidConfig)
         );
         assert_eq!(
             fees.set_operation_config(
                 FeeOperation::TransferProperty,
                 fixed_config(400, 500, 1_000), // base < min
             ),
-            Err(propchain_fees::propchain_fees::FeeError::InvalidConfig)
+            Err(landvault_fees::landvault_fees::FeeError::InvalidConfig)
         );
 
         // Non-admin callers cannot change pricing.
         test::set_caller::<DefaultEnvironment>(accounts.bob);
         assert_eq!(
             fees.set_operation_config(FeeOperation::TransferProperty, fixed_config(1, 1, 2),),
-            Err(propchain_fees::propchain_fees::FeeError::Unauthorized)
+            Err(landvault_fees::landvault_fees::FeeError::Unauthorized)
         );
     }
 
@@ -90,7 +90,7 @@ mod integration_fees {
         test::set_caller::<DefaultEnvironment>(accounts.bob);
         assert_eq!(
             fees.add_validator(accounts.bob),
-            Err(propchain_fees::propchain_fees::FeeError::Unauthorized)
+            Err(landvault_fees::landvault_fees::FeeError::Unauthorized)
         );
 
         test::set_caller::<DefaultEnvironment>(accounts.alice);
@@ -115,7 +115,7 @@ mod integration_fees {
         // Shares must sum to at most 100%.
         assert_eq!(
             fees.set_distribution_rates(BasisPoints::new(6_000), BasisPoints::new(5_000)),
-            Err(propchain_fees::propchain_fees::FeeError::InvalidConfig)
+            Err(landvault_fees::landvault_fees::FeeError::InvalidConfig)
         );
 
         // Default split is 50/50: the single validator is owed half.
@@ -127,7 +127,7 @@ mod integration_fees {
         test::set_caller::<DefaultEnvironment>(accounts.bob);
         assert_eq!(
             fees.distribute_fees(),
-            Err(propchain_fees::propchain_fees::FeeError::Unauthorized)
+            Err(landvault_fees::landvault_fees::FeeError::Unauthorized)
         );
         assert_eq!(fees.claim_rewards(), Ok(4_500));
         assert_eq!(fees.claim_rewards(), Ok(0), "double claim pays nothing");
@@ -147,7 +147,7 @@ mod integration_fees {
         test::set_caller::<DefaultEnvironment>(accounts.bob);
         assert_eq!(
             fees.update_fee_params(),
-            Err(propchain_fees::propchain_fees::FeeError::Unauthorized)
+            Err(landvault_fees::landvault_fees::FeeError::Unauthorized)
         );
 
         test::set_caller::<DefaultEnvironment>(accounts.alice);

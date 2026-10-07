@@ -1,8 +1,8 @@
-# PropChain Smart Contracts
+# LandVault Smart Contracts
 
 > 🏠 **Decentralized Real Estate Infrastructure** | Rust-based smart contracts for blockchain-powered property transactions
 
-PropChain Smart Contracts is a production-grade Rust-based smart contract system that enables the tokenization and trading of real estate assets through blockchain technology. Our contracts provide the core functionality needed to build decentralized real estate platforms, including property ownership, secure transfers, and escrow services.
+LandVault Smart Contracts is a production-grade Rust-based smart contract system that enables the tokenization and trading of real estate assets through blockchain technology. Our contracts provide the core functionality needed to build decentralized real estate platforms, including property ownership, secure transfers, and escrow services.
 
 Built with Rust and ink! for Substrate/Polkadot ecosystem, these smart contracts serve as the foundation for Web3 real estate applications, enabling developers to create platforms where physical properties can be represented as digital assets and traded seamlessly using cryptocurrency.
 
@@ -51,8 +51,8 @@ Ensure you have the following installed:
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/MettaChain/PropChain-contract.git
-cd PropChain-contract
+git clone https://github.com/MettaChain/LandVault-contract.git
+cd LandVault-contract
 
 # 2. Run automated setup
 ./scripts/setup.sh
@@ -99,8 +99,8 @@ cargo test                 # Run all tests including integration
 
 # Load Testing (Performance Validation)
 ./scripts/load_test.sh                 # Run full load test suite
-cargo test --package propchain-tests load_test_concurrent_registration_light --release  # Quick validation
-cargo test --package propchain-tests stress_test_mass_registration --release  # Stress test
+cargo test --package landvault-tests load_test_concurrent_registration_light --release  # Quick validation
+cargo test --package landvault-tests stress_test_mass_registration --release  # Stress test
 ```
 
 For comprehensive load testing documentation, see [Load Testing Guide](docs/LOAD_TESTING_GUIDE.md).
@@ -145,7 +145,7 @@ TARGET=wasm32-unknown-unknown
 ### Contract Documentation
 
 - **[📖 Contract API](./docs/contracts.md)** - Complete contract interface documentation
-- **[🔬 API Reference](https://mettachain.github.io/PropChain-contract/docs/propchain_traits/)** - Auto-generated rustdoc from contract trait definitions
+- **[🔬 API Reference](https://mettachain.github.io/LandVault-contract/docs/landvault_traits/)** - Auto-generated rustdoc from contract trait definitions
 - **[🔗 Integration Guide](./docs/integration.md)** - How to integrate with frontend applications
 - **[🚀 Deployment Guide](./docs/deployment.md)** - Contract deployment best practices
 - **[🏗️ Architecture](./docs/architecture.md)** - Contract design and technical architecture
@@ -165,7 +165,7 @@ TARGET=wasm32-unknown-unknown
 ### Repository Structure
 
 ```
-PropChain-contract/
+LandVault-contract/
 ├── 📁 contracts/           # Main smart contract source code
 │   ├── 📁 lib/            # Contract logic and implementations
 │   ├── 📁 traits/         # Shared trait definitions
@@ -269,14 +269,14 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ### Get Help
 
-- **🐛 Report Issues**: [GitHub Issues](https://github.com/MettaChain/PropChain-contract/issues)
-- **📧 Email Support**: contracts@propchain.io
-- **📖 Documentation**: [docs.propchain.io](https://docs.propchain.io)
-- **💬 Discord**: [PropChain Community](https://discord.gg/propchain)
+- **🐛 Report Issues**: [GitHub Issues](https://github.com/MettaChain/LandVault-contract/issues)
+- **📧 Email Support**: contracts@landvault.io
+- **📖 Documentation**: [docs.landvault.io](https://docs.landvault.io)
+- **💬 Discord**: [LandVault Community](https://discord.gg/landvault)
 
 ### Additional Resources
 
-- **[🌐 Frontend Application](https://github.com/MettaChain/PropChain-FrontEnd)** - Client-side React/Next.js application
+- **[🌐 Frontend Application](https://github.com/MettaChain/LandVault-FrontEnd)** - Client-side React/Next.js application
 - **[🔒 Security Audits](./audits/)** - Third-party security audit reports
 - **[📊 Performance Metrics](./docs/performance.md)** - Benchmarks and optimization guides
 
@@ -286,6 +286,6 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 **⭐ Star this repository if it helped you!**
 
-Made with ❤️ by the PropChain Team
+Made with ❤️ by the LandVault Team
 
 </div>

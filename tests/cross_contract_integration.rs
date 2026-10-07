@@ -1,12 +1,12 @@
 //! Cross-Contract Integration Tests
 //!
 //! This module contains integration tests that verify interactions
-//! between multiple PropChain contracts.
+//! between multiple LandVault contracts.
 
 use ink::env::test::DefaultAccounts;
 use ink::env::DefaultEnvironment;
-use propchain_contracts::PropertyRegistry;
-use propchain_traits::*;
+use landvault_contracts::PropertyRegistry;
+use landvault_traits::*;
 
 #[cfg(test)]
 mod integration_tests {
@@ -185,10 +185,10 @@ mod integration_tests {
         // Try to transfer non-existent property
         let accounts = ink::env::test::default_accounts::<DefaultEnvironment>();
         let result = registry.transfer_property(999, accounts.bob);
-        assert_eq!(result, Err(propchain_contracts::Error::PropertyNotFound));
+        assert_eq!(result, Err(landvault_contracts::Error::PropertyNotFound));
 
         // Try to create escrow for non-existent property
         let result = registry.create_escrow(999, 100000);
-        assert_eq!(result, Err(propchain_contracts::Error::PropertyNotFound));
+        assert_eq!(result, Err(landvault_contracts::Error::PropertyNotFound));
     }
 }

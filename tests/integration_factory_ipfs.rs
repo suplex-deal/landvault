@@ -39,7 +39,7 @@ mod integration_factory_ipfs {
         AccessLevel, DocumentType, Error as IpfsError, IpfsMetadataRegistry, PropertyMetadata,
         ValidationRules,
     };
-    use propchain_factory::contract_factory::{
+    use landvault_factory::contract_factory::{
         ContractFactory, ContractType, DeploymentConfig, Error as FactoryError,
     };
 

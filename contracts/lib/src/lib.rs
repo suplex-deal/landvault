@@ -13,9 +13,9 @@ use ink::prelude::string::String;
 use ink::prelude::vec::Vec;
 use ink::storage::Mapping;
 // Import identity module
-use propchain_identity::propchain_identity::IdentityRegistryRef;
+use landvault_identity::landvault_identity::IdentityRegistryRef;
 // Re-export traits
-pub use propchain_traits::*;
+pub use landvault_traits::*;
 // Re-export reentrancy protection
 pub use reentrancy_guard::{ReentrancyError, ReentrancyGuard};
 
@@ -30,7 +30,7 @@ pub mod audit;
 pub mod reentrancy_guard;
 
 #[ink::contract]
-pub mod propchain_contracts {
+pub mod landvault_contracts {
     use super::*;
     use crate::audit::{AuditRecord, AuditTrail};
 
@@ -1223,7 +1223,7 @@ pub mod propchain_contracts {
         /// ```rust,ignore
         /// // Deploy and initialize contract
         /// use ink::env::DefaultEnvironment;
-        /// use propchain_contracts::PropertyRegistry;
+        /// use landvault_contracts::PropertyRegistry;
         ///
         /// // Constructor is called automatically during deployment
         /// let contract = PropertyRegistry::new();
@@ -1991,7 +1991,7 @@ pub mod propchain_contracts {
             reason: String,
             duration_seconds: Option<u64>,
         ) -> Result<(), Error> {
-            use propchain_traits::constants::*;
+            use landvault_traits::constants::*;
             Self::validate_string_length(&reason, MAX_REASON_LENGTH)?;
             if let Some(d) = duration_seconds {
                 if !(MIN_PAUSE_DURATION..=MAX_PAUSE_DURATION).contains(&d) {
@@ -2072,7 +2072,7 @@ pub mod propchain_contracts {
         /// regardless of `required_approvals`. Use only in critical incidents.
         #[ink(message)]
         pub fn force_emergency_stop(&mut self, reason: String) -> Result<(), Error> {
-            use propchain_traits::constants::MAX_REASON_LENGTH;
+            use landvault_traits::constants::MAX_REASON_LENGTH;
             Self::validate_string_length(&reason, MAX_REASON_LENGTH)?;
             let caller = self.env().caller();
             if !self.access_control.has_role(caller, Role::SuperAdmin) {
@@ -3813,7 +3813,7 @@ pub mod propchain_contracts {
             reason: String,
         ) -> Result<(), Error> {
             self.ensure_not_paused()?;
-            Self::validate_string_length(&reason, propchain_traits::constants::MAX_REASON_LENGTH)?;
+            Self::validate_string_length(&reason, landvault_traits::constants::MAX_REASON_LENGTH)?;
             let caller = self.env().caller();
 
             // Only verifiers or admin can revoke badges
@@ -4038,7 +4038,7 @@ pub mod propchain_contracts {
             reason: String,
         ) -> Result<u64, Error> {
             self.ensure_not_paused()?;
-            Self::validate_string_length(&reason, propchain_traits::constants::MAX_REASON_LENGTH)?;
+            Self::validate_string_length(&reason, landvault_traits::constants::MAX_REASON_LENGTH)?;
             let caller = self.env().caller();
             let property = self
                 .properties
@@ -4124,7 +4124,7 @@ pub mod propchain_contracts {
             self.ensure_not_paused()?;
             Self::validate_string_length(
                 &resolution,
-                propchain_traits::constants::MAX_REASON_LENGTH,
+                landvault_traits::constants::MAX_REASON_LENGTH,
             )?;
             let caller = self.env().caller();
 
@@ -4603,7 +4603,7 @@ pub mod propchain_contracts {
 
         /// Full metadata validation using centralized constants.
         fn validate_metadata(metadata: &PropertyMetadata) -> Result<(), Error> {
-            use propchain_traits::constants::*;
+            use landvault_traits::constants::*;
 
             if metadata.location.is_empty() || metadata.legal_description.is_empty() {
                 return Err(Error::InvalidMetadata);
@@ -4639,7 +4639,7 @@ pub mod propchain_contracts {
 
         /// Validates a URL string is non-empty and within length limits.
         fn validate_url(url: &str) -> Result<(), Error> {
-            use propchain_traits::constants::MAX_URL_LENGTH;
+            use landvault_traits::constants::MAX_URL_LENGTH;
             if url.is_empty() {
                 return Err(Error::StringEmpty);
             }
@@ -4755,9 +4755,9 @@ pub mod propchain_contracts {
 #[cfg(test)]
 mod tests_pause {
     use ink::primitives::AccountId;
-    use propchain_traits::PropertyMetadata;
+    use landvault_traits::PropertyMetadata;
 
-    use super::propchain_contracts::{Error, ExternalDependency, PropertyRegistry};
+    use super::landvault_contracts::{Error, ExternalDependency, PropertyRegistry};
 
     #[ink::test]
     fn test_pause_resume_flow() {
@@ -4891,9 +4891,9 @@ mod tests_pause {
 #[cfg(test)]
 mod registry_fallback_tests {
     use ink::env::{test, DefaultEnvironment};
-    use propchain_traits::PropertyMetadata;
+    use landvault_traits::PropertyMetadata;
 
-    use super::propchain_contracts::{Error, PropertyRegistry};
+    use super::landvault_contracts::{Error, PropertyRegistry};
 
     fn metadata(location: &str) -> PropertyMetadata {
         PropertyMetadata {

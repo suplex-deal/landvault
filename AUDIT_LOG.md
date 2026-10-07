@@ -4,12 +4,12 @@ Generated on: Mon Sep 28 08:27:40 UTC 2026
 ## 📦 Dependency License & Advisory Checks (cargo-deny)
 ```text
 [0m[1m[38;5;9merror[deprecated][0m[1m: this key has been removed, see https://github.com/EmbarkStudios/cargo-deny/pull/611 for migration information[0m
-   [0m[36m┌─[0m /home/runner/work/PropChain-contract/PropChain-contract/deny.toml:20:1
+   [0m[36m┌─[0m /home/runner/work/LandVault-contract/LandVault-contract/deny.toml:20:1
    [0m[36m│[0m
 [0m[36m20[0m [0m[36m│[0m [0m[31munlicensed[0m = "deny"
    [0m[36m│[0m [0m[31m━━━━━━━━━━[0m
 
-2026-09-28 08:27:40 [[31mERROR[0m] failed to validate configuration file /home/runner/work/PropChain-contract/PropChain-contract/deny.toml[0m
+2026-09-28 08:27:40 [[31mERROR[0m] failed to validate configuration file /home/runner/work/LandVault-contract/LandVault-contract/deny.toml[0m
 ```
 ---
 ## 🔍 Vulnerability Advisory Scans (cargo-audit)
@@ -207,8 +207,8 @@ Found 0 mutants to test
 ## 🧪 Test Gate: bridge granular pause / sig payload / dex invariants
 ```text
 [1m[33mwarning[0m: profiles for the non root package will be ignored, specify profiles at the workspace root:
-package:   /home/runner/work/PropChain-contract/PropChain-contract/contracts/hello-world/Cargo.toml
-workspace: /home/runner/work/PropChain-contract/PropChain-contract/Cargo.toml
+package:   /home/runner/work/LandVault-contract/LandVault-contract/contracts/hello-world/Cargo.toml
+workspace: /home/runner/work/LandVault-contract/LandVault-contract/Cargo.toml
 [1m[33mwarning[0m[1m: unused workspace dependency `soroban-sdk`[0m
   [1m[94m--> [0mCargo.toml:51:1
    [1m[94m|[0m
@@ -221,7 +221,7 @@ workspace: /home/runner/work/PropChain-contract/PropChain-contract/Cargo.toml
 [1m[33mwarning[0m: contracts/oracle/Cargo.toml: Found `feature = ...` in `target.'cfg(...)'.dependencies`. This key is not supported for selecting dependencies and will not work as expected. Use the [features] section instead: https://doc.rust-lang.org/cargo/reference/features.html
 [1m[33mwarning[0m: `oracle` (manifest) generated 1 warning
 [1m[33mwarning[0m: contracts/lending/Cargo.toml: Found `feature = ...` in `target.'cfg(...)'.dependencies`. This key is not supported for selecting dependencies and will not work as expected. Use the [features] section instead: https://doc.rust-lang.org/cargo/reference/features.html
-[1m[33mwarning[0m: `propchain-lending` (manifest) generated 1 warning
+[1m[33mwarning[0m: `landvault-lending` (manifest) generated 1 warning
 [1m[92m Downloading[0m crates ...
 [1m[92m  Downloaded[0m array-init v2.1.0
 [1m[92m  Downloaded[0m arrayref v0.3.9
@@ -473,8 +473,8 @@ workspace: /home/runner/work/PropChain-contract/PropChain-contract/Cargo.toml
 [1m[92m   Compiling[0m ink_env v5.1.1
 [1m[92m   Compiling[0m ink_storage v5.1.1
 [1m[92m   Compiling[0m ink v5.1.1
-[1m[92m   Compiling[0m propchain-traits v1.0.0 (/home/runner/work/PropChain-contract/PropChain-contract/contracts/traits)
-[1m[92m   Compiling[0m propchain-bridge v1.0.0 (/home/runner/work/PropChain-contract/PropChain-contract/contracts/bridge)
+[1m[92m   Compiling[0m landvault-traits v1.0.0 (/home/runner/work/LandVault-contract/LandVault-contract/contracts/traits)
+[1m[92m   Compiling[0m landvault-bridge v1.0.0 (/home/runner/work/LandVault-contract/LandVault-contract/contracts/bridge)
 [1m[91merror[0m[1m: this file contains an unclosed delimiter[0m
     [1m[94m--> [0mcontracts/bridge/src/tests.rs:2654:3
      [1m[94m|[0m
@@ -490,7 +490,7 @@ workspace: /home/runner/work/PropChain-contract/PropChain-contract/Cargo.toml
 [1m[94m2654[0m [1m[94m|[0m }
      [1m[94m|[0m  [1m[91m^[0m
 
-[1m[91merror[0m: could not compile `propchain-bridge` (lib test) due to 1 previous error
+[1m[91merror[0m: could not compile `landvault-bridge` (lib test) due to 1 previous error
 
 ---
 

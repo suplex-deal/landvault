@@ -1,5 +1,5 @@
 [package]
-name = "propchain-metadata"
+name = "landvault-metadata"
 version.workspace = true
 authors.workspace = true
 edition.workspace = true
@@ -12,13 +12,13 @@ description = "Advanced property metadata standard with IPFS integration, versio
 ink = { workspace = true }
 scale = { workspace = true }
 scale-info = { workspace = true }
-propchain-traits = { path = "../traits" }
+landvault-traits = { path = "../traits" }
 
 [dev-dependencies]
 ink_e2e = "5.0.0"
 
 [lib]
-name = "propchain_metadata"
+name = "landvault_metadata"
 path = "src/lib.rs"
 
 [features]

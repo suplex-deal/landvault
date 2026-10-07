@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# PropChain Development Setup Script
-# This script sets up the complete development environment for PropChain smart contracts
+# LandVault Development Setup Script
+# This script sets up the complete development environment for LandVault smart contracts
 
 set -euo pipefail
 
@@ -99,7 +99,7 @@ run_tests() {
 
 # Main setup function
 main() {
-    log_info "Starting PropChain development environment setup..."
+    log_info "Starting LandVault development environment setup..."
     
     # Install dependencies
     install_rust
@@ -112,7 +112,7 @@ main() {
     build_contracts
     run_tests
     
-    log_success "PropChain development environment setup completed!"
+    log_success "LandVault development environment setup completed!"
     echo
     log_info "Next steps:"
     echo "  1. Start developing: cd contracts/lib"

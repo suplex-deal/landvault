@@ -8,7 +8,7 @@
 // to the replay/deadline/nonce guards.
 
 use ink::primitives::Hash;
-use propchain_traits::{AccountId, Eip712Permit};
+use landvault_traits::{AccountId, Eip712Permit};
 
 /// A complete permit authorization request: the signed payload fields plus
 /// the owner's registered public key and the raw 65-byte signature.

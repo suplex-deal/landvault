@@ -1,6 +1,6 @@
 //! # Integration Tests: Multicall batching across real targets (Issue #926)
 //!
-//! `propchain-multicall` exists to dispatch batches of calls to *other*
+//! `landvault-multicall` exists to dispatch batches of calls to *other*
 //! contracts. This suite instantiates the real `MulticallContract` and
 //! drives its batch surface.
 //!
@@ -20,9 +20,9 @@
 #[cfg(test)]
 mod integration_multicall {
     use ink::env::{test, DefaultEnvironment};
-    use propchain_multicall::propchain_multicall::MulticallContract;
-    use propchain_traits::constants::MAX_BATCH_SIZE;
-    use propchain_traits::multicall::{CallRequest, MulticallError};
+    use landvault_multicall::landvault_multicall::MulticallContract;
+    use landvault_traits::constants::MAX_BATCH_SIZE;
+    use landvault_traits::multicall::{CallRequest, MulticallError};
 
     fn setup() -> MulticallContract {
         let accounts = test::default_accounts::<DefaultEnvironment>();

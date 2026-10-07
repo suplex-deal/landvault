@@ -1,4 +1,4 @@
-use propchain_traits::BasisPoints;
+use landvault_traits::BasisPoints;
 
 // Data types for the fees contract (Issue #101 - extracted from lib.rs)
 

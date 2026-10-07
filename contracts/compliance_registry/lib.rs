@@ -7,13 +7,13 @@
     dead_code
 )]
 
-use propchain_traits::{ComplianceChecker, *};
+use landvault_traits::{ComplianceChecker, *};
 
 #[ink::contract]
 pub mod compliance_registry {
     use ink::prelude::vec::Vec;
     use ink::storage::Mapping;
-    use propchain_traits::ComplianceOperation;
+    use landvault_traits::ComplianceOperation;
 
     use super::*;
 
@@ -394,49 +394,49 @@ pub mod compliance_registry {
         fn error_code(&self) -> u32 {
             match self {
                 Error::NotAuthorized => {
-                    propchain_traits::errors::compliance_codes::COMPLIANCE_UNAUTHORIZED
+                    landvault_traits::errors::compliance_codes::COMPLIANCE_UNAUTHORIZED
                 }
                 Error::NotVerified => {
-                    propchain_traits::errors::compliance_codes::COMPLIANCE_NOT_VERIFIED
+                    landvault_traits::errors::compliance_codes::COMPLIANCE_NOT_VERIFIED
                 }
                 Error::VerificationExpired => {
-                    propchain_traits::errors::compliance_codes::COMPLIANCE_EXPIRED
+                    landvault_traits::errors::compliance_codes::COMPLIANCE_EXPIRED
                 }
                 Error::HighRisk => {
-                    propchain_traits::errors::compliance_codes::COMPLIANCE_HIGH_RISK
+                    landvault_traits::errors::compliance_codes::COMPLIANCE_HIGH_RISK
                 }
                 Error::ProhibitedJurisdiction => {
-                    propchain_traits::errors::compliance_codes::COMPLIANCE_PROHIBITED_JURISDICTION
+                    landvault_traits::errors::compliance_codes::COMPLIANCE_PROHIBITED_JURISDICTION
                 }
                 Error::AlreadyVerified => {
-                    propchain_traits::errors::compliance_codes::COMPLIANCE_ALREADY_VERIFIED
+                    landvault_traits::errors::compliance_codes::COMPLIANCE_ALREADY_VERIFIED
                 }
                 Error::ConsentNotGiven => {
-                    propchain_traits::errors::compliance_codes::COMPLIANCE_CONSENT_NOT_GIVEN
+                    landvault_traits::errors::compliance_codes::COMPLIANCE_CONSENT_NOT_GIVEN
                 }
                 Error::DataRetentionExpired => {
-                    propchain_traits::errors::compliance_codes::COMPLIANCE_DATA_RETENTION_EXPIRED
+                    landvault_traits::errors::compliance_codes::COMPLIANCE_DATA_RETENTION_EXPIRED
                 }
                 Error::InvalidRiskScore => {
-                    propchain_traits::errors::compliance_codes::COMPLIANCE_INVALID_RISK_SCORE
+                    landvault_traits::errors::compliance_codes::COMPLIANCE_INVALID_RISK_SCORE
                 }
                 Error::InvalidDocumentType => {
-                    propchain_traits::errors::compliance_codes::COMPLIANCE_INVALID_DOCUMENT_TYPE
+                    landvault_traits::errors::compliance_codes::COMPLIANCE_INVALID_DOCUMENT_TYPE
                 }
                 Error::JurisdictionNotSupported => {
-                    propchain_traits::errors::compliance_codes::COMPLIANCE_JURISDICTION_NOT_SUPPORTED
+                    landvault_traits::errors::compliance_codes::COMPLIANCE_JURISDICTION_NOT_SUPPORTED
                 }
                 Error::SanctionsCheckFailed => {
-                    propchain_traits::errors::compliance_codes::COMPLIANCE_SANCTIONS_CHECK_FAILED
+                    landvault_traits::errors::compliance_codes::COMPLIANCE_SANCTIONS_CHECK_FAILED
                 }
                 Error::OperationNotAllowed => {
-                    propchain_traits::errors::compliance_codes::COMPLIANCE_SANCTIONS_CHECK_FAILED + 1
+                    landvault_traits::errors::compliance_codes::COMPLIANCE_SANCTIONS_CHECK_FAILED + 1
                 }
                 Error::TokenNotFound => {
-                    propchain_traits::errors::compliance_codes::COMPLIANCE_SANCTIONS_CHECK_FAILED + 2
+                    landvault_traits::errors::compliance_codes::COMPLIANCE_SANCTIONS_CHECK_FAILED + 2
                 }
                 Error::InvalidOperation => {
-                    propchain_traits::errors::compliance_codes::COMPLIANCE_SANCTIONS_CHECK_FAILED + 3
+                    landvault_traits::errors::compliance_codes::COMPLIANCE_SANCTIONS_CHECK_FAILED + 3
                 }
             }
         }

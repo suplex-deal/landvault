@@ -12,7 +12,7 @@ use ink::prelude::vec::Vec;
 pub mod staking_dashboard;
 
 #[ink::contract]
-pub mod propchain_analytics {
+pub mod landvault_analytics {
     use super::*;
 
     /// Market metrics representing aggregated property data.
@@ -44,7 +44,7 @@ pub mod propchain_analytics {
     )]
     #[cfg_attr(feature = "std", derive(scale_info::TypeInfo))]
     pub struct PortfolioPosition {
-        pub property_type: propchain_traits::PropertyType,
+        pub property_type: landvault_traits::PropertyType,
         pub value: u128,
     }
 
@@ -54,7 +54,7 @@ pub mod propchain_analytics {
     )]
     #[cfg_attr(feature = "std", derive(scale_info::TypeInfo))]
     pub struct RebalancingSuggestion {
-        pub property_type: propchain_traits::PropertyType,
+        pub property_type: landvault_traits::PropertyType,
         pub current_allocation_bips: u32,
         pub target_allocation_bips: u32,
         pub recommendation: String,
@@ -140,11 +140,11 @@ pub mod propchain_analytics {
         /// Owner portfolio holdings by property type
         portfolio_positions: ink::storage::Mapping<AccountId, Vec<PortfolioPosition>>,
         /// Property-type specific market trends for rebalancing
-        property_type_trends: ink::storage::Mapping<propchain_traits::PropertyType, MarketTrend>,
+        property_type_trends: ink::storage::Mapping<landvault_traits::PropertyType, MarketTrend>,
         /// Benchmark performance for property types against a basket of reference indices
-        benchmark_indices: ink::storage::Mapping<propchain_traits::PropertyType, i32>,
+        benchmark_indices: ink::storage::Mapping<landvault_traits::PropertyType, i32>,
         /// Pending admin key rotation request (Issue #496)
-        pending_admin_rotation: Option<propchain_traits::KeyRotationRequest>,
+        pending_admin_rotation: Option<landvault_traits::KeyRotationRequest>,
     }
 
     /// Errors for the analytics contract.
@@ -449,7 +449,7 @@ pub mod propchain_analytics {
         #[ink(message)]
         pub fn update_property_type_trend(
             &mut self,
-            property_type: propchain_traits::PropertyType,
+            property_type: landvault_traits::PropertyType,
             trend: MarketTrend,
         ) -> Result<(), AnalyticsError> {
             self.ensure_admin()?;
@@ -461,7 +461,7 @@ pub mod propchain_analytics {
         #[ink(message)]
         pub fn get_property_type_trend(
             &self,
-            property_type: propchain_traits::PropertyType,
+            property_type: landvault_traits::PropertyType,
         ) -> MarketTrend {
             self.property_type_trends
                 .get(property_type)
@@ -479,7 +479,7 @@ pub mod propchain_analytics {
         #[ink(message)]
         pub fn update_benchmark_index(
             &mut self,
-            property_type: propchain_traits::PropertyType,
+            property_type: landvault_traits::PropertyType,
             performance_change_percentage: i32,
         ) -> Result<(), AnalyticsError> {
             self.ensure_admin()?;
@@ -490,7 +490,7 @@ pub mod propchain_analytics {
 
         /// Get the stored benchmark index for a property type.
         #[ink(message)]
-        pub fn get_benchmark_index(&self, property_type: propchain_traits::PropertyType) -> i32 {
+        pub fn get_benchmark_index(&self, property_type: landvault_traits::PropertyType) -> i32 {
             self.benchmark_indices.get(property_type).unwrap_or(0)
         }
 
@@ -574,7 +574,7 @@ pub mod propchain_analytics {
                 return 0;
             }
 
-            let mut distinct_types: Vec<propchain_traits::PropertyType> = Vec::new();
+            let mut distinct_types: Vec<landvault_traits::PropertyType> = Vec::new();
             let mut max_share_bips: u32 = 0;
             let mut trend_total: i32 = 0;
             let mut benchmark_penalty: i32 = 0;
@@ -650,9 +650,9 @@ pub mod propchain_analytics {
 
             let block = self.env().block_number();
             let effective_at =
-                block.saturating_add(propchain_traits::constants::KEY_ROTATION_COOLDOWN_BLOCKS);
+                block.saturating_add(landvault_traits::constants::KEY_ROTATION_COOLDOWN_BLOCKS);
 
-            self.pending_admin_rotation = Some(propchain_traits::KeyRotationRequest {
+            self.pending_admin_rotation = Some(landvault_traits::KeyRotationRequest {
                 old_account: caller,
                 new_account: new_admin,
                 requested_at: block,
@@ -689,7 +689,7 @@ pub mod propchain_analytics {
             }
             let expiry = request
                 .effective_at
-                .saturating_add(propchain_traits::constants::KEY_ROTATION_EXPIRY_BLOCKS);
+                .saturating_add(landvault_traits::constants::KEY_ROTATION_EXPIRY_BLOCKS);
             if block > expiry {
                 self.pending_admin_rotation = None;
                 return Err(AnalyticsError::RequestExpired);
@@ -733,7 +733,7 @@ pub mod propchain_analytics {
 
         /// Get the pending admin rotation request, if any.
         #[ink(message)]
-        pub fn get_pending_admin_rotation(&self) -> Option<propchain_traits::KeyRotationRequest> {
+        pub fn get_pending_admin_rotation(&self) -> Option<landvault_traits::KeyRotationRequest> {
             self.pending_admin_rotation.clone()
         }
     }
@@ -886,7 +886,7 @@ pub mod propchain_analytics {
             set_caller(accounts.bob);
             assert_eq!(
                 c.update_property_type_trend(
-                    propchain_traits::PropertyType::Residential,
+                    landvault_traits::PropertyType::Residential,
                     sample_trend()
                 ),
                 Err(AnalyticsError::Unauthorized)
@@ -899,7 +899,7 @@ pub mod propchain_analytics {
             let mut c = admin_contract();
             set_caller(accounts.bob);
             assert_eq!(
-                c.update_benchmark_index(propchain_traits::PropertyType::Residential, 7),
+                c.update_benchmark_index(landvault_traits::PropertyType::Residential, 7),
                 Err(AnalyticsError::Unauthorized)
             );
         }
@@ -925,29 +925,29 @@ pub mod propchain_analytics {
             assert_eq!(c.update_market_sentiment(1, 400, 100), Ok(()));
             assert_eq!(c.overall_sentiment.bull_volume, 400);
             let positions = vec![PortfolioPosition {
-                property_type: propchain_traits::PropertyType::Residential,
+                property_type: landvault_traits::PropertyType::Residential,
                 value: 1_000,
             }];
             assert_eq!(c.set_portfolio_positions(accounts.alice, positions), Ok(()));
             assert_eq!(c.get_portfolio_positions(accounts.alice).len(), 1);
             assert_eq!(
                 c.update_property_type_trend(
-                    propchain_traits::PropertyType::Commercial,
+                    landvault_traits::PropertyType::Commercial,
                     sample_trend()
                 ),
                 Ok(())
             );
             assert_eq!(
-                c.get_property_type_trend(propchain_traits::PropertyType::Commercial)
+                c.get_property_type_trend(landvault_traits::PropertyType::Commercial)
                     .price_change_percentage,
                 5
             );
             assert_eq!(
-                c.update_benchmark_index(propchain_traits::PropertyType::Commercial, 9),
+                c.update_benchmark_index(landvault_traits::PropertyType::Commercial, 9),
                 Ok(())
             );
             assert_eq!(
-                c.get_benchmark_index(propchain_traits::PropertyType::Commercial),
+                c.get_benchmark_index(landvault_traits::PropertyType::Commercial),
                 9
             );
         }

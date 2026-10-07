@@ -1,15 +1,15 @@
 [package]
-name = "propchain-prediction-market"
+name = "landvault-prediction-market"
 version = "1.0.0"
-authors = ["PropChain Team <dev@propchain.io>"]
+authors = ["LandVault Team <dev@landvault.io>"]
 edition = "2021"
 
 [dependencies]
 ink = { workspace = true }
 scale = { workspace = true }
 scale-info = { workspace = true }
-propchain-traits = { path = "../traits", default-features = false }
-propchain-contracts = { path = "../lib", default-features = false }
+landvault-traits = { path = "../traits", default-features = false }
+landvault-contracts = { path = "../lib", default-features = false }
 
 [lib]
 path = "src/lib.rs"
@@ -20,7 +20,7 @@ std = [
     "ink/std",
     "scale/std",
     "scale-info/std",
-    "propchain-traits/std",
-    "propchain-contracts/std",
+    "landvault-traits/std",
+    "landvault-contracts/std",
 ]
 ink-as-dependency = []

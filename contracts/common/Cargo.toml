@@ -1,12 +1,12 @@
 [package]
-name = "propchain-common"
+name = "landvault-common"
 version = "1.0.0"
-authors = ["PropChain Team <dev@propchain.io>"]
+authors = ["LandVault Team <dev@landvault.io>"]
 edition = "2021"
-description = "Shared utilities for PropChain contracts (transaction-scoped caching)"
+description = "Shared utilities for LandVault contracts (transaction-scoped caching)"
 license = "MIT"
-homepage = "https://propchain.io"
-repository = "https://github.com/MettaChain/PropChain-contract"
+homepage = "https://landvault.io"
+repository = "https://github.com/MettaChain/LandVault-contract"
 publish = false
 
 [dependencies]

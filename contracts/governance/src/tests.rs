@@ -340,7 +340,7 @@ mod tests {
     /// Commitment must reproduce the exact encoding used by `reveal_vote`:
     /// hash_encoded((proposal_id, caller, support, salt)).
     fn commitment_for(proposal_id: u64, caller: AccountId, support: bool, salt: [u8; 32]) -> Hash {
-        propchain_traits::crypto::hash_encoded(&(proposal_id, caller, support, salt))
+        landvault_traits::crypto::hash_encoded(&(proposal_id, caller, support, salt))
     }
 
     #[ink::test]
@@ -483,7 +483,7 @@ mod tests {
         // recover cleanly rather than panic if it got that far.
         let mut sig = [0x7Fu8; 65];
         sig[64] = 0x01; // recovery id
-        let approval = propchain_traits::SignedApproval {
+        let approval = landvault_traits::SignedApproval {
             signature: sig,
             message_hash: [0x01; 32],
         };
@@ -805,6 +805,9 @@ mod tests {
         assert_eq!(
             gov.request_admin_rotation(AccountId::from([0u8; 32])),
             Err(Error::InvalidRotationTarget)
+        );
+    }
+
     // ========== Treasury & budget proposals (Issue #1122) ==========
 
     /// Seed the contract's own account so native disbursements can succeed and
@@ -975,6 +978,9 @@ mod tests {
         assert_eq!(gov.get_delegated_count(accounts.alice), 0);
         assert_eq!(gov.get_delegated_count(accounts.bob), 1);
         assert_eq!(gov.get_delegate_of(accounts.django), Some(accounts.bob));
+    }
+
+    #[ink::test]
     fn budget_proposal_execution_releases_funds_within_spend_limit() {
         let accounts = default_accounts();
         let mut gov = create_governance();

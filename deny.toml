@@ -1,4 +1,4 @@
-# cargo-deny configuration for PropChain
+# cargo-deny configuration for LandVault
 # Minimal configuration to check for outdated/unmaintained dependencies
 
 [advisories]

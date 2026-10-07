@@ -1,4 +1,4 @@
-//! Property types and trait definitions for the PropChain registry.
+//! Property types and trait definitions for the LandVault registry.
 //!
 //! This module contains the core property-related types, metadata structures,
 //! and trait definitions for property registration, escrow, and management.
@@ -75,7 +75,7 @@ pub type TokenId = u64;
 // Trait Definitions
 // =========================================================================
 
-/// Trait definitions for PropChain contracts
+/// Trait definitions for LandVault contracts
 pub trait PropertyRegistry {
     /// Error type for the contract
     type Error;

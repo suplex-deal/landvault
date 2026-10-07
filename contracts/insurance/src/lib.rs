@@ -21,7 +21,7 @@ mod fraud_detection;
 // Premium calculation engine (Issue #1162)
 //
 // This is an ordinary module. It used to be `include!()`-ed textually into
-// `mod propchain_insurance`, which meant the file could not be addressed by
+// `mod landvault_insurance`, which meant the file could not be addressed by
 // path, the six types it works on had to happen to be in scope in the contract
 // module, and adding a `mod premium_engine;` declaration anywhere was a
 // duplicate-definition build break guarded only by a comment. With a real
@@ -32,10 +32,10 @@ pub mod premium_engine;
 
 /// Decentralized Property Insurance Platform
 #[ink::contract]
-pub mod propchain_insurance {
+pub mod landvault_insurance {
     use ink::prelude::string::String;
     use ink::prelude::vec::Vec;
-    use propchain_traits::{non_reentrant, ReentrancyError, ReentrancyGuard};
+    use landvault_traits::{non_reentrant, ReentrancyError, ReentrancyGuard};
 
     use super::*;
 
@@ -211,7 +211,7 @@ pub mod propchain_insurance {
 
         // ── Admin Key Rotation (Issue #496) ──────────────────────────────────
         /// Pending admin key rotation request, if any
-        pending_admin_rotation: Option<propchain_traits::KeyRotationRequest>,
+        pending_admin_rotation: Option<landvault_traits::KeyRotationRequest>,
     }
 
     #[ink(event)]
@@ -2280,9 +2280,9 @@ pub mod propchain_insurance {
 
             let block = self.env().block_number();
             let effective_at =
-                block.saturating_add(propchain_traits::constants::KEY_ROTATION_COOLDOWN_BLOCKS);
+                block.saturating_add(landvault_traits::constants::KEY_ROTATION_COOLDOWN_BLOCKS);
 
-            self.pending_admin_rotation = Some(propchain_traits::KeyRotationRequest {
+            self.pending_admin_rotation = Some(landvault_traits::KeyRotationRequest {
                 old_account: caller,
                 new_account: new_admin,
                 requested_at: block,
@@ -2320,7 +2320,7 @@ pub mod propchain_insurance {
             }
             let expiry = request
                 .effective_at
-                .saturating_add(propchain_traits::constants::KEY_ROTATION_EXPIRY_BLOCKS);
+                .saturating_add(landvault_traits::constants::KEY_ROTATION_EXPIRY_BLOCKS);
             if block > expiry {
                 self.pending_admin_rotation = None;
                 return Err(InsuranceError::RequestExpired);
@@ -2366,7 +2366,7 @@ pub mod propchain_insurance {
 
         /// Get the pending admin rotation request, if any.
         #[ink(message)]
-        pub fn get_pending_admin_rotation(&self) -> Option<propchain_traits::KeyRotationRequest> {
+        pub fn get_pending_admin_rotation(&self) -> Option<landvault_traits::KeyRotationRequest> {
             self.pending_admin_rotation.clone()
         }
 
@@ -3312,13 +3312,13 @@ pub mod propchain_insurance {
 
         /// Return the current health status of this contract.
         #[ink(message)]
-        pub fn health(&self) -> propchain_traits::monitoring::HealthReport {
+        pub fn health(&self) -> landvault_traits::monitoring::HealthReport {
             let total_operations = self.policy_count.saturating_add(self.claim_count);
             let error_rate_bips = 0u32; // Insurance contract tracks claims, not errors
 
-            propchain_traits::monitoring::HealthReport {
+            landvault_traits::monitoring::HealthReport {
                 contract_name: String::from("insurance"),
-                status: propchain_traits::monitoring::HealthStatus::Healthy,
+                status: landvault_traits::monitoring::HealthStatus::Healthy,
                 reported_at: self.env().block_timestamp(),
                 total_operations,
                 error_count: 0,
@@ -3335,7 +3335,7 @@ pub mod propchain_insurance {
     }
 }
 
-pub use crate::propchain_insurance::{InsuranceError, PropertyInsurance};
+pub use crate::landvault_insurance::{InsuranceError, PropertyInsurance};
 
 #[cfg(test)]
 mod tests;

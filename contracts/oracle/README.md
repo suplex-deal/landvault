@@ -1,6 +1,6 @@
 # Property Valuation Oracle
 
-The Property Valuation Oracle provides real-time property valuations for the PropChain ecosystem using multiple data sources and advanced aggregation algorithms.
+The Property Valuation Oracle provides real-time property valuations for the LandVault ecosystem using multiple data sources and advanced aggregation algorithms.
 
 ## Features
 
@@ -231,7 +231,7 @@ The oracle integrates seamlessly with the PropertyRegistry contract to provide r
 
 Run the comprehensive test suite:
 ```bash
-cargo test -p propchain-oracle
+cargo test -p landvault-oracle
 ```
 
 ## Deployment

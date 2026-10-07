@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# PropChain Test Script
+# LandVault Test Script
 # This script runs comprehensive tests for all contracts
 
 set -euo pipefail
@@ -263,7 +263,7 @@ generate_test_report() {
     local report_file="$WORKSPACE_ROOT/test-report-$(date +%Y%m%d-%H%M%S).md"
     
     cat > "$report_file" << EOF
-# PropChain Test Report
+# LandVault Test Report
 
 **Generated:** $(date -u +%Y-%m-%dT%H:%M:%SZ)  
 **Workspace:** $WORKSPACE_ROOT  
@@ -313,7 +313,7 @@ EOF
 - Monitor gas consumption for optimization opportunities
 
 ---
-*This report was generated automatically by the PropChain test script.*
+*This report was generated automatically by the LandVault test script.*
 EOF
     
     log_success "Test report generated: $report_file"
@@ -369,7 +369,7 @@ main() {
         esac
     done
     
-    log_info "Starting PropChain test suite..."
+    log_info "Starting LandVault test suite..."
     
     # Check prerequisites
     check_prerequisites

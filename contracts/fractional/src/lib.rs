@@ -11,7 +11,7 @@
 pub mod fractional {
     use ink::prelude::vec::Vec;
     use ink::storage::Mapping;
-    use propchain_traits::{self, non_reentrant, ReentrancyError, ReentrancyGuard};
+    use landvault_traits::{self, non_reentrant, ReentrancyError, ReentrancyGuard};
 
     #[derive(
         Debug,
@@ -340,7 +340,7 @@ pub mod fractional {
         /// Contract administrator (Issue #496)
         admin: AccountId,
         /// Pending admin key rotation request (Issue #496)
-        pending_admin_rotation: Option<propchain_traits::KeyRotationRequest>,
+        pending_admin_rotation: Option<landvault_traits::KeyRotationRequest>,
     }
 
     impl From<ReentrancyError> for FractionalError {
@@ -1234,9 +1234,9 @@ pub mod fractional {
 
             let block = self.env().block_number();
             let effective_at =
-                block.saturating_add(propchain_traits::constants::KEY_ROTATION_COOLDOWN_BLOCKS);
+                block.saturating_add(landvault_traits::constants::KEY_ROTATION_COOLDOWN_BLOCKS);
 
-            self.pending_admin_rotation = Some(propchain_traits::KeyRotationRequest {
+            self.pending_admin_rotation = Some(landvault_traits::KeyRotationRequest {
                 old_account: caller,
                 new_account: new_admin,
                 requested_at: block,
@@ -1273,7 +1273,7 @@ pub mod fractional {
             }
             let expiry = request
                 .effective_at
-                .saturating_add(propchain_traits::constants::KEY_ROTATION_EXPIRY_BLOCKS);
+                .saturating_add(landvault_traits::constants::KEY_ROTATION_EXPIRY_BLOCKS);
             if block > expiry {
                 self.pending_admin_rotation = None;
                 return Err(FractionalError::RequestExpired);
@@ -1317,7 +1317,7 @@ pub mod fractional {
 
         /// Get the pending admin rotation request, if any.
         #[ink(message)]
-        pub fn get_pending_admin_rotation(&self) -> Option<propchain_traits::KeyRotationRequest> {
+        pub fn get_pending_admin_rotation(&self) -> Option<landvault_traits::KeyRotationRequest> {
             self.pending_admin_rotation.clone()
         }
     }

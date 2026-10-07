@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# PropChain Log Analyzer
+# LandVault Log Analyzer
 # Parses, filters, and aggregates contract event logs exported as NDJSON.
 #
 # Usage:

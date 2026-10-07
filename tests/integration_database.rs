@@ -16,7 +16,7 @@
 mod integration_database {
     use ink::env::{test, DefaultEnvironment};
     use ink::primitives::Hash;
-    use propchain_database::propchain_database::{
+    use landvault_database::landvault_database::{
         DataType, DatabaseIntegration, Error as DatabaseError, SyncStatus,
     };
 

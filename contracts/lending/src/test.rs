@@ -4,7 +4,7 @@
 use ink::env::{test, DefaultEnvironment};
 
 use super::*;
-use crate::propchain_lending::{
+use crate::landvault_lending::{
     CollateralKind, ListingStatus, LoanStatus, LoanType, PaymentScheduleStatus, Schedule,
 };
 

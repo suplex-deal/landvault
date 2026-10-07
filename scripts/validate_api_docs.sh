@@ -5,7 +5,7 @@
 
 set -e
 
-echo "🔍 PropChain API Documentation Validator"
+echo "🔍 LandVault API Documentation Validator"
 echo "========================================="
 echo ""
 

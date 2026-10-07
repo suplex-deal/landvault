@@ -1,8 +1,8 @@
 #![cfg(feature = "e2e-tests")]
 
 use ink_e2e::build_message;
-use propchain_contracts::PropertyRegistry;
-use propchain_traits::PropertyMetadata;
+use landvault_contracts::PropertyRegistry;
+use landvault_traits::PropertyMetadata;
 
 type E2EResult<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 
@@ -13,7 +13,7 @@ async fn e2e_register_property() -> E2EResult<()> {
     // Given
     let constructor = PropertyRegistry::new();
     let contract_acc_id = client
-        .instantiate("propchain-contracts", &ink_e2e::alice(), constructor, 0, None)
+        .instantiate("landvault-contracts", &ink_e2e::alice(), constructor, 0, None)
         .await
         .expect("instantiate failed")
         .account_id;
@@ -46,7 +46,7 @@ async fn e2e_get_property() -> E2EResult<()> {
     // Given
     let constructor = PropertyRegistry::new();
     let contract_acc_id = client
-        .instantiate("propchain-contracts", &ink_e2e::alice(), constructor, 0, None)
+        .instantiate("landvault-contracts", &ink_e2e::alice(), constructor, 0, None)
         .await
         .expect("instantiate failed")
         .account_id;
@@ -88,7 +88,7 @@ async fn e2e_cross_contract_escrow_workflow() -> E2EResult<()> {
     // Given
     let constructor = PropertyRegistry::new();
     let contract_acc_id = client
-        .instantiate("propchain-contracts", &ink_e2e::alice(), constructor, 0, None)
+        .instantiate("landvault-contracts", &ink_e2e::alice(), constructor, 0, None)
         .await
         .expect("instantiate failed")
         .account_id;
@@ -149,7 +149,7 @@ async fn e2e_network_failure_scenarios() -> E2EResult<()> {
     // Given
     let constructor = PropertyRegistry::new();
     let contract_acc_id = client
-        .instantiate("propchain-contracts", &ink_e2e::alice(), constructor, 0, None)
+        .instantiate("landvault-contracts", &ink_e2e::alice(), constructor, 0, None)
         .await
         .expect("instantiate failed")
         .account_id;
@@ -207,7 +207,7 @@ async fn e2e_performance_under_load() -> E2EResult<()> {
     // Given
     let constructor = PropertyRegistry::new();
     let contract_acc_id = client
-        .instantiate("propchain-contracts", &ink_e2e::alice(), constructor, 0, None)
+        .instantiate("landvault-contracts", &ink_e2e::alice(), constructor, 0, None)
         .await
         .expect("instantiate failed")
         .account_id;
@@ -254,7 +254,7 @@ async fn e2e_transfer_property() -> E2EResult<()> {
     // Given
     let constructor = PropertyRegistry::new();
     let contract_acc_id = client
-        .instantiate("propchain-contracts", &ink_e2e::alice(), constructor, 0, None)
+        .instantiate("landvault-contracts", &ink_e2e::alice(), constructor, 0, None)
         .await
         .expect("instantiate failed")
         .account_id;
@@ -297,7 +297,7 @@ async fn e2e_end_to_end_property_workflow() -> E2EResult<()> {
     // Given
     let constructor = PropertyRegistry::new();
     let contract_acc_id = client
-        .instantiate("propchain-contracts", &ink_e2e::alice(), constructor, 0, None)
+        .instantiate("landvault-contracts", &ink_e2e::alice(), constructor, 0, None)
         .await
         .expect("instantiate failed")
         .account_id;

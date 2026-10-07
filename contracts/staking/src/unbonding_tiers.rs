@@ -45,7 +45,7 @@
 // keyed on time. `tier_for_duration` is the single place that decides it.
 
 use ink::storage::traits::StorageLayout;
-use propchain_traits::constants::LOCK_PERIOD_1_YEAR;
+use landvault_traits::constants::LOCK_PERIOD_1_YEAR;
 
 /// Block time assumed by the tier ladder, in seconds. Matches the 6-second
 /// blocks implied by `constants::LOCK_PERIOD_30_DAYS` (432_000 blocks).

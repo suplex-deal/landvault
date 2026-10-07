@@ -1,4 +1,4 @@
-//! Test Utilities and Fixtures for PropChain Contracts
+//! Test Utilities and Fixtures for LandVault Contracts
 //!
 //! This module provides shared testing utilities, fixtures, and helpers
 //! for all contract tests.
@@ -7,7 +7,7 @@
 
 use ink::env::DefaultEnvironment;
 use ink::primitives::AccountId;
-use propchain_traits::*;
+use landvault_traits::*;
 
 /// Test account identifiers
 pub struct TestAccounts {

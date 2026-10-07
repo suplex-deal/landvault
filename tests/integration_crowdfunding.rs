@@ -13,7 +13,7 @@
 #[cfg(test)]
 mod integration_crowdfunding {
     use ink::env::{test, DefaultEnvironment};
-    use propchain_crowdfunding::propchain_crowdfunding::{
+    use landvault_crowdfunding::landvault_crowdfunding::{
         CampaignStatus, CrowdfundingError, MilestoneStatus, RealEstateCrowdfunding,
     };
 

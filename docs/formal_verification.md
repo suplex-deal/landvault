@@ -32,7 +32,7 @@ Read this before citing a proof.
   marked `replace with your actual contract types`.
 - Harnesses in `economic-models` prove properties of the formulas transcribed in
   `economic-models/src/lib.rs`. They cannot be pointed at the production functions
-  directly: `borrow_rate::compute_borrow_rate` is private to `propchain-lending`, the
+  directly: `borrow_rate::compute_borrow_rate` is private to `landvault-lending`, the
   fee rounding functions are `include!`d into an `#[ink::contract]` module, and
   `staking`'s `reward_snapshots` is a private module. `economic-models`' own `pins`
   tests tie each transcription back to the values the production unit tests assert, so a

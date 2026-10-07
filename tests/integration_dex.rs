@@ -13,7 +13,7 @@
 #[cfg(test)]
 mod integration_dex {
     use ink::env::{test, DefaultEnvironment};
-    use propchain_dex::dex::{Error as DexError, PropertyDex};
+    use landvault_dex::dex::{Error as DexError, PropertyDex};
 
     fn dex() -> PropertyDex {
         test::set_caller::<DefaultEnvironment>(

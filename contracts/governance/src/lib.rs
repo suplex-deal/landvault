@@ -12,7 +12,7 @@ extern crate alloc;
 
 // Standalone governance helpers wired into the build per Issue #982 (they
 // were previously dead files that were never compiled or tested). They are
-// unit-tested by `cargo test -p propchain-governance`; exposing them on the
+// unit-tested by `cargo test -p landvault-governance`; exposing them on the
 // on-chain message surface remains a separate feature decision.
 pub mod delegation;
 pub mod treasury;
@@ -24,8 +24,8 @@ mod snapshot_tests;
 pub mod governance {
     use ink::prelude::vec::Vec;
     use ink::storage::Mapping;
-    use propchain_traits::constants;
-    use propchain_traits::errors::*;
+    use landvault_traits::constants;
+    use landvault_traits::errors::*;
     use super::treasury;
 
     include!("errors.rs");
@@ -269,7 +269,7 @@ pub mod governance {
         /// Registered ECDSA public keys for optional cryptographic signature verification
         signer_public_keys: Mapping<AccountId, [u8; 33]>,
         /// Pending admin key rotation request
-        pending_admin_rotation: Option<propchain_traits::KeyRotationRequest>,
+        pending_admin_rotation: Option<landvault_traits::KeyRotationRequest>,
         // ── Voting Privacy (Issue #234) ───────────────────────────────────────
         /// Commitments: (proposal_id, voter) -> hashed vote commitment
         vote_commitments: Mapping<(u64, AccountId), Hash>,
@@ -707,7 +707,7 @@ pub mod governance {
             &mut self,
             proposal_id: u64,
             support: bool,
-            signed_approval: Option<propchain_traits::SignedApproval>,
+            signed_approval: Option<landvault_traits::SignedApproval>,
         ) -> Result<(), Error> {
             let caller = self.env().caller();
 
@@ -716,10 +716,10 @@ pub mod governance {
                     .signer_public_keys
                     .get(caller)
                     .ok_or(Error::Unauthorized)?;
-                propchain_traits::crypto::verify_signed_approval(approval, &expected_key)
+                landvault_traits::crypto::verify_signed_approval(approval, &expected_key)
                     .map_err(|_| Error::Unauthorized)?;
 
-                let expected_hash = propchain_traits::crypto::hash_encoded(&(
+                let expected_hash = landvault_traits::crypto::hash_encoded(&(
                     proposal_id,
                     support,
                     caller,
@@ -844,7 +844,7 @@ pub mod governance {
 
             // Verify the commitment matches
             let encoded = (proposal_id, caller, support, salt);
-            let expected = propchain_traits::crypto::hash_encoded(&encoded);
+            let expected = landvault_traits::crypto::hash_encoded(&encoded);
             if commitment != expected {
                 return Err(Error::Unauthorized);
             }
@@ -1089,7 +1089,7 @@ pub mod governance {
             // window (admin refreshes the notice period).
             let now = self.env().block_number() as u64;
             let effective_at = now.saturating_add(
-                propchain_traits::constants::GOVERNANCE_EMERGENCY_OVERRIDE_GRACE_BLOCKS,
+                landvault_traits::constants::GOVERNANCE_EMERGENCY_OVERRIDE_GRACE_BLOCKS,
             );
             self.emergency_override_requests.insert(
                 proposal_id,
@@ -1137,8 +1137,7 @@ pub mod governance {
                 self.emergency_override_requests.remove(proposal_id);
                 return Err(Error::ProposalClosed);
             }
-
-            if request.execute {
+            let execute = request.execute;
             if execute {
                 // Force-execution disburses any budget payout too; a denial
                 // (spend limit / funds) aborts the override (Issue #1122).
@@ -1196,9 +1195,9 @@ pub mod governance {
             let caller = self.env().caller();
             let block = self.env().block_number();
             let effective_at =
-                block.saturating_add(propchain_traits::constants::KEY_ROTATION_COOLDOWN_BLOCKS);
+                block.saturating_add(landvault_traits::constants::KEY_ROTATION_COOLDOWN_BLOCKS);
 
-            self.pending_admin_rotation = Some(propchain_traits::KeyRotationRequest {
+            self.pending_admin_rotation = Some(landvault_traits::KeyRotationRequest {
                 old_account: caller,
                 new_account: new_admin,
                 requested_at: block,
@@ -1234,7 +1233,7 @@ pub mod governance {
             }
             let expiry = request
                 .effective_at
-                .saturating_add(propchain_traits::constants::KEY_ROTATION_EXPIRY_BLOCKS);
+                .saturating_add(landvault_traits::constants::KEY_ROTATION_EXPIRY_BLOCKS);
             if block > expiry {
                 self.pending_admin_rotation = None;
                 return Err(Error::ProposalExpired);
@@ -1402,6 +1401,8 @@ pub mod governance {
             } else {
                 self.delegated_counts.insert(delegate, &(count - 1));
             }
+        }
+
         /// Maps a standalone `TreasuryError` onto the contract error surface.
         fn map_treasury_error(e: treasury::TreasuryError) -> Error {
             match e {

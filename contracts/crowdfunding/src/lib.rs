@@ -10,7 +10,7 @@
 use ink::storage::Mapping;
 
 #[ink::contract]
-pub mod propchain_crowdfunding {
+pub mod landvault_crowdfunding {
     use ink::prelude::string::String;
     use ink::prelude::vec::Vec;
 
@@ -43,8 +43,8 @@ pub mod propchain_crowdfunding {
         ArithmeticOverflow,
     }
 
-    impl From<propchain_traits::ReentrancyError> for CrowdfundingError {
-        fn from(_: propchain_traits::ReentrancyError) -> Self {
+    impl From<landvault_traits::ReentrancyError> for CrowdfundingError {
+        fn from(_: landvault_traits::ReentrancyError) -> Self {
             CrowdfundingError::ReentrantCall
         }
     }
@@ -315,7 +315,7 @@ pub mod propchain_crowdfunding {
         released_milestone_counts: Mapping<u64, u32>,
         released_capital: Mapping<u64, u128>,
         blocked_jurisdictions: Vec<String>,
-        reentrancy_guard: propchain_traits::ReentrancyGuard,
+        reentrancy_guard: landvault_traits::ReentrancyGuard,
         /// Authorized oracle accounts for milestone verification
         authorized_oracles: Mapping<AccountId, bool>,
         /// Tracks whether an investor has been refunded for a campaign
@@ -426,7 +426,7 @@ pub mod propchain_crowdfunding {
                 released_milestone_counts: Mapping::default(),
                 released_capital: Mapping::default(),
                 blocked_jurisdictions: Vec::new(),
-                reentrancy_guard: propchain_traits::ReentrancyGuard::new(),
+                reentrancy_guard: landvault_traits::ReentrancyGuard::new(),
                 authorized_oracles: Mapping::default(),
                 refunds_issued: Mapping::default(),
                 campaign_investors: Mapping::default(),
@@ -714,7 +714,7 @@ pub mod propchain_crowdfunding {
         /// - `ReentrantCall` if a reentrant call is detected.
         #[ink(message)]
         pub fn release_milestone(&mut self, milestone_id: u64) -> Result<(), CrowdfundingError> {
-            propchain_traits::non_reentrant!(self, {
+            landvault_traits::non_reentrant!(self, {
                 let mut milestone = self
                     .milestones
                     .get(milestone_id)
@@ -799,7 +799,7 @@ pub mod propchain_crowdfunding {
         /// Investor claims a refund for a failed/cancelled campaign
         #[ink(message)]
         pub fn claim_refund(&mut self, campaign_id: u64) -> Result<u128, CrowdfundingError> {
-            propchain_traits::non_reentrant!(self, {
+            landvault_traits::non_reentrant!(self, {
                 let caller = self.env().caller();
                 let campaign = self
                     .campaigns
@@ -1603,13 +1603,13 @@ pub mod propchain_crowdfunding {
     }
 }
 
-pub use crate::propchain_crowdfunding::{CrowdfundingError, RealEstateCrowdfunding};
+pub use crate::landvault_crowdfunding::{CrowdfundingError, RealEstateCrowdfunding};
 
 #[cfg(test)]
 mod tests {
     #[allow(unused_imports)]
     use ink::env::{test, DefaultEnvironment};
-    use propchain_crowdfunding::{
+    use landvault_crowdfunding::{
         CampaignStatus, CrowdfundingError, MilestoneStatus, RealEstateCrowdfunding,
     };
 
@@ -1867,7 +1867,7 @@ mod tests {
         let campaign_id = contract.create_campaign("Test".into(), 100_000).unwrap();
         assert!(contract.assess_risk(campaign_id, 50, 80, 10).is_ok());
         let profile = contract.get_risk_profile(campaign_id).unwrap();
-        assert_eq!(profile.rating, propchain_crowdfunding::RiskRating::Low);
+        assert_eq!(profile.rating, landvault_crowdfunding::RiskRating::Low);
     }
 
     #[ink::test]

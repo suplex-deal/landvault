@@ -1,7 +1,7 @@
 #![cfg_attr(not(feature = "std"), no_std, no_main)]
 #![allow(clippy::new_without_default, clippy::clone_on_copy)]
 
-//! # PropChain Transparent Proxy
+//! # LandVault Transparent Proxy
 //!
 //! A transparent proxy contract that routes calls to an implementation contract.
 //! Upgrades follow a two-step governance pattern: stage a new implementation
@@ -36,7 +36,7 @@
 //! of scope for the initial implementation.
 
 #[ink::contract]
-pub mod propchain_proxy {
+pub mod landvault_proxy {
     use ink::env::call::build_call;
     use ink::prelude::vec::Vec;
 
@@ -60,7 +60,7 @@ pub mod propchain_proxy {
     /// Largest upgrade delay an admin may configure.
     ///
     /// 30 days at a 6-second block time, matching `LOCK_PERIOD_30_DAYS` in
-    /// `propchain-traits`.
+    /// `landvault-traits`.
     ///
     /// The cap does more than rule out an "effectively forever" delay. With an
     /// unbounded `u64` delay, `set_implementation` evaluates
@@ -142,6 +142,18 @@ pub mod propchain_proxy {
         #[ink(topic)]
         cancelled_implementation: AccountId,
         /// Admin that withdrew it.
+        #[ink(topic)]
+        by: AccountId,
+    }
+
+    /// Emitted when the upgrade delay is changed.
+    #[ink(event)]
+    pub struct UpgradeDelayChanged {
+        /// Previous upgrade delay in blocks.
+        old_delay: u64,
+        /// New upgrade delay in blocks.
+        new_delay: u64,
+        /// Admin that updated the delay.
         #[ink(topic)]
         by: AccountId,
     }

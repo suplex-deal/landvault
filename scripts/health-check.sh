@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# PropChain Health Check Script
+# LandVault Health Check Script
 # Checks contract build status, test status, and dependency versions
 
 set -euo pipefail
@@ -220,7 +220,7 @@ generate_report() {
     local report_file="$WORKSPACE_ROOT/health-report-$(date +%Y%m%d-%H%M%S).txt"
 
     {
-        echo "PropChain Health Check Report"
+        echo "LandVault Health Check Report"
         echo "Generated: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
         echo "Workspace: $WORKSPACE_ROOT"
         echo ""
@@ -264,7 +264,7 @@ main() {
         esac
     done
 
-    log_info "Starting PropChain health check..."
+    log_info "Starting LandVault health check..."
     echo ""
 
     check_toolchain

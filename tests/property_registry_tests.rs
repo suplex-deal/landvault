@@ -4,7 +4,7 @@ use ink::env::{
     test::{self, DefaultAccounts},
     DefaultEnvironment,
 };
-use propchain_contracts::PropertyRegistry;
+use landvault_contracts::PropertyRegistry;
 
 #[cfg(test)]
 mod tests {

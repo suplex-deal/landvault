@@ -1,4 +1,4 @@
-use propchain_traits::AccountId;
+use landvault_traits::AccountId;
 
 /// Outcome of a reputation slash, reporting the *actual* effect rather than
 /// the requested severity.
@@ -27,7 +27,7 @@ pub struct OracleSlashingManager {
 
 impl Default for OracleSlashingManager {
     fn default() -> Self {
-        Self::new(propchain_traits::constants::ORACLE_MIN_REPUTATION_THRESHOLD)
+        Self::new(landvault_traits::constants::ORACLE_MIN_REPUTATION_THRESHOLD)
     }
 }
 

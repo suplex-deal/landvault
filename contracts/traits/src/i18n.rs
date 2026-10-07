@@ -1,4 +1,4 @@
-//! Localization infrastructure for PropChain error messages.
+//! Localization infrastructure for LandVault error messages.
 //!
 //! All lookups are static match expressions that allocate nothing, making this
 //! module fully compatible with `no_std` / WASM contract environments.

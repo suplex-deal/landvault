@@ -1,6 +1,6 @@
-# PropChain Dynamic Fee and Market Mechanism
+# LandVault Dynamic Fee and Market Mechanism
 
-This contract implements **dynamic fees** and **market mechanisms** for the PropChain property registry (Issue #38).
+This contract implements **dynamic fees** and **market mechanisms** for the LandVault property registry (Issue #38).
 
 ## Features
 
@@ -56,7 +56,7 @@ Frontends or off-chain logic can:
 
 ## Types (Exported)
 
-- **`FeeOperation`**: Enum of operation types (in `propchain_traits`).
+- **`FeeOperation`**: Enum of operation types (in `landvault_traits`).
 - **`FeeConfig`**: base_fee, min_fee, max_fee, congestion_sensitivity, demand_factor_bp, last_updated.
 - **`FeeReport`**: Full snapshot for dashboards.
 - **`FeeEstimate`**: Per-operation estimate with recommendation.
@@ -65,8 +65,8 @@ Frontends or off-chain logic can:
 ## Building and Tests
 
 ```bash
-cargo build -p propchain-fees
-cargo test -p propchain-fees
+cargo build -p landvault-fees
+cargo test -p landvault-fees
 ```
 
 ## Acceptance Criteria (Issue #38)

@@ -2,7 +2,7 @@
 
 ## Overview
 
-The PropChain Insurance module now features a sophisticated dynamic premium calculation engine that adjusts insurance premiums based on comprehensive risk assessment, market conditions, policyholder behavior, and actuarial models.
+The LandVault Insurance module now features a sophisticated dynamic premium calculation engine that adjusts insurance premiums based on comprehensive risk assessment, market conditions, policyholder behavior, and actuarial models.
 
 ## Architecture
 
@@ -335,7 +335,7 @@ pub struct RiskPool {
 Run the premium calculation tests:
 
 ```bash
-cargo test --package propchain-insurance premium_tests
+cargo test --package landvault-insurance premium_tests
 ```
 
 ### Test Coverage

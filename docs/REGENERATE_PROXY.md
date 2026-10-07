@@ -1,4 +1,4 @@
-# PropChain Transparent Proxy — Design & Regeneration Guide
+# LandVault Transparent Proxy — Design & Regeneration Guide
 
 ## Overview
 
@@ -44,4 +44,4 @@ To regenerate this contract from scratch:
 2. Read `docs/proxy_upgrade_governance.md` for governance constraints
 3. Implement the storage struct, constructor, admin messages, and fallback
 4. Add tests covering: construction, staging, delay, confirmation, unauthorized access
-5. Verify: `cargo test -p propchain-proxy` and `cargo clippy --all-targets --all-features -- -D warnings`
+5. Verify: `cargo test -p landvault-proxy` and `cargo clippy --all-targets --all-features -- -D warnings`

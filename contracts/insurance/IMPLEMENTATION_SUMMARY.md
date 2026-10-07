@@ -2,7 +2,7 @@
 
 ## Overview
 
-Successfully implemented a comprehensive dynamic premium calculation system for the PropChain Insurance module that adjusts premiums based on risk assessment, market conditions, policyholder behavior, and actuarial models.
+Successfully implemented a comprehensive dynamic premium calculation system for the LandVault Insurance module that adjusts premiums based on risk assessment, market conditions, policyholder behavior, and actuarial models.
 
 ## Key Features Implemented
 
@@ -291,13 +291,13 @@ println!("Total: ${}", premium.annual_premium);
 
 ```bash
 # Run all insurance tests
-cargo test --package propchain-insurance
+cargo test --package landvault-insurance
 
 # Run only premium tests
-cargo test --package propchain-insurance premium
+cargo test --package landvault-insurance premium
 
 # Run with verbose output
-cargo test --package propchain-insurance -- --nocapture
+cargo test --package landvault-insurance -- --nocapture
 ```
 
 ## Integration Points
@@ -336,4 +336,4 @@ The dynamic premium calculation system provides:
 6. **Extensibility**: Easy to add new factors
 7. **Production Ready**: Comprehensive tests and documentation
 
-This implementation positions PropChain Insurance as a leading decentralized insurance platform with sophisticated, fair, and transparent pricing mechanisms.
+This implementation positions LandVault Insurance as a leading decentralized insurance platform with sophisticated, fair, and transparent pricing mechanisms.

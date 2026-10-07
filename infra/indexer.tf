@@ -22,12 +22,12 @@ variable "db_instance_class" {
 }
 
 resource "aws_db_instance" "indexer_postgres" {
-  identifier        = "propchain-indexer"
+  identifier        = "landvault-indexer"
   engine            = "postgres"
   engine_version    = "15"
   instance_class    = var.db_instance_class
   allocated_storage = 20
-  db_name           = "propchain_indexer"
+  db_name           = "landvault_indexer"
   username          = "indexer"
   manage_master_user_password = true
   skip_final_snapshot = true
@@ -38,7 +38,7 @@ resource "aws_instance" "indexer_node" {
   instance_type = "t3.small"
 
   tags = {
-    Name = "propchain-indexer"
+    Name = "landvault-indexer"
   }
 }
 

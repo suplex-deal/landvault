@@ -1,7 +1,7 @@
 //! Oracle types and trait definitions for real-time property valuation.
 //!
 //! This module contains all oracle-related types, error handling, and trait
-//! definitions used across the PropChain ecosystem for property valuations,
+//! definitions used across the LandVault ecosystem for property valuations,
 //! price feeds, and market analysis.
 
 use ink::prelude::string::String;

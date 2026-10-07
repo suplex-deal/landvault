@@ -45,7 +45,7 @@ pub mod property;
 
 // Original re-exports
 // Re-export all new module contents at the crate root so that
-// existing `use propchain_traits::*` continues to resolve every type.
+// existing `use landvault_traits::*` continues to resolve every type.
 pub use bridge::*;
 // Re-export compliance and fee module contents (types are defined in those modules)
 pub use compliance::*;

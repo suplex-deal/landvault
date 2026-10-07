@@ -1,7 +1,7 @@
 # Identity Recovery
 
 This document describes the secure identity recovery mechanism for the
-`propchain_identity` contract.
+`landvault_identity` contract.
 
 ## Recovery flow
 

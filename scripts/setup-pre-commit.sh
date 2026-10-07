@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# PropChain Pre-commit Setup Script
+# LandVault Pre-commit Setup Script
 # This script sets up pre-commit hooks for the project
 
 set -euo pipefail
@@ -189,7 +189,7 @@ main() {
         esac
     done
     
-    log_info "Setting up PropChain pre-commit hooks..."
+    log_info "Setting up LandVault pre-commit hooks..."
     
     if [ "$test_only" = false ]; then
         # Install dependencies

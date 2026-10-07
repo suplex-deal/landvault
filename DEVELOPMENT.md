@@ -1,7 +1,7 @@
 # Development Setup
 
 This guide walks you through setting up a local development environment for
-PropChain Smart Contracts.
+LandVault Smart Contracts.
 
 ## Prerequisites
 
@@ -30,8 +30,8 @@ rustup target add wasm32-unknown-unknown
 ## Clone & Build
 
 ```bash
-git clone https://github.com/MettaChain/PropChain-contract.git
-cd PropChain-contract
+git clone https://github.com/MettaChain/LandVault-contract.git
+cd LandVault-contract
 
 # Install Rust toolchain and project deps
 ./scripts/setup.sh
@@ -50,7 +50,7 @@ cd PropChain-contract
 cargo test --all-features --workspace
 
 # Run a single contract's tests
-cargo test -p propchain-lending
+cargo test -p landvault-lending
 
 # Run with coverage (requires cargo-llvm-cov)
 ./scripts/run_tests_with_coverage.sh
@@ -73,7 +73,7 @@ cargo clippy --all-targets --all-features -- -D warnings
 
 The project ships a `rustfmt.toml` in the repo root that enables
 `format_macro_matchers = true` so that `#[ink::contract]`, `#[ink::test]`,
-and `propchain_traits::non_reentrant!` macro bodies are formatted
+and `landvault_traits::non_reentrant!` macro bodies are formatted
 consistently.
 
 Apply nightly formatting with:

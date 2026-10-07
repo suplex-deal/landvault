@@ -54,7 +54,7 @@ jobs:
             --harness oracle_proofs::prove_fresh_oracle_always_accepted
 
       # Issue #1209: the value-movement arithmetic. These run against
-      # `propchain-economic-models`, a dependency-free crate, because Kani has to
+      # `landvault-economic-models`, a dependency-free crate, because Kani has to
       # compile everything the target pulls in. See `docs/formal_verification.md`
       # for what each harness does and does not establish.
       - name: Verify lending borrow-rate curve

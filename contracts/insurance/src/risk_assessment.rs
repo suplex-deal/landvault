@@ -167,13 +167,13 @@ pub mod risk_model {
     }
 
     /// Map risk score (0-1000) to risk level
-    pub fn score_to_risk_level(score: u32) -> crate::propchain_insurance::RiskLevel {
+    pub fn score_to_risk_level(score: u32) -> crate::landvault_insurance::RiskLevel {
         match score {
-            0..=200 => crate::propchain_insurance::RiskLevel::VeryLow,
-            201..=400 => crate::propchain_insurance::RiskLevel::Low,
-            401..=600 => crate::propchain_insurance::RiskLevel::Medium,
-            601..=800 => crate::propchain_insurance::RiskLevel::High,
-            _ => crate::propchain_insurance::RiskLevel::VeryHigh,
+            0..=200 => crate::landvault_insurance::RiskLevel::VeryLow,
+            201..=400 => crate::landvault_insurance::RiskLevel::Low,
+            401..=600 => crate::landvault_insurance::RiskLevel::Medium,
+            601..=800 => crate::landvault_insurance::RiskLevel::High,
+            _ => crate::landvault_insurance::RiskLevel::VeryHigh,
         }
     }
 
@@ -246,15 +246,15 @@ mod tests {
     fn test_risk_level_mapping() {
         assert_eq!(
             risk_model::score_to_risk_level(100),
-            crate::propchain_insurance::RiskLevel::VeryLow
+            crate::landvault_insurance::RiskLevel::VeryLow
         );
         assert_eq!(
             risk_model::score_to_risk_level(500),
-            crate::propchain_insurance::RiskLevel::Medium
+            crate::landvault_insurance::RiskLevel::Medium
         );
         assert_eq!(
             risk_model::score_to_risk_level(900),
-            crate::propchain_insurance::RiskLevel::VeryHigh
+            crate::landvault_insurance::RiskLevel::VeryHigh
         );
     }
 

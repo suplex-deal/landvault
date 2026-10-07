@@ -15,7 +15,7 @@ mod servicing_status;
 mod status_packing;
 
 #[ink::contract]
-pub mod propchain_lending {
+pub mod landvault_lending {
     use ink::prelude::string::String;
     use ink::prelude::vec::Vec;
 
@@ -55,8 +55,8 @@ pub mod propchain_lending {
         PriceFeedStale,
     }
 
-    impl From<propchain_traits::ReentrancyError> for LendingError {
-        fn from(_: propchain_traits::ReentrancyError) -> Self {
+    impl From<landvault_traits::ReentrancyError> for LendingError {
+        fn from(_: landvault_traits::ReentrancyError) -> Self {
             LendingError::ReentrantCall
         }
     }
@@ -627,7 +627,7 @@ pub mod propchain_lending {
         proposals: Mapping<u64, Proposal>,
         proposal_count: u64,
         credit_profiles: Mapping<AccountId, CreditProfile>,
-        reentrancy_guard: propchain_traits::ReentrancyGuard,
+        reentrancy_guard: landvault_traits::ReentrancyGuard,
         // #304: Loan Marketplace
         marketplace_listings: Mapping<u64, LoanListing>,
         marketplace_offers: Mapping<u64, LoanOffer>,
@@ -636,7 +636,7 @@ pub mod propchain_lending {
         // #588: Multi-collateral portfolio mapping loan_id -> property_ids
         pub loan_collaterals: Mapping<u64, Vec<u64>>,
         // Admin Key Rotation (Issue #496)
-        pending_admin_rotation: Option<propchain_traits::KeyRotationRequest>,
+        pending_admin_rotation: Option<landvault_traits::KeyRotationRequest>,
         // #1087: per-account escrow balances for deposit/borrow token custody
         lender_balances: Mapping<AccountId, u128>,
         // #1088: admin-injected property price feed for liquidation decisions
@@ -861,7 +861,7 @@ pub mod propchain_lending {
                 proposals: Mapping::default(),
                 proposal_count: 0,
                 credit_profiles: Mapping::default(),
-                reentrancy_guard: propchain_traits::ReentrancyGuard::new(),
+                reentrancy_guard: landvault_traits::ReentrancyGuard::new(),
                 // #304: Loan Marketplace
                 marketplace_listings: Mapping::default(),
                 marketplace_offers: Mapping::default(),
@@ -1059,7 +1059,7 @@ pub mod propchain_lending {
         /// - `ReentrantCall` if a re-entrant execution is detected.
         #[ink(message, payable)]
         pub fn deposit(&mut self, pool_id: u64, amount: u128) -> Result<(), LendingError> {
-            propchain_traits::non_reentrant!(self, {
+            landvault_traits::non_reentrant!(self, {
                 let mut pool = self.pools.get(pool_id).ok_or(LendingError::PoolNotFound)?;
                 pool = self.accrue_pool_interest(pool);
                 pool.total_deposits += amount;
@@ -1101,7 +1101,7 @@ pub mod propchain_lending {
         /// - `ReentrantCall` if a re-entrant execution is detected.
         #[ink(message)]
         pub fn borrow(&mut self, pool_id: u64, amount: u128) -> Result<(), LendingError> {
-            propchain_traits::non_reentrant!(self, {
+            landvault_traits::non_reentrant!(self, {
                 let mut pool = self.pools.get(pool_id).ok_or(LendingError::PoolNotFound)?;
                 pool = self.accrue_pool_interest(pool);
                 // Overflow-safe capacity check: if `total_borrows + amount`
@@ -1928,7 +1928,7 @@ pub mod propchain_lending {
         /// - `PropertyNotFound` if a pledged property has no assessment record.
         /// - `InsufficientCollateral` if collateral data is missing or invalid.
         /// - `ReentrantCall` if a re-entrant liquidation is attempted; the
-        ///   `non_reentrant!` macro (via `propchain_traits::ReentrancyGuard`)
+        ///   `non_reentrant!` macro (via `landvault_traits::ReentrancyGuard`)
         ///   is the single authoritative reentrancy mechanism for this path
         ///   (#1094).
         /// - `PriceFeedMissing` if no oracle price is recorded for a pledged property.
@@ -1937,9 +1937,9 @@ pub mod propchain_lending {
         pub fn liquidate_loan(
             &mut self,
             loan_id: u64,
-            _current_collateral_values: Vec<(u64, u128)>,
+            current_collateral_values: Vec<(u64, u128)>,
         ) -> Result<(), LendingError> {
-            propchain_traits::non_reentrant!(self, {
+            landvault_traits::non_reentrant!(self, {
                 let mut app = self
                     .loan_applications
                     .get(loan_id)
@@ -2083,7 +2083,7 @@ pub mod propchain_lending {
         /// - `ReentrantCall` if a re-entrant execution is detected.
         #[ink(message)]
         pub fn purge_application(&mut self, loan_id: u64) -> Result<(), LendingError> {
-            propchain_traits::non_reentrant!(self, {
+            landvault_traits::non_reentrant!(self, {
                 if self.env().caller() != self.admin {
                     return Err(LendingError::Unauthorized);
                 }
@@ -2591,7 +2591,7 @@ pub mod propchain_lending {
         /// - `ReentrantCall` if a re-entrant execution is detected.
         #[ink(message)]
         pub fn accept_loan_offer(&mut self, offer_id: u64) -> Result<u64, LendingError> {
-            propchain_traits::non_reentrant!(self, {
+            landvault_traits::non_reentrant!(self, {
                 let mut offer = self
                     .marketplace_offers
                     .get(offer_id)
@@ -2777,9 +2777,9 @@ pub mod propchain_lending {
 
             let block = self.env().block_number();
             let effective_at =
-                block.saturating_add(propchain_traits::constants::KEY_ROTATION_COOLDOWN_BLOCKS);
+                block.saturating_add(landvault_traits::constants::KEY_ROTATION_COOLDOWN_BLOCKS);
 
-            self.pending_admin_rotation = Some(propchain_traits::KeyRotationRequest {
+            self.pending_admin_rotation = Some(landvault_traits::KeyRotationRequest {
                 old_account: caller,
                 new_account: new_admin,
                 requested_at: block,
@@ -2816,7 +2816,7 @@ pub mod propchain_lending {
             }
             let expiry = request
                 .effective_at
-                .saturating_add(propchain_traits::constants::KEY_ROTATION_EXPIRY_BLOCKS);
+                .saturating_add(landvault_traits::constants::KEY_ROTATION_EXPIRY_BLOCKS);
             if block > expiry {
                 self.pending_admin_rotation = None;
                 return Err(LendingError::RequestExpired);
@@ -2860,19 +2860,19 @@ pub mod propchain_lending {
 
         /// Get the pending admin rotation request, if any.
         #[ink(message)]
-        pub fn get_pending_admin_rotation(&self) -> Option<propchain_traits::KeyRotationRequest> {
+        pub fn get_pending_admin_rotation(&self) -> Option<landvault_traits::KeyRotationRequest> {
             self.pending_admin_rotation.clone()
         }
 
         /// Return the current health status of this contract.
         #[ink(message)]
-        pub fn health(&self) -> propchain_traits::monitoring::HealthReport {
+        pub fn health(&self) -> landvault_traits::monitoring::HealthReport {
             let total_operations = self.loan_count.saturating_add(self.pool_count);
             let error_rate_bips = 0u32; // Lending contract doesn't track error rate directly
 
-            propchain_traits::monitoring::HealthReport {
+            landvault_traits::monitoring::HealthReport {
                 contract_name: String::from("lending"),
-                status: propchain_traits::monitoring::HealthStatus::Healthy,
+                status: landvault_traits::monitoring::HealthStatus::Healthy,
                 reported_at: self.env().block_timestamp(),
                 total_operations,
                 error_count: 0,
@@ -2964,7 +2964,7 @@ pub mod propchain_lending {
     }
 
     /// Regression tests for the #1094 decision: `liquidate_loan` is protected
-    /// by the `non_reentrant!` macro (via `propchain_traits::ReentrancyGuard`)
+    /// by the `non_reentrant!` macro (via `landvault_traits::ReentrancyGuard`)
     /// and the standalone `liquidation_reentrancy::LiquidationGuard` dead
     /// module has been removed, so the macro is the single authoritative
     /// reentrancy mechanism for the liquidation path.
@@ -3011,7 +3011,7 @@ pub mod propchain_lending {
     }
 }
 
-pub use crate::propchain_lending::{
+pub use crate::landvault_lending::{
     LendingError, LoanServicer, LoanStatus, PaymentSchedule, PaymentScheduleStatus, PropertyLending,
 };
 
@@ -3026,7 +3026,7 @@ pub use crate::propchain_lending::{
 #[cfg(test)]
 mod tests {
     use ink::env::{test, DefaultEnvironment};
-    use propchain_lending::PropertyLending;
+    use landvault_lending::PropertyLending;
 
     use super::*;
 
@@ -3083,10 +3083,10 @@ mod tests {
         let loan = contract.get_loan(loan_id).unwrap();
         assert_eq!(loan.servicing_status, ServicingStatus::Pending);
 
-        let packed = crate::propchain_lending::PackedLoanApplication::from(loan.clone());
+        let packed = crate::landvault_lending::PackedLoanApplication::from(loan.clone());
         assert_eq!(packed.servicing_status, ServicingStatus::Pending);
 
-        let opened: crate::propchain_lending::LoanApplication = packed.into();
+        let opened: crate::landvault_lending::LoanApplication = packed.into();
         assert_eq!(opened.servicing_status, ServicingStatus::Pending);
         assert_eq!(opened.loan_id, loan.loan_id);
         assert_eq!(opened.servicing_reference, loan.servicing_reference);
@@ -3410,7 +3410,7 @@ mod tests {
         test::set_caller::<DefaultEnvironment>(accounts.bob);
         assert_eq!(
             contract.record_repayment(accounts.charlie),
-            Err(propchain_lending::LendingError::Unauthorized)
+            Err(landvault_lending::LendingError::Unauthorized)
         );
     }
 
@@ -3943,7 +3943,7 @@ mod tests {
                 1_000_000,
                 800,
                 12,
-                crate::propchain_lending::CollateralKind::PropertyTokenized,
+                crate::landvault_lending::CollateralKind::PropertyTokenized,
                 vec![],
             )
             .unwrap();
@@ -4021,7 +4021,7 @@ mod tests {
 mod lending_admin_rotation_tests {
     use ink::env::{test, DefaultEnvironment};
 
-    use super::propchain_lending::{LendingError, PropertyLending};
+    use super::landvault_lending::{LendingError, PropertyLending};
 
     fn setup() -> PropertyLending {
         let accounts = test::default_accounts::<DefaultEnvironment>();
@@ -4127,7 +4127,7 @@ mod lending_admin_rotation_tests {
 mod storage_derivation_tests {
     use scale::{Decode, Encode};
 
-    use super::propchain_lending::{
+    use super::landvault_lending::{
         CollateralKind, CollateralRecord, CreditProfile, LendingPool, LoanApplication, LoanListing,
         LoanOffer, LoanRestructuring, LoanServicer, LoanStatus, MarginPosition, PaymentSchedule,
         PaymentScheduleStatus, PropertyLending, Proposal, YieldPosition,

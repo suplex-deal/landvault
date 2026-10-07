@@ -1,4 +1,4 @@
-//! Centralized configuration constants for PropChain contracts.
+//! Centralized configuration constants for LandVault contracts.
 //!
 //! All magic numbers are extracted here with documentation explaining
 //! their purpose and valid ranges. Contracts import from this module
@@ -105,6 +105,9 @@ pub const GOVERNANCE_DEFAULT_TIMELOCK_BLOCKS: u64 = 100;
 
 /// Maximum number of active proposals at once.
 pub const GOVERNANCE_MAX_ACTIVE_PROPOSALS: u32 = 100;
+
+/// Grace period in blocks required before an emergency override takes effect.
+pub const GOVERNANCE_EMERGENCY_OVERRIDE_GRACE_BLOCKS: u64 = 10;
 
 // ── DEX Constants (Issue #1115) ──────────────────────────────────────────────
 

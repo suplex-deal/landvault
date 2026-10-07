@@ -1,8 +1,8 @@
 #[cfg(test)]
 mod e2e_tests {
     use super::*;
-    use crate::propchain_contracts::PropertyRegistry;
-    use propchain_proxy::TransparentProxy;
+    use crate::landvault_contracts::PropertyRegistry;
+    use landvault_proxy::TransparentProxy;
     use ink_e2e::build_message;
 
     type E2EResult<T> = std::result::Result<T, Box<dyn std::error::Error>>;
@@ -12,13 +12,13 @@ mod e2e_tests {
         // 1. Deploy Logic V1
         let logic_constructor = PropertyRegistry::new();
         let logic_acc_id = client
-            .instantiate("propchain_contracts", &ink_e2e::alice(), logic_constructor, 0, None)
+            .instantiate("landvault_contracts", &ink_e2e::alice(), logic_constructor, 0, None)
             .await
             .expect("Logic instantiation failed")
             .account_id;
         
         let logic_code_hash = client
-            .upload("propchain_contracts", &ink_e2e::alice(), None)
+            .upload("landvault_contracts", &ink_e2e::alice(), None)
             .await
             .expect("Logic upload failed")
             .code_hash;

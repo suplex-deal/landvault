@@ -1,4 +1,4 @@
-# PropChain Lending Platform
+# LandVault Lending Platform
 
 Decentralized property-backed lending platform with collateral management, dynamic interest rates, margin trading, and yield farming.
 

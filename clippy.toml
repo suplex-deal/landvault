@@ -1,4 +1,4 @@
-# Clippy configuration for PropChain smart contracts.
+# Clippy configuration for LandVault smart contracts.
 #
 # Every key in this file is one Clippy actually parses. That is now machine
 # checked: `scripts/check_clippy_config.sh`

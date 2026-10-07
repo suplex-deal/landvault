@@ -193,13 +193,13 @@ pub mod fraud_detection {
     }
 
     /// Determine fraud risk level from score
-    pub fn score_to_fraud_risk_level(score: u32) -> crate::propchain_insurance::RiskLevel {
+    pub fn score_to_fraud_risk_level(score: u32) -> crate::landvault_insurance::RiskLevel {
         match score {
-            ..=250 => crate::propchain_insurance::RiskLevel::VeryLow, // Very low fraud risk
-            251..=450 => crate::propchain_insurance::RiskLevel::Low,  // Low fraud risk
-            451..=600 => crate::propchain_insurance::RiskLevel::Medium, // Medium fraud risk
-            601..=800 => crate::propchain_insurance::RiskLevel::High, // High fraud risk
-            _ => crate::propchain_insurance::RiskLevel::VeryHigh,     // Very high fraud risk
+            ..=250 => crate::landvault_insurance::RiskLevel::VeryLow, // Very low fraud risk
+            251..=450 => crate::landvault_insurance::RiskLevel::Low,  // Low fraud risk
+            451..=600 => crate::landvault_insurance::RiskLevel::Medium, // Medium fraud risk
+            601..=800 => crate::landvault_insurance::RiskLevel::High, // High fraud risk
+            _ => crate::landvault_insurance::RiskLevel::VeryHigh,     // Very high fraud risk
         }
     }
 
@@ -287,11 +287,11 @@ mod tests {
     fn test_fraud_risk_level_mapping() {
         assert_eq!(
             fraud_detection::score_to_fraud_risk_level(100),
-            crate::propchain_insurance::RiskLevel::VeryLow
+            crate::landvault_insurance::RiskLevel::VeryLow
         );
         assert_eq!(
             fraud_detection::score_to_fraud_risk_level(700),
-            crate::propchain_insurance::RiskLevel::High
+            crate::landvault_insurance::RiskLevel::High
         );
     }
 

@@ -36,10 +36,10 @@
 use ink::prelude::string::{String, ToString};
 use ink::prelude::vec::Vec;
 use ink::storage::Mapping;
-use propchain_traits::oracle::*;
-use propchain_traits::property::PropertyType;
+use landvault_traits::oracle::*;
+use landvault_traits::property::PropertyType;
 
-/// Public so consumers (e.g. the propchain-tests crate) can link
+/// Public so consumers (e.g. the landvault-tests crate) can link
 /// `mock_oracle::mock_oracle_contract::MockOracle` directly.
 #[ink::contract]
 pub mod mock_oracle_contract {
@@ -184,7 +184,7 @@ pub mod mock_oracle_contract {
                 confidence_score: MOCK_CONFIDENCE,
                 sources_used: MOCK_SOURCES_USED,
                 last_updated: self.env().block_timestamp(),
-                valuation_method: propchain_traits::oracle::ValuationMethod::Automated,
+                valuation_method: landvault_traits::oracle::ValuationMethod::Automated,
             }
         }
 
@@ -439,7 +439,7 @@ pub mod mock_oracle_contract {
                     valuation: p,
                     timestamp: self.env().block_timestamp(),
                     confidence_score: MOCK_CONFIDENCE,
-                    valuation_method: propchain_traits::oracle::ValuationMethod::Automated,
+                    valuation_method: landvault_traits::oracle::ValuationMethod::Automated,
                     is_anomaly: false,
                 }]
                 .into_iter()
@@ -485,7 +485,7 @@ pub mod mock_oracle_contract {
                         valuation: p,
                         timestamp: ts,
                         confidence_score: MOCK_CONFIDENCE,
-                        valuation_method: propchain_traits::oracle::ValuationMethod::Automated,
+                        valuation_method: landvault_traits::oracle::ValuationMethod::Automated,
                         is_anomaly: false,
                     }]
                 } else {
@@ -722,7 +722,7 @@ pub mod mock_oracle_contract {
             let mut oracle = setup();
             let source = OracleSource {
                 id: "test-source".to_string(),
-                source_type: propchain_traits::oracle::OracleSourceType::Manual,
+                source_type: landvault_traits::oracle::OracleSourceType::Manual,
                 address: AccountId::from([0x01; 32]),
                 is_active: true,
                 weight: 50,

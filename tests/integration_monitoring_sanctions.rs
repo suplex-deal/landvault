@@ -21,12 +21,12 @@
 mod integration_monitoring_sanctions {
     // ── Contracts under test ─────────────────────────────────────────────
     use ink::env::{test, DefaultEnvironment};
-    use propchain_monitoring::monitoring::MonitoringContract;
-    use propchain_sanctions::sanctions_screening::{
+    use landvault_monitoring::monitoring::MonitoringContract;
+    use landvault_sanctions::sanctions_screening::{
         EntityType, Error as SanctionsError, SanctionLevel, SanctionsScreening,
     };
     // Shared types live in the traits crate.
-    use propchain_traits::monitoring::{
+    use landvault_traits::monitoring::{
         AlertType, HealthStatus, MonitoringError, MonitoringSystem, OperationType,
     };
 

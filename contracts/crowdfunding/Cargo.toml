@@ -1,12 +1,12 @@
 [package]
-name = "propchain-crowdfunding"
+name = "landvault-crowdfunding"
 version = "1.0.0"
-authors = ["PropChain Team <dev@propchain.io>"]
+authors = ["LandVault Team <dev@landvault.io>"]
 edition = "2021"
 description = "Decentralized real estate crowdfunding platform with compliance, governance, and secondary markets"
 license = "MIT"
-homepage = "https://propchain.io"
-repository = "https://github.com/MettaChain/PropChain-contract"
+homepage = "https://landvault.io"
+repository = "https://github.com/MettaChain/LandVault-contract"
 keywords = ["blockchain", "real-estate", "smart-contracts", "ink", "crowdfunding"]
 categories = ["cryptography::cryptocurrencies"]
 publish = false
@@ -15,13 +15,13 @@ publish = false
 ink = { workspace = true }
 scale = { workspace = true }
 scale-info = { workspace = true }
-propchain-traits = { path = "../traits", default-features = false }
+landvault-traits = { path = "../traits", default-features = false }
 
 [dev-dependencies]
 ink_e2e = "5.0.0"
 
 [lib]
-name = "propchain_crowdfunding"
+name = "landvault_crowdfunding"
 path = "src/lib.rs"
 crate-type = ["cdylib", "rlib"]
 
@@ -31,7 +31,7 @@ std = [
     "ink/std",
     "scale/std",
     "scale-info/std",
-    "propchain-traits/std",
+    "landvault-traits/std",
 ]
 ink-as-dependency = []
 e2e-tests = []

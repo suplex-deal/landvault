@@ -4,7 +4,7 @@ services:
   # Local Substrate node
   substrate-node:
     image: paritytech/substrate-node-template:latest
-    container_name: propchain-substrate
+    container_name: landvault-substrate
     ports:
       - "9944:9944"
       - "9933:9933"
@@ -17,12 +17,12 @@ services:
     volumes:
       - substrate_data:/data
     networks:
-      - propchain-network
+      - landvault-network
 
   # IPFS node for document storage
   ipfs:
     image: ipfs/go-ipfs:latest
-    container_name: propchain-ipfs
+    container_name: landvault-ipfs
     ports:
       - "4001:4001"
       - "8080:8080"
@@ -30,42 +30,42 @@ services:
     volumes:
       - ipfs_data:/data/ipfs
     networks:
-      - propchain-network
+      - landvault-network
 
   # PostgreSQL for off-chain data
   postgres:
     image: postgres:15
-    container_name: propchain-postgres
+    container_name: landvault-postgres
     environment:
-      POSTGRES_DB: propchain
-      POSTGRES_USER: propchain
-      POSTGRES_PASSWORD: propchain123
+      POSTGRES_DB: landvault
+      POSTGRES_USER: landvault
+      POSTGRES_PASSWORD: landvault123
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - propchain-network
+      - landvault-network
 
   # Redis for caching
   redis:
     image: redis:7-alpine
-    container_name: propchain-redis
+    container_name: landvault-redis
     ports:
       - "6379:6379"
     volumes:
       - redis_data:/data
     networks:
-      - propchain-network
+      - landvault-network
 
   # Event indexer and API
   indexer:
     build:
       context: .
       dockerfile: Dockerfile.indexer
-    container_name: propchain-indexer
+    container_name: landvault-indexer
     environment:
-      DATABASE_URL: postgres://propchain:propchain123@postgres:5432/propchain
+      DATABASE_URL: postgres://landvault:landvault123@postgres:5432/landvault
       SUBSTRATE_WS: ws://substrate-node:9944
       BIND_ADDR: 0.0.0.0:8088
     depends_on:
@@ -74,7 +74,7 @@ services:
     ports:
       - "8088:8088"
     networks:
-      - propchain-network
+      - landvault-network
 
 volumes:
   substrate_data:
@@ -83,5 +83,5 @@ volumes:
   redis_data:
 
 networks:
-  propchain-network:
+  landvault-network:
     driver: bridge

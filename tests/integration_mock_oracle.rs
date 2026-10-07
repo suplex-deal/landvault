@@ -24,7 +24,7 @@
 mod integration_mock_oracle {
     use ink::env::{test, DefaultEnvironment};
     use mock_oracle::mock_oracle_contract::MockOracle;
-    use propchain_traits::oracle::{
+    use landvault_traits::oracle::{
         Oracle, OracleError, OracleRegistry, OracleSource, OracleSourceType, ValuationMethod,
     };
 
@@ -136,7 +136,7 @@ mod integration_mock_oracle {
         let oracle = setup();
         // The workspace gate (`cargo test --all-features --workspace`)
         // force-enables the `mock` feature through feature unification,
-        // while a bare `-p propchain-tests` run keeps it off. Whichever
+        // while a bare `-p landvault-tests` run keeps it off. Whichever
         // build is active, `is_mock_enabled()` must agree with whether an
         // unpriced property resolves to a deterministic seed valuation.
         if oracle.is_mock_enabled() {
@@ -273,7 +273,7 @@ mod integration_mock_oracle {
         // Volatility metrics are static zeros on the mock.
         let volatility = Oracle::get_market_volatility(
             &oracle,
-            propchain_traits::PropertyType::Residential,
+            landvault_traits::PropertyType::Residential,
             "Testville".to_string(),
         )
         .unwrap();

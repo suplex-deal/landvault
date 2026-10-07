@@ -1,4 +1,4 @@
-//! Dependency Injection framework for PropChain contracts.
+//! Dependency Injection framework for LandVault contracts.
 //!
 //! # Overview
 //!
@@ -80,7 +80,7 @@ impl core::fmt::Display for DependencyError {
 // Service Key
 // =========================================================================
 
-/// Identifies every injectable service in the PropChain ecosystem.
+/// Identifies every injectable service in the LandVault ecosystem.
 ///
 /// Add a new variant here whenever a new cross-contract dependency is
 /// introduced. The variant name doubles as documentation for what the

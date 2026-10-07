@@ -5,7 +5,7 @@
 name = "PropertyRegistry"
 description = "Property registration and ownership management contract"
 version = "1.0.0"
-authors = ["PropChain Team <dev@propchain.io>"]
+authors = ["LandVault Team <dev@landvault.io>"]
 
 # [contracts.escrow] -- REMOVED build deleted in workspace compile fix
 
@@ -13,7 +13,7 @@ authors = ["PropChain Team <dev@propchain.io>"]
 name = "PropertyToken"
 description = "ERC-721 compatible property token contract"
 version = "1.0.0"
-authors = ["PropChain Team <dev@propchain.io>"]
+authors = ["LandVault Team <dev@landvault.io>"]
 
 # Build configuration
 [build]

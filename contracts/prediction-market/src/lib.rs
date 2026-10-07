@@ -7,9 +7,9 @@
 )]
 
 #[ink::contract]
-pub mod propchain_prediction_market {
+pub mod landvault_prediction_market {
     use ink::storage::Mapping;
-    use propchain_contracts::{non_reentrant, ReentrancyError, ReentrancyGuard};
+    use landvault_contracts::{non_reentrant, ReentrancyError, ReentrancyGuard};
 
     /// How long a proposed manual resolution stays challengeable, in
     /// block-timestamp seconds (Issue #1148).

@@ -1,7 +1,7 @@
 [package]
-name = "propchain-proxy"
+name = "landvault-proxy"
 version = "1.0.0"
-authors = ["PropChain Team <dev@propchain.io>"]
+authors = ["LandVault Team <dev@landvault.io>"]
 edition = "2021"
 
 [dependencies]
@@ -10,7 +10,7 @@ scale = { workspace = true, features = ["std"] }
 scale-info = { workspace = true, features = ["std"] }
 
 [lib]
-name = "propchain_proxy"
+name = "landvault_proxy"
 path = "src/lib.rs"
 crate-type = ["cdylib"]
 

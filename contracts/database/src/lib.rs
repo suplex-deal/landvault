@@ -3,7 +3,7 @@
 #![allow(unexpected_cfgs)]
 #![allow(clippy::new_without_default)]
 
-//! # PropChain Database Integration Contract
+//! # LandVault Database Integration Contract
 //!
 //! On-chain coordination layer for off-chain database integration providing:
 //! - Database synchronization event emission for off-chain indexers
@@ -26,14 +26,14 @@
 //!    off-chain data behind a checksum, so it records and compares values but
 //!    does not independently attest to them; see `verify_sync`.
 //!
-//! Resolves: https://github.com/MettaChain/PropChain-contract/issues/112
+//! Resolves: https://github.com/MettaChain/LandVault-contract/issues/112
 
 use ink::prelude::string::String;
 use ink::prelude::vec::Vec;
 use ink::storage::Mapping;
 
 #[ink::contract]
-pub mod propchain_database {
+pub mod landvault_database {
     use super::*;
 
     // Data types extracted to types.rs (Issue #101)

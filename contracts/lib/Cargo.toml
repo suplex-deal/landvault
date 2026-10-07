@@ -1,12 +1,12 @@
 [package]
-name = "propchain-contracts"
+name = "landvault-contracts"
 version = "1.0.0"
-authors = ["PropChain Team <dev@propchain.io>"]
+authors = ["LandVault Team <dev@landvault.io>"]
 edition = "2021"
 description = "Decentralized real estate infrastructure smart contracts"
 license = "MIT"
-homepage = "https://propchain.io"
-repository = "https://github.com/MettaChain/PropChain-contract"
+homepage = "https://landvault.io"
+repository = "https://github.com/MettaChain/LandVault-contract"
 keywords = ["blockchain", "real-estate", "smart-contracts", "ink", "substrate"]
 categories = ["cryptography::cryptocurrencies", "web-programming::http-client"]
 readme = "../../README.md"
@@ -16,8 +16,8 @@ publish = false
 ink = { workspace = true, features = ["std"] }
 scale = { workspace = true, features = ["std"] }
 scale-info = { workspace = true, features = ["std"] }
-propchain-traits = { path = "../traits" }
-propchain-identity = { path = "../identity", default-features = false }
+landvault-traits = { path = "../traits" }
+landvault-identity = { path = "../identity", default-features = false }
 
 # Additional dependencies for oracle functionality
 # serde = { version = "1.0", default-features = false, features = ["derive"] }
@@ -30,7 +30,7 @@ openbrush = { version = "4.0.0-beta", default-features = false, features = ["psp
 ink_e2e = "5.0.0"
 
 [lib]
-name = "propchain_contracts"
+name = "landvault_contracts"
 path = "src/lib.rs"
 crate-type = ["rlib"]
 
@@ -41,7 +41,7 @@ std = [
     "scale/std",
     "scale-info/std",
     "openbrush?/std",
-    "propchain-identity/std",
+    "landvault-identity/std",
 ]
 ink-as-dependency = []
 

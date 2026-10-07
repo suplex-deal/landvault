@@ -1,7 +1,7 @@
 /// # Integration Tests: GDPR Consent Management (Issue #1005)
 ///
 /// These tests verify the end-to-end consent lifecycle of the
-/// `propchain-gdpr` contract:
+/// `landvault-gdpr` contract:
 ///   grant -> check -> withdraw -> re-check
 /// plus the data access request flow and input validation guards.
 ///
@@ -19,7 +19,7 @@
 mod integration_gdpr {
     // GDPR consent contract
     use ink::env::{test, DefaultEnvironment};
-    use propchain_gdpr::gdpr_consent::{
+    use landvault_gdpr::gdpr_consent::{
         ConsentStatus, Error as GdprError, GdprConsent, ProcessingPurpose,
     };
 

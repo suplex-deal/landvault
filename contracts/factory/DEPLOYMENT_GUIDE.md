@@ -1,6 +1,6 @@
 # Contract Factory Deployment Guide
 
-This guide explains how to use the PropChain Contract Factory for standardized contract deployment.
+This guide explains how to use the LandVault Contract Factory for standardized contract deployment.
 
 ## Prerequisites
 
@@ -46,7 +46,7 @@ factory.set_code_hash(
 #### Option A: Using Templates
 
 ```rust
-use propchain_factory::templates::PropertyTokenTemplate;
+use landvault_factory::templates::PropertyTokenTemplate;
 
 let template = PropertyTokenTemplate {
     admin: admin_account,
@@ -68,7 +68,7 @@ let address = factory.deploy_contract(config, "1.0.0".to_string())?;
 #### Option B: Using Builder Pattern
 
 ```rust
-use propchain_factory::builder::DeploymentBuilder;
+use landvault_factory::builder::DeploymentBuilder;
 
 let salt = generate_deterministic_salt(&encoded_params);
 
@@ -298,7 +298,7 @@ REQUIRED_CODE_HASHES=(
   "Oracle:0xghi789..."
 )
 
-echo "🔍 Starting post-deployment verification for PropChain Factory"
+echo "🔍 Starting post-deployment verification for LandVault Factory"
 echo "Factory Address: $FACTORY_ADDRESS"
 echo "RPC URL: $RPC_URL"
 echo "========================================"

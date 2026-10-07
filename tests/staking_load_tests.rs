@@ -11,13 +11,13 @@
 //!
 //! # Running
 //! ```
-//! cargo test --package propchain-tests staking_load -- --nocapture
+//! cargo test --package landvault-tests staking_load -- --nocapture
 //! ```
 
 #[cfg(test)]
 mod staking_load_tests {
-    use propchain_staking::staking::*;
-    use propchain_staking::types::*;
+    use landvault_staking::staking::*;
+    use landvault_staking::types::*;
 
     // Re-export helpers used in staking tests
     fn default_accounts() -> ink::env::test::DefaultAccounts<ink::env::DefaultEnvironment> {

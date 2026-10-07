@@ -37,11 +37,11 @@ members = [
 resolver = "2"
 
 [workspace.package]
-authors = ["PropChain Team <dev@propchain.io>"]
+authors = ["LandVault Team <dev@landvault.io>"]
 edition = "2021"
-homepage = "https://propchain.io"
+homepage = "https://landvault.io"
 license = "MIT"
-repository = "https://github.com/MettaChain/PropChain-contract"
+repository = "https://github.com/MettaChain/LandVault-contract"
 version = "1.0.0"
 
 [workspace.dependencies]

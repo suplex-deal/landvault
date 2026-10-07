@@ -1,7 +1,7 @@
 #![allow(clippy::clone_on_copy)] // fires inside ink! generated storage code
 #![cfg_attr(not(feature = "std"), no_std, no_main)]
 
-//! # PropChain Multicall Contract
+//! # LandVault Multicall Contract
 //!
 //! Dispatches multiple cross-contract calls in a single transaction.
 //!
@@ -18,8 +18,8 @@
 //! `try_aggregate` to collect per-call results without reverting.
 
 use ink::prelude::vec::Vec;
-use propchain_traits::constants::MAX_BATCH_SIZE;
-use propchain_traits::multicall::{
+use landvault_traits::constants::MAX_BATCH_SIZE;
+use landvault_traits::multicall::{
     CallRequest, CallResult, MulticallError, CALL_SELECTOR_LEN,
 };
 
@@ -27,7 +27,7 @@ use propchain_traits::multicall::{
 const MAX_MULTICALL_SIZE: u32 = MAX_BATCH_SIZE;
 
 #[ink::contract]
-pub mod propchain_multicall {
+pub mod landvault_multicall {
     use super::*;
 
     // ── Events ────────────────────────────────────────────────────────────

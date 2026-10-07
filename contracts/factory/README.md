@@ -1,10 +1,10 @@
-# PropChain Contract Factory
+# LandVault Contract Factory
 
-A standardized factory pattern implementation for deploying PropChain smart contracts.
+A standardized factory pattern implementation for deploying LandVault smart contracts.
 
 ## Overview
 
-The Contract Factory provides a centralized, secure, and standardized way to deploy PropChain contracts. It manages code hashes, tracks deployments, and ensures consistent deployment patterns across the ecosystem.
+The Contract Factory provides a centralized, secure, and standardized way to deploy LandVault contracts. It manages code hashes, tracks deployments, and ensures consistent deployment patterns across the ecosystem.
 
 ## Features
 
@@ -12,7 +12,7 @@ The Contract Factory provides a centralized, secure, and standardized way to dep
 - **Code Hash Management**: Centralized registry of approved contract code hashes
 - **Deployment Tracking**: Complete audit trail of all deployed contracts
 - **Access Control**: Admin-controlled code hash updates
-- **Multi-Contract Support**: Supports all PropChain contract types
+- **Multi-Contract Support**: Supports all LandVault contract types
 
 ## Supported Contract Types
 

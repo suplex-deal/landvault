@@ -5,10 +5,10 @@
 use ink::prelude::string::String;
 use ink::prelude::vec::Vec;
 use ink::storage::Mapping;
-use propchain_traits::constants;
-use propchain_traits::{DynamicFeeProvider, FeeOperation};
+use landvault_traits::constants;
+use landvault_traits::{DynamicFeeProvider, FeeOperation};
 
-/// Dynamic Fee and Market Mechanism contract for PropChain.
+/// Dynamic Fee and Market Mechanism contract for LandVault.
 /// Implements congestion-based fees, premium listing auctions, validator incentives,
 /// and fee transparency for network participants.
 #[ink::contract]
@@ -18,7 +18,7 @@ use propchain_traits::{DynamicFeeProvider, FeeOperation};
 // every test after every include isn't worth the structural churn, so
 // suppress the lint here.
 #[allow(clippy::items_after_test_module)]
-pub mod propchain_fees {
+pub mod landvault_fees {
     use super::*;
 
     /// Basis points denominator (10000 = 100%)

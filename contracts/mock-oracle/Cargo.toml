@@ -1,12 +1,12 @@
 [package]
 name = "mock-oracle"
 version = "1.0.0"
-authors = ["PropChain Team <dev@propchain.io>"]
+authors = ["LandVault Team <dev@landvault.io>"]
 edition = "2021"
 description = "Deterministic mock oracle for testnet staging — accepts prices via faucet-call"
 license = "MIT"
-homepage = "https://propchain.io"
-repository = "https://github.com/MettaChain/PropChain-contract"
+homepage = "https://landvault.io"
+repository = "https://github.com/MettaChain/LandVault-contract"
 keywords = ["blockchain", "real-estate", "oracle", "mock", "testnet", "ink", "substrate"]
 categories = ["cryptography::cryptocurrencies", "development-tools::testing"]
 readme = "../../README.md"
@@ -16,12 +16,12 @@ publish = false
 ink = { workspace = true, default-features = false }
 scale = { workspace = true, default-features = false, features = ["derive"] }
 scale-info = { workspace = true, default-features = false, features = ["derive"] }
-propchain-traits = { path = "../traits", default-features = false }
+landvault-traits = { path = "../traits", default-features = false }
 
 [lib]
 name = "mock_oracle"
 path = "src/lib.rs"
-# "rlib" lets the propchain-tests crate link MockOracle directly
+# "rlib" lets the landvault-tests crate link MockOracle directly
 # (same pattern as contracts/fractional).
 crate-type = ["cdylib", "rlib"]
 
@@ -31,7 +31,7 @@ std = [
     "ink/std",
     "scale/std",
     "scale-info/std",
-    "propchain-traits/std",
+    "landvault-traits/std",
 ]
 # ── Feature flag: mock ─────────────────────────────────────────────────────
 # When `mock` is enabled the oracle returns deterministic prices derived from

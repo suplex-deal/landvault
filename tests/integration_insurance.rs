@@ -23,7 +23,7 @@
 #[allow(clippy::module_inception)]
 mod integration_insurance {
     use ink::env::{test, DefaultEnvironment};
-    use propchain_insurance::propchain_insurance::{
+    use landvault_insurance::landvault_insurance::{
         ClaimStatus, CoverageType, InsuranceError, PayoutMode, PremiumCalculation,
         PropertyInsurance, TriggerComparator, TriggerMetric,
     };

@@ -638,7 +638,7 @@ mod tests {
     fn identity() -> Identity {
         Identity {
             account_id: account(0x0a),
-            did_document: did_document("did:propchain:0x0a"),
+            did_document: did_document("did:landvault:0x0a"),
             reputation_score: 742,
             verification_level: VerificationLevel::Enhanced,
             kyc_tier: KycTier::Tier2_Standard,

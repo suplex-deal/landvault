@@ -27,7 +27,7 @@
 mod integration_version_registry {
     use ink::env::{test, DefaultEnvironment};
     use ink::primitives::Hash;
-    use propchain_factory::contract_factory::{ContractFactory, ContractType, DeploymentConfig};
+    use landvault_factory::contract_factory::{ContractFactory, ContractType, DeploymentConfig};
     use version_registry::version_registry::{Error as RegistryError, VersionRegistry};
 
     /// Raw code hashes shared by the registry (`[u8; 32]`) and the factory

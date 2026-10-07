@@ -1,4 +1,4 @@
-# PropChain rustfmt configuration
+# LandVault rustfmt configuration
 #
 # Requires the nightly toolchain for macro_matchers support:
 #   cargo +nightly fmt
@@ -11,7 +11,7 @@
 # ── Nightly-only settings ─────────────────────────────────────────────────
 
 # Format the contents of macro matchers (e.g. `#[ink::contract]`,
-# `#[ink::test]`, `propchain_traits::non_reentrant!`) consistently with the
+# `#[ink::test]`, `landvault_traits::non_reentrant!`) consistently with the
 # rest of the code. Without this, macro bodies are left unformatted by rustfmt.
 format_macro_matchers = true
 

@@ -2,13 +2,13 @@
 // Implements actuarial pricing with real-time adjustments
 // Claim-frequency adjustment added (rolling-window surcharge)
 
-// Issue #1162: this file was `include!()`-ed into `mod propchain_insurance`,
+// Issue #1162: this file was `include!()`-ed into `mod landvault_insurance`,
 // so the six types below resolved out of that module's `include!("types.rs")`
 // scope. As a real module it has to name them itself. Every one of them is
 // `pub` with `pub` fields, which is why the move is additive rather than a
 // visibility change.
-use crate::propchain_insurance::{
-    ActuarialModel, CoverageType, PremiumCalculation, PremiumModifiers, RiskAssessment, RiskPool,
+use crate::landvault_insurance::{
+    ActuarialModel, CoverageType, PremiumBreakdown, PremiumCalculation, PremiumModifiers, RiskAssessment, RiskPool,
 };
 
 
@@ -500,7 +500,7 @@ const PREMIUM_CALCULATION_DIVISOR_5MULT: u128 = 1_000_000_000_000_000_000_000; /
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::propchain_insurance::RiskLevel;
+    use crate::landvault_insurance::RiskLevel;
     use ink::prelude::string::String;
 
     /// One year, matching `SECONDS_PER_YEAR` above.

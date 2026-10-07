@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# PropChain Contract Interaction Playground & Scenario Generator
+# LandVault Contract Interaction Playground & Scenario Generator
 #
 # Interactive CLI for exercising the most common contract calls against a
-# deployed PropChain stack (property registration, escrow, staking,
+# deployed LandVault stack (property registration, escrow, staking,
 # governance, insurance) without having to remember every message
 # signature and cargo-contract invocation by hand.
 #
@@ -67,7 +67,7 @@ declare -A DEFAULT_ACCOUNTS=(
 SURI="${SURI:-${DEFAULT_ACCOUNTS[$NETWORK]:-}}"
 DEPLOYMENTS_DIR="$WORKSPACE_ROOT/deployments/$NETWORK"
 OUTPUT_SCENARIO="$WORKSPACE_ROOT/docs/playground_scenario.json"
-INTERACTION_LOG_TMP="/tmp/propchain_playground_session.log"
+INTERACTION_LOG_TMP="/tmp/landvault_playground_session.log"
 
 # Menu option -> contract directory under contracts/
 declare -A CONTRACT_DIR=(
@@ -87,13 +87,13 @@ mkdir -p "$(dirname "$OUTPUT_SCENARIO")"
 # ---------------------------------------------------------------------------
 show_help() {
     cat << 'EOF'
-PropChain Contract Interaction Playground
+LandVault Contract Interaction Playground
 
 Usage:
   ./scripts/playground.sh [--help]
 
 Description:
-  Interactive menu for trying out the core PropChain contract calls
+  Interactive menu for trying out the core LandVault contract calls
   against a running node, without hand-writing cargo-contract commands.
 
   Menu options:
@@ -494,7 +494,7 @@ action_create_insurance_policy() {
 main() {
     check_prerequisites
 
-    echo -e "${BOLD}PropChain Contract Playground${NC}  (network: $NETWORK)"
+    echo -e "${BOLD}LandVault Contract Playground${NC}  (network: $NETWORK)"
     echo "Run with --help for usage details."
 
     while true; do

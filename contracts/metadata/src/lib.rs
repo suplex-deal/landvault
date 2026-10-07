@@ -15,7 +15,7 @@
 //! - Legal document integration and verification
 //! - Metadata management and search capabilities
 //!
-//! Resolves: https://github.com/MettaChain/PropChain-contract/issues/69
+//! Resolves: https://github.com/MettaChain/LandVault-contract/issues/69
 
 use ink::prelude::string::String;
 use ink::prelude::vec::Vec;
@@ -23,7 +23,7 @@ use ink::storage::Mapping;
 
 #[ink::contract]
 #[allow(clippy::too_many_arguments)]
-mod propchain_metadata {
+mod landvault_metadata {
     use super::*;
 
     // Data types extracted to types.rs (Issue #101)

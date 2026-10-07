@@ -1,4 +1,4 @@
-//! Shared types for PropChain contracts.
+//! Shared types for LandVault contracts.
 
 // =========================================================================
 // Data Types

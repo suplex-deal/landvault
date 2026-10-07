@@ -19,13 +19,13 @@
 #[cfg(test)]
 mod integration_bridge_oracle {
     // Oracle contract
-    use oracle::propchain_oracle::{OracleError, PropertyValuationOracle};
+    use oracle::landvault_oracle::{OracleError, PropertyValuationOracle};
 
     // Bridge contract
-    use propchain_bridge::bridge::{Error as BridgeError, PropertyBridge};
+    use landvault_bridge::bridge::{Error as BridgeError, PropertyBridge};
 
     // Shared types
-    use propchain_traits::{
+    use landvault_traits::{
         oracle::{PropertyValuation, ValuationMethod},
         PropertyMetadata,
     };
@@ -302,13 +302,13 @@ mod integration_bridge_oracle {
 
         let chain_polygon: u64 = 3;
         bridge
-            .update_chain_info(chain_polygon, propchain_traits::ChainBridgeInfo {
+            .update_chain_info(chain_polygon, landvault_traits::ChainBridgeInfo {
                 chain_id: chain_polygon,
                 chain_name: String::from("Polygon"),
                 bridge_contract_address: None,
                 is_active: true,
-                gas_multiplier: propchain_traits::constants::DEFAULT_GAS_MULTIPLIER,
-                confirmation_blocks: propchain_traits::constants::DEFAULT_CONFIRMATION_BLOCKS,
+                gas_multiplier: landvault_traits::constants::DEFAULT_GAS_MULTIPLIER,
+                confirmation_blocks: landvault_traits::constants::DEFAULT_CONFIRMATION_BLOCKS,
                 supported_tokens: vec![],
                 chain_daily_limit: 10_000_000_000_000_000_000,
             })

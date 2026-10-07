@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# PropChain Build Script
+# LandVault Build Script
 # This script builds all contracts and performs quality checks
 
 set -euo pipefail
@@ -258,7 +258,7 @@ main() {
         esac
     done
     
-    log_info "Starting PropChain build process..."
+    log_info "Starting LandVault build process..."
     
     # Execute build steps
     check_prerequisites
